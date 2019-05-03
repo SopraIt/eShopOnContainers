@@ -33,6 +33,19 @@ services:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
 
+  # elasticsearch:
+  #   ports:
+  #     - "9200:9200"
+  #     - "9300:9300"
+
+  # kibana:
+  #   ports:
+  #     - "5601:5601"
+  
+  # logstash:
+  #   ports:
+  #     - "8080:8080"
+
   identity.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -93,6 +106,24 @@ services:
     ports:
       - "5101:80"   # Important: In a production environment your should remove the external port (5101) kept here for microservice debugging purposes. 
                     # The API Gateway redirects and access through the internal port (80).
+    
+  catalog.backgroundtasks:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sql.data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
+      - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
+      - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
+      - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}          
+      - UseCustomizationData=True
+      - AzureServiceBusEnabled=False
+      - CheckUpdateTime=30000
+      - GracePeriodTime=1
+      - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
+      - OrchestratorType=${ORCHESTRATOR_TYPE}
+      - UseLoadTest=${USE_LOADTEST:-False}
+    ports:
+      - "5122:80"
 
   ordering.api:
     environment:
@@ -359,7 +390,9 @@ services:
       - HealthChecks-UI__HealthChecks__16__Name=Payments HTTP Check
       - HealthChecks-UI__HealthChecks__16__Uri=http://payment.api/hc
       - HealthChecks-UI__HealthChecks__17__Name=Ordering SignalRHub HTTP Check
-      - HealthChecks-UI__HealthChecks__17__Uri=http://ordering.signalrhub/hc      
+      - HealthChecks-UI__HealthChecks__17__Uri=http://ordering.signalrhub/hc  
+      - HealthChecks-UI__HealthChecks__18__Name=Catalog HTTP Background Check
+      - HealthChecks-UI__HealthChecks__18__Uri=http://catalog.backgroundtasks/hc    
       - OrderingBackgroundTasksUrl=http://ordering.backgroundtasks/hc
       - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
       - OrchestratorType=${ORCHESTRATOR_TYPE}
@@ -411,3 +444,15 @@ services:
       - SelfUrl=http://webhooks.client/
     ports:
       - "5114:80"
+  
+  nopcommerce_web:
+    ports:
+        - "5300:80"
+  
+  nopcommerce_database:
+    ports:
+        - "1433:1433"
+    environment:
+        SA_PASSWORD: "nopCommerce_db_password"
+        ACCEPT_EULA: "Y"
+        MSSQL_PID: "Express" 
