@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.app.svc.catalogbackgroundtasks }}
+  labels:
+    app: {{ template "catalog-backgroundtasks.name" . }}
+    chart: {{ template "catalog-backgroundtasks.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: {{ template "catalog-backgroundtasks.name" . }}
+    release: {{ .Release.Name }}

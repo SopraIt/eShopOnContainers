@@ -8,12 +8,14 @@ version: '3.4'
 
 services:
   seq:
+    image: datalust/seq:latest
     environment:
       - ACCEPT_EULA=Y
     ports:
       - "5340:80"
 
   sql.data:
+    image: microsoft/mssql-server-linux:2017-latest
     environment:
       - SA_PASSWORD=Pass@word
       - ACCEPT_EULA=Y
@@ -21,14 +23,17 @@ services:
       - "5433:1433"    # Important: In a production environment your should remove the external port
 
   nosql.data:
+    image: mongo
     ports:
       - "27017:27017"  # Important: In a production environment your should remove the external port
 
   basket.data:
+    image: redis:alpine
     ports:
       - "6379:6379"    # Important: In a production environment your should remove the external port
 
   rabbitmq:
+    image: rabbitmq:3-management-alpine
     ports:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
@@ -444,12 +449,20 @@ services:
       - SelfUrl=http://webhooks.client/
     ports:
       - "5114:80"
-  
+
   nopcommerce_web:
+    image: ${REGISTRY:-eshop}/nopcommerce:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: nopCommerce/Dockerfile
+    depends_on:
+        - nopcommerce_database
     ports:
         - "5300:80"
   
   nopcommerce_database:
+    image: "microsoft/mssql-server-linux"
+    container_name: nopcommerce_${REGISTRY:-eshop}_mssql_server_${PLATFORM:-linux}-${TAG:-latest}
     ports:
         - "1433:1433"
     environment:

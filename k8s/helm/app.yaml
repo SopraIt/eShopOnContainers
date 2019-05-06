@@ -11,7 +11,7 @@ app:                                                  # app global settings
       ordering: ordering-api                          # ingress entry for ordering api
       identity: identity                              # ingress entry for identity api
       mvc: webmvc                                     # ingress entry for web mvc
-      spa: ""                                         # ingress entry for web spa
+      spa: webspa                                     # ingress entry for web spa
       status: webstatus                               # ingress entry for web status
       webshoppingapigw: webshoppingapigw              # ingress entry for web shopping Agw
       webmarketingapigw: webmarketingapigw            # ingress entry for web mkg Agw
@@ -24,9 +24,12 @@ app:                                                  # app global settings
       marketing: marketing-api                        # ingress entry for marketing api
       webhooks: webhooks-api                          # ingress entry for webhooks api
       webhooksweb: webhooks-web                       # ingress entry for webhooks web demo client
+      elasticsearch: elasticsearch
+      kibana: kibana
   svc:
       basket: basket                                    # service name for basket api
       catalog: catalog                                  # service name for catalog api
+      catalogbackgroundtasks: catalogbackgroundtasks  # service name for catalogbackgroundtasks
       ordering: ordering                                # service name for ordering api
       orderingbackgroundtasks: orderingbackgroundtasks  # service name for orderingbackgroundtasks
       orderingsignalrhub: ordering-signalrhub            # service name for orderingsignalrhub
@@ -45,3 +48,5 @@ app:                                                  # app global settings
       marketing: marketing                              # service name for marketing ap
       webhooks: webhooks                                # service name for webhooks api
       webhooksweb: webhooksweb                          # service name for webhooks web
+      elasticsearch: elasticsearch
+      kibana: kibana
