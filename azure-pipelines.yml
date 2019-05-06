@@ -19,6 +19,6 @@ steps:
   displayName: 'docker-compose push'
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    cd ./k8s/helm
+    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag v0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+  displayName: 'k8s intsall all'
