@@ -2,38 +2,6 @@ version: '3.4'
 
 services:
 
-  seq:
-    image: datalust/seq:latest
-
-  sql.data:
-    image: microsoft/mssql-server-linux:2017-latest
-
-  nosql.data:
-    image: mongo
-
-  basket.data:
-    image: redis:alpine
-
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-
-  nopcommerce_database:
-    image: "microsoft/mssql-server-linux"
-    container_name: nopcommerce_${REGISTRY:-eshop}_mssql_server_${PLATFORM:-linux}-${TAG:-latest}
-
-  # elasticsearch:
-  #   image: docker.elastic.co/elasticsearch/elasticsearch:7.0.1
-  
-  # kibana:
-  #   image: docker.elastic.co/kibana/kibana:7.0.1
-  #   depends_on:
-  #     - elasticsearch
-  
-  # logstash:
-  #   image: docker.elastic.co/logstash/logstash:7.0.1
-  #   depends_on:
-  #     - elasticsearch
-
   identity.api:
     image: ${REGISTRY:-eshop}/identity.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
@@ -262,13 +230,5 @@ services:
       dockerfile: src/Web/WebhookClient/Dockerfile
     depends_on:
       - webhooks.api 
-
-  nopcommerce_web:
-    image: ${REGISTRY:-eshop}/nopcommerce:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: nopCommerce/Dockerfile
-    depends_on:
-        - nopcommerce_database
 
   

@@ -1,9 +1,9 @@
 replicaCount: 1
 clusterName: eshop-aks
-pathBase: /
+pathBase: /webspa
 
 image:
-  repository: eshop/webspa
+  repository: webspa
   tag: latest
   pullPolicy: IfNotPresent
 

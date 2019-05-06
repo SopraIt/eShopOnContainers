@@ -3,7 +3,7 @@ clusterName: eshop-aks
 pathBase: /webstatus
 
 image:
-  repository: eshop/webstatus
+  repository: webstatus
   tag: latest
   pullPolicy: IfNotPresent
 

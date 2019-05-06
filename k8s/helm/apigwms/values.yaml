@@ -3,7 +3,7 @@ clusterName: eshop-aks
 pathBase: /mobileshoppingapigw
 
 image:
-  repository: eshop/ocelotapigw
+  repository: ocelotapigw
   tag: latest
   pullPolicy: IfNotPresent
 

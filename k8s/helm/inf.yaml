@@ -35,6 +35,10 @@ inf:
     svc: rabbitmq           # Name of k8s svc for rabbitmq
     constr: rabbitmq        # Event bus connection string
     useAzure: false         # true if use Azure Service Bus. False if RabbitMQ
+  elasticsearch:
+    url: http://elasticsearch-master:9200
+  catalog:
+    url: https://ccadmin-test-ze1a.oracleoutsourcing.com
   appinsights:
       key: ""               # App insights to use
   k8s:                      # inf.k8s defines Kubernetes cluster global config
@@ -42,9 +46,10 @@ inf:
   misc:                     # inf.misc contains miscellaneous configuration related to infrastructure
     useLoadTest: false      # If running under loading test or not
     useAzureStorage: false  # If catalog api uses azure storage or not
-#  registry:                # Uncomment "registry" to specify registry secret
-#    secretName:            # secretName is the name of the secret inside k8s   
-#    server:                # Registry login server
-#    login:                 # User login
-#    pwd:                   # User pwd
+  registry:                # Uncomment "registry" to specify registry secret
+    secretName: ""           # secretName is the name of the secret inside k8s   
+    server: "docker.io"                # Registry login server
+    login: "samuelecozzi"                # User login
+    pwd:   "bxi4MhIAELJe"                # User pwd
+    namespace: "samuelecozzi"            # namespace of repository
 
