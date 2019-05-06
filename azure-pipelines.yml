@@ -9,7 +9,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
-# steps:
+steps:
 # - script: TAG=v0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml  build
 #  displayName: 'docker-compose build'
 
