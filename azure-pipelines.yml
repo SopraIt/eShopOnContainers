@@ -10,8 +10,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-# - script: TAG=v0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml  build
-#  displayName: 'docker-compose build'
+- script: TAG=v0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml  build
+  displayName: 'docker-compose build'
 
 - script: |
     docker login -u samuelecozzi -p $(docker_repo_pwd)
