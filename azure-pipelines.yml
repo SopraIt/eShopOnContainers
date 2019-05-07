@@ -44,6 +44,7 @@ steps:
 - powershell: |
     #.\login-k8s.ps1 -servicePrincipalSecret "$(APP_SP_SECRET)"
     az login -u $(USR) -p $(PWD)
+    az account set --subscription IT-BU0791-PocAIPlatform-LAB
     az aks get-credentials --resource-group=$(AZ_RESOURCE) --name=$(AZ_K8S_NAME)
     .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
