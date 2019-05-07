@@ -95,6 +95,7 @@ else {
 }
 
 Write-Host "helm repo update" -ForegroundColor Green
+helm init --client-only
 helm repo update
 
 Write-Host "Installing: ELK Stack" -ForegroundColor Green
