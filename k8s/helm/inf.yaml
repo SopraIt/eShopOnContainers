@@ -36,7 +36,9 @@ inf:
     constr: rabbitmq        # Event bus connection string
     useAzure: false         # true if use Azure Service Bus. False if RabbitMQ
   elasticsearch:
-    url: http://elasticsearch-master:9200
+    url: http://elk-stack-elastic-stack.default.svc.cluster.local:9200
+  logstash:
+    url: http://logstash:8080
   catalog:
     url: https://ccadmin-test-ze1a.oracleoutsourcing.com
   appinsights:
