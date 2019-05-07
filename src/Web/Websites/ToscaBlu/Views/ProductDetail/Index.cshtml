@@ -1,0 +1,15 @@
+﻿@using Microsoft.eShopOnContainers.WebMVC.Services
+@using Microsoft.eShopOnContainers.WebMVC.ViewModels
+
+@model Microsoft.eShopOnContainers.WebMVC.ViewModels.CatalogItem
+@inject IIdentityParser<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Dettaglio Prodotto";
+}
+
+<form method="post" id="cartForm">
+    <div class="esh-basket">
+        @Model.Id
+    </div>
+</form>

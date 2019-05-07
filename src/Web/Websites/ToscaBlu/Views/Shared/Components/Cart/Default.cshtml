@@ -1,0 +1,57 @@
+@model Microsoft.eShopOnContainers.WebMVC.ViewModels.CartViewModels.CartComponentViewModel
+
+@{
+    ViewData["Title"] = "My Cart";
+}
+
+@*<a class="esh-basketstatus @Model.Disabled"
+   asp-area="" 
+   asp-controller="Cart" 
+   asp-action="Index">    
+    @if (ViewBag.IsBasketInoperative == true)
+    {
+        <div class="esh-basketstatus-image">
+            <img src="~/images/cart-inoperative.png" />            
+        </div>
+        <div class="esh-basketstatus-badge-inoperative">
+            X           
+        </div>        
+    }
+    else
+    {
+        <div class="esh-basketstatus-image">
+            <img src="~/images/cart.png" />
+        </div>
+        <div class="esh-basketstatus-badge">
+            @Model.ItemsCount
+        </div>
+    }       
+</a>*@
+
+
+<div class="row" id="minicartRow">
+    <h2 class="label-hidden" data-bind="widgetLocaleText : 'shoppingCartHeader'">Riepilogo carrello</h2>
+    <div class="col-xs-12 hidden-xs" id="dropdowncart">
+        <div class="pull-right">
+            <h3 class="label-hidden" data-bind="widgetLocaleText : 'cartOperationsText'">Operazioni carrello</h3>
+            <div class="minicart-heading">
+                <!--<span class="glyphicon glyphicon-shopping-cart"></span>-->
+                <a data-bind="with: cart, click: toggleDropDownCart, widgetLocaleText: {attr: 'aria-label', value: 'miniShoppingCartTitle'}, event: {keydown: $data.keypressHandler}" href="#" id="CC-header-cart-total" data-original-title="Shopping Cart" class="cc-cartlink-anchor" aria-label="Mini carrello">
+                    <!--<span data-bind="text: cartLinkText"></span>-->
+
+
+                    <img class="headerIcon" id="basketIcon" src="~/images/tb/basket2.png">
+                    <p class="minicartItemsNumber" data-bind="text: numberOfItems">@Model.ItemsCount</p>
+
+
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+

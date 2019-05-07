@@ -1,0 +1,1276 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <header id="headerBar" class="page-row">
+
+        <div data-bind="css:{'container': containHeader}">
+            <!-- ko foreach: headerRows -->
+            <div class="row">
+                <div data-bind="template: { name: 'region-template', foreach: regions }" class="redBox">
+                    <!-- ko if: $data.hasOwnProperty('structure') && $data.structure() == 101 --><!-- /ko -->
+                    <!-- ko ifnot: $data.hasOwnProperty('structure') && $data.structure() == 101 -->
+                    <!-- ko if: $data.widgets() && $data.widgets().length && !$data.globalWidgetsOnly() -->
+                    <div data-bind="css: widthClass, attr: {id: 'region-'+name()}" class="col-sm-12" id="region-re900007">
+                        <!-- ko foreach: $data.widgets  -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc --><!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="tb_PopUpCountry_v1-wi800010">
+                            <div class="modal fade in" id="CC-PopupCountry" tabindex="-1" role="link" aria-hidden="false">
+                                <div class="modal-dialog cc-modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="row">
+                                            <div class="modal-header CC-header-modal-heading">
+                                                <img src="/file/v4584967678279402847/general/close.png" id="PopupCountryCloseBtn">
+                                            </div>
+                                            <div class="modal-title" data-bind="widgetLocaleText: 'TiTrovi'">Ti trovi in </div>
+                                            <p class="modal-text" data-bind="widgetLocaleText: 'SeDesideri'">Se desideri spedire in $, visita il nostro negozio online pensato per la tua nazione.</p>
+                                            <a class="modal-button" href=""><img class="flag" src="/file/v1135098605938728816/general/blank.gif"> <span class="modal-countrycode"></span> <span class="cta" data-bind="widgetLocaleText: 'VaiAlSito'">Vai al sito</span></a>
+                                            <a class="modal-cta" href=""><span data-bind="widgetLocaleText: 'RimaniQui'">Rimani su questo sito</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc --><!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc -->
+                        <!-- ko if: templateUrl() --><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: $data.templateSrc --><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc --><!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="tb-notification-banner_v1-wi700010">
+                            <!-- ko if: check1 || check2 || check3 || check4 -->
+                            <div class="cc_notificationSlider">
+
+                                <div id="notification-slider" class="carousel slide" data-ride="carousel">
+                                    <!-- class of slide for animation -->
+                                    <div class="carousel-inner">
+                                        <!-- ko if : $data.check1 -->
+                                        <div class="item active">
+                                            <!-- ko if: $data.notificationUrl1().indexOf('https://') !== -1 || $data.notificationUrl1().indexOf('http://') !== -1 --><!-- /ko -->
+                                            <!-- ko ifnot: $data.notificationUrl1().indexOf('https://') !== -1 || $data.notificationUrl1().indexOf('http://') !== -1 -->
+                                            <a id="notification_link1" data-bind="ccLink: {route: notificationUrl1[0]}" href="#">
+                                                <div class="example1"><p class="notification-text" data-bind="widgetLocaleText: 'text1'">Spedizione standard gratuita per ordini superiori a 150€</p></div>
+                                            </a>
+                                            <!-- /ko -->
+                                        </div>
+                                        <!--/ko-->
+                                        <!-- ko if : $data.check2  --><!--/ko-->
+                                        <!-- ko if : $data.check3  --><!--/ko-->
+                                        <!-- ko if : $data.check4  --><!--/ko-->
+                                    </div>
+                                    <!-- /.carousel-inner -->
+                                    <a class="left carousel-control" data-slide="prev" href="#notification-slider">
+                                    </a>
+                                    <a class="right carousel-control" data-slide="next" href="#notification-slider">
+                                    </a>
+                                </div>
+                                <!-- /.carousel -->
+                            </div>
+                            <!--/ko-->
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc -->
+                        <!-- ko addTemplate: elementsSrc() --><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="notifications-notificationsInst">
+                            <div id="cc-notifications" data-oc-id="cc-notifications">
+                                <!-- oc layout: panels -->
+                                <div id="cc-notifications-panel" data-oc-id="cc-notifications-panel">
+                                    <!-- oc section: notifications-message-box -->
+                                    <div data-bind="element: 'notifications-message-box'" id="notificationsInst-notifications-message-box-id">
+                                        <div id="messageBox" class="cc-message-box">
+                                            <!-- Message Panel -->
+                                            <!-- ko with: messageBox -->
+                                            <div id="CC-messages" data-bind="slide: messageFlag" role="alert" style="display: none;"></div>
+                                            <!-- /ko -->
+                                            <!-- Message Panel -->
+                                        </div>
+                                    </div>
+                                    <!-- /oc -->
+                                </div>
+                                <!-- /oc -->
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc -->
+                        <!-- ko addTemplate: elementsSrc() --><!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="headerWidget_v10-headerWidgetInst">
+                            <!-- ko setContextVariable: {name: 'elementConfig', value: {
+                              "200163": {"id": "200163"},
+                              "200181": {
+                                "id": "200181",
+                                "padding": {
+                                  "paddingBottom": "0",
+                                  "paddingLeft": "0",
+                                  "paddingRight": "0",
+                                  "paddingTop": "0"
+                                },
+                                "richText": {
+                                  "content": "<p>headerNew TEST TEST (versione ITA)<\/p>\n",
+                                  "sourceMedia": "m20310"
+                                }
+                              },
+                              "200184": {
+                                "id": "200184",
+                                "padding": {
+                                  "paddingBottom": "0",
+                                  "paddingLeft": "0",
+                                  "paddingRight": "0",
+                                  "paddingTop": "0"
+                                },
+                                "richText": {
+                                  "content": " ",
+                                  "sourceMedia": "m20315"
+                                }
+                              },
+                              "200185": {
+                                "id": "200185",
+                                "padding": {
+                                  "paddingBottom": "0",
+                                  "paddingLeft": "0",
+                                  "paddingRight": "0",
+                                  "paddingTop": "0"
+                                },
+                                "richText": {
+                                  "content": "<div class=\"iconsContainer\"><img class=\"headerIcon\" src=\"\/file\/general\/search2.png\" \/> <img class=\"headerIcon\" src=\"\/file\/general\/favourites2.png\" \/> <img class=\"headerIcon\" src=\"\/file\/general\/user2.png\" \/> <img class=\"headerIcon\" src=\"\/file\/general\/basket2.png\" \/><\/div>\n",
+                                  "sourceMedia": "m20317"
+                                }
+                              },
+                              "200186": {
+                                "id": "200186",
+                                "padding": {
+                                  "paddingBottom": "0",
+                                  "paddingLeft": "0",
+                                  "paddingRight": "0",
+                                  "paddingTop": "0"
+                                },
+                                "richText": {
+                                  "content": "<div class=\"selectorContainer\">\n<p>Italy <\/p>\n\/\n<p class=\"languageSelector\"> IT<\/p>\n<\/div>\n",
+                                  "sourceMedia": "m20319"
+                                }
+                              }
+                            }} -->
+                            <!-- /ko -->
+                            <!--
+                             /**
+                              *
+                              * Header Widget Template
+                              *
+                              */
+                            -->
+
+                            <div class="templateRegion" id="CC-headerWidget" data-oc-id="CC-headerWidget">
+                                <div class="header-line">
+                                    <h1 class="label-hidden" data-bind="text: $data.site().siteInfo.name">Tosca Blu Italia IT</h1>
+                                    <div class="header-background">
+                                        <div id="header">
+                                            <div class="skip-content" data-bind="click: skipToContentHandler">
+                                                <button id="cc-btn-skipToContent-desktop" data-bind="widgetLocaleText: 'skipToContent'">Passa al contenuto</button>
+                                            </div>
+                                            <!-- ko if: initialized -->
+                                            <h2 class="label-hidden" data-bind="widgetLocaleText : 'siteNavigationHeader'">Navigazione sito</h2>
+                                            <!-- /ko -->
+                                            <!-- oc layout: panels -->
+                                            <div class="row">
+
+                                                <div class="oc-panel col-md-4" data-oc-id="panel-0-0">
+
+                                                    <!-- oc section: tb-site-selector --><span data-bind="element: 'tb-site-selector'" id="headerWidgetInst-tb-site-selector-id">
+
+                                                        <div id="cc-SiteSelectorPicker">
+                                                            <a href="#CC-siteSelectorModalPane" data-toggle="modal">
+                                                                <span data-bind="text: $data.site().priceListGroup.defaultPriceListGroup.displayName">Italia</span> /
+                                                                <span data-bind="text: $data.locale" style="text-transform: uppercase;">it</span>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="modal fade" id="CC-siteSelectorModalPane" tabindex="-1" role="link">
+                                                            <div class="modal-dialog cc-modal-dialog" id="CC-siteSelectorModal">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header CC-header-modal-heading">
+                                                                        <div class="cross-icon-modal" style="text-align: right;"><span data-dismiss="modal" class="glyphicon glyphicon-remove"></span></div>
+                                                                        <h4 data-bind="widgetLocaleText: 'countryPicker'">SELEZIONA IL TUO PAESE</h4>
+                                                                        <div id="countryList"><ul><li><a href="https://www.toscablu.com/it-AT/home">Austria</a></li><li><a href="https://www.toscablu.com/it-BE/home">Belgio</a></li><li><a href="https://www.toscablu.com/it-BG/home">Bulgaria</a></li><li><a href="https://www.toscablu.com/it-CY/home">Cipro</a></li><li><a href="https://www.toscablu.com/it-HR/home">Croazia</a></li><li><a href="https://www.toscablu.com/it-DK/home">Danimarca</a></li><li><a href="https://www.toscablu.com/it-EE/home">Estonia</a></li><li><a href="https://www.toscablu.com/it-FI/home">Finlandia</a></li><li><a href="https://www.toscablu.com/it-FR/home">Francia</a></li></ul><ul><li><a href="https://www.toscablu.com/it-DE/home">Germania</a></li><li><a href="https://www.toscablu.com/it-JP/home">Giappone</a></li><li><a href="https://www.toscablu.com/it-GR/home">Grecia</a></li><li><a href="https://www.toscablu.com/it-IE/home">Irlanda</a></li><li><a style="padding:0px" class="btn disabled" href="https://www.toscablu.com/it-IT/home">Italia</a></li><li><a href="https://www.toscablu.com/it-LV/home">Lettonia</a></li><li><a href="https://www.toscablu.com/it-LT/home">Lituania</a></li><li><a href="https://www.toscablu.com/it-LU/home">Lussemburgo</a></li><li><a href="https://www.toscablu.com/it-MT/home">Malta</a></li></ul><ul><li><a href="https://www.toscablu.com/it-MD/home">Moldova, Repubblica di</a></li><li><a href="https://www.toscablu.com/it-NO/home">Norvegia</a></li><li><a href="https://www.toscablu.com/it-NL/home">Paesi Bassi</a></li><li><a href="https://www.toscablu.com/it-PL/home">Polonia</a></li><li><a href="https://www.toscablu.com/it-PT/home">Portogallo</a></li><li><a href="https://www.toscablu.com/it-GB/home">Regno Unito</a></li><li><a href="https://www.toscablu.com/it-CZ/home">Repubblica Ceca</a></li><li><a href="https://www.toscablu.com/it-RO/home">Romania</a></li><li><a href="https://www.toscablu.com/ru-RU/home">Russia</a></li></ul><ul><li><a href="https://www.toscablu.com/it-RS/home">Serbia</a></li><li><a href="https://www.toscablu.com/it-SG/home">Singapore</a></li><li><a href="https://www.toscablu.com/it-SK/home">Slovacchia</a></li><li><a href="https://www.toscablu.com/it-SI/home">Slovenia</a></li><li><a href="https://www.toscablu.com/it-ES/home">Spagna</a></li><li><a href="https://www.toscablu.com/it-US/home">Stati Uniti</a></li><li><a href="https://www.toscablu.com/it-SE/home">Svezia</a></li><li><a href="https://www.toscablu.com/it-CH/home">Svizzera</a></li><li><a href="https://www.toscablu.com/it-UA/home">Ucraina</a></li></ul><ul><li><a href="https://www.toscablu.com/it-HU/home">Ungheria</a></li></ul></div>
+                                                                        <hr>
+                                                                        <h5 data-bind="widgetLocaleText: 'languagePicker'">SELEZIONA LA LINGUA</h5>
+                                                                        <ul class="language-picker">
+
+                                                                            <li><a href="https://www.toscablu.com/it-IT/home">Italiano</a></li>
+                                                                            <li><a href="https://www.toscablu.com/en-IT/home">Inglese</a></li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </span>
+                                                    <!-- /oc -->
+
+                                                </div>
+
+
+                                                <div class="oc-panel col-md-4" data-oc-id="panel-0-1">
+
+                                                    <!-- oc section: tb-logo --><span data-bind="element: 'tb-logo'" id="headerWidgetInst-tb-logo-id">
+                                                        <div class="logoNewContainer"><a href="https://www.toscablu.com/it-IT/home"><img class="logoNew" src="~/images/tb/tosca-blu.png"></a></div>
+
+                                                    </span>
+                                                    <!-- /oc -->
+
+                                                </div>
+
+
+                                                <div class="oc-panel col-md-2" data-oc-id="panel-0-2">
+
+                                                    <!-- oc section: search -->
+                                                    <div data-bind="element: 'search'" id="headerWidgetInst-search-id">
+                                                        <!-- ko if: initialized() && $data.elements.hasOwnProperty('search') -->
+                                                        <form role="form" data-bind="submit: function(data, event) { $data['elements']['search'].handleSearch.bind($data['elements']['search'], $data['elements']['search'], event)() }, event: { keydown : $data['elements']['search'].handleKeyPress }">
+                                                            <!-- ko with: $data['elements']['search'] -->
+                                                            <label for="CC-headerWidget-Search" class="label-hidden" data-bind="widgetLocaleText :'searchLabel'">Ricerca</label>
+                                                            <div class="col-xs-12 pull-right input-group search">
+                                                                <input id="CC-headerWidget-Search" type="text" class="form-control search-query" autocomplete="off" data-bind="widgetLocaleText: {attr: 'placeholder', value: 'searchPlaceholder'}, value: searchText, valueUpdate: 'afterkeydown', onRender:initializeSearch.bind($parent), event: { focus: searchSelected}" placeholder="Immettere qui il testo da ricercare.">
+                                                                <div class="input-group-btn">
+                                                                    <button type="submit" id="searchSubmit" class="btn btn-default form-control" data-bind="event: { keydown : hideSearchDropdown}">
+                                                                        <span class="sr-only" data-bind="widgetLocaleText :'searchButtonText'">Cerca</span>
+                                                                        <span class="glyphicon glyphicon-search"></span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                            <!-- /ko -->
+                                                        </form>
+                                                        <!-- /ko -->
+
+                                                    </div>
+                                                    <!-- /oc -->
+
+                                                </div>
+
+
+                                                <div class="oc-panel col-md-2" data-oc-id="panel-0-3">
+
+                                                    <!-- oc section: header-icons --><span data-bind="element: 'header-icons'" id="headerWidgetInst-header-icons-id">
+                                                                                         <div class="iconsContainer">
+                                                                                             <!--<a href="javascript:$('#headerWidgetInst-search-id').fadeToggle()"><img class="headerIcon" id="searchIcon" src="/file/general/search2.png" /></a>-->
+                                                                                             <a href="javascript:void(0)" data-bind="click: function(){
+    if($('#newSearchBar').height() === 90 || $('#newSearchBar').height() === '90px'){
+    $('#newSearchBar').css('height','0px');
+    }else if($('#newSearchBar').height() === 0 || $('#newSearchBar').height() === '0px'){
+    $('#newSearchBar').css('height','90px');
+    }
+    }"><img class="headerIcon" id="searchIcon" src="~/images/tb/search2.png"></a>
+                                                                                             <a href="https://www.toscablu.com/it-IT/wishlist"><img class="headerIcon" id="favouritesIcon" src="~/images/tb/favourites2.png"></a>
+
+
+
+
+
+                                                                                             <!-- ko if: initialized() && $data.elements.hasOwnProperty('login-registration-v2') -->
+                                                                                             @await Html.PartialAsync("_TBLoginPartial")
+
+                                                                                             <!-- MODAL dialouge for registration pane -->
+                                                                                             <!-- ko with: $data['elements']['login-registration-v2'] -->
+                                                                                             <div class="modal fade" id="CC-headermodalpane" tabindex="-1" role="link">
+                                                                                                 <div class="modal-dialog cc-modal-dialog" id="CC-LoginRegistrationModal">
+                                                                                                     <div class="modal-content" id="loginModal">
+                                                                                                         <div id="CC-registerUserPane">
+                                                                                                             <div class="cross-icon-modal" style="text-align: right;">
+                                                                                                                 <span data-dismiss="modal" class="glyphicon glyphicon-remove"></span>
+                                                                                                             </div>
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 data-bind="widgetLocaleText:'headerCreateAccount'">Crea un account</h3>
+                                                                                                                 <img class="icon-cross" id="CC-userRegistrationCancel" data-bind="click: cancelRegistration.bind($data, $parent), event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}" src="/file/general/cross.svg">
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-messages-registration" data-bind="visible: showErrorMessage" style="display: none;">
+                                                                                                                     <div role="alert" class="text-danger cc-error-message" data-bind="text: modalMessageText"></div>
+                                                                                                                 </div>
+                                                                                                                 <div id="CC-userRegistration" data-bind="with: $parent.user">
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-userRegistration-firstname" data-bind="widgetLocaleText:'firstNameText'">Nome</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-userRegistration-firstname-error" data-bind="validationMessage: firstName" style="display: none;"></span>
+                                                                                                                             <input type="text" class="col-md-5 form-control" id="CC-userRegistration-firstname" aria-required="true" data-bind="validatableValue: firstName, widgetLocaleText : {value:'firstNameText', attr:'placeholder'}, valueUpdate: 'afterkeydown', event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }}" required="required" placeholder="Nome">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-userRegistration-lastname" data-bind="widgetLocaleText:'lastNameText'">Cognome</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-userRegistration-lastname-error" data-bind="validationMessage: lastName" style="display: none;"></span>
+                                                                                                                             <input type="text" class="col-md-5 form-control" id="CC-userRegistration-lastname" aria-required="true" data-bind="validatableValue: lastName, widgetLocaleText : {value:'lastNameText', attr:'placeholder'}, valueUpdate: 'afterkeydown', event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }}" required="required" placeholder="Cognome">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-userRegistration-emailAddress" data-bind="widgetLocaleText:'emailAddressText'">Indirizzo e-mail</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-userRegistration-emailAddress-error" data-bind="validationMessage: emailAddress" style="display: none;"></span>
+                                                                                                                             <input type="email" class="col-md-5 form-control" id="CC-userRegistration-emailAddress" aria-required="true" data-bind="validatableValue: emailAddress,
+                            widgetLocaleText : {value:'emailAddressText', attr:'placeholder'}, valueUpdate: 'afterkeydown', event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }, blur: $parent.emailAddressLostFocus.bind($parents[1]), focus: $parent.emailAddressFocused.bind($parents[1])}" required="required" placeholder="Indirizzo e-mail">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-userRegistration-password" data-bind="widgetLocaleText:'passwordText'">Password</label>
+                                                                                                                             <div class="password-errors" role="alert">
+                                                                                                                                 <div class="text-muted" id="cc-userRegistration-password-embeddedAssistance" data-bind="embeddedAssistance: newPassword" style="display: none;"></div>
+                                                                                                                                 <div class="text-danger" id="CC-userRegistration-password-error" data-bind="validationMessage: newPassword" style="display: none;"></div>
+                                                                                                                             </div>
+                                                                                                                             <input type="password" class="col-md-5 form-control" id="CC-userRegistration-password" aria-required="true" data-bind="validatableValue: newPassword, widgetLocaleText : {value:'passwordText', attr:'placeholder'}, valueUpdate: 'afterkeydown',
+                            event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }, blur: $parent.passwordFieldLostFocus.bind($parents[1]), focus: $parent.passwordFieldFocused.bind($parents[1])}" required="required" placeholder="Password">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-userRegistration-confirmPassword" data-bind="widgetLocaleText:'confirmPasswordText'">Conferma password</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-userRegistration-cPassword-error" data-bind="validationMessage: confirmPassword" style="display: none;"></span>
+                                                                                                                             <input type="password" class="col-md-5 form-control" id="CC-userRegistration-confirmPassword" aria-required="true" data-bind="validatableValue: confirmPassword, widgetLocaleText : {value:'confirmPasswordText', attr:'placeholder'}, valueUpdate: 'afterkeydown',
+                            event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }, blur: $parent.confirmPwdFieldLostFocus.bind($parents[1]), focus: $parent.confirmPwdFieldFocused.bind($parents[1])}" required="required" placeholder="Conferma password">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <div class="checkbox">
+                                                                                                                                 <label for="CC-emailUpdates">
+                                                                                                                                     <input type="checkbox" id="CC-emailUpdates" data-bind="checked: emailMarketingMails, event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }}">
+                                                                                                                                     <span data-bind="widgetLocaleText: 'marketingMailsText'">Desidero ricevere gli aggiornamenti via e-mail.</span>
+                                                                                                                                 </label>
+                                                                                                                             </div>
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row" data-bind="visible:$parents[1].site().requireGDPRP13nConsent" style="display: none;">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <div class="checkbox">
+                                                                                                                                 <label for="CC-personalizationConsent">
+                                                                                                                                     <input type="checkbox" id="CC-personalizationConsent" data-bind="checked: GDPRProfileP13nConsentGranted, event: {keydown: function(data, event) { return $parent.registerUser.bind(data, $parents[1], event)() }}">
+                                                                                                                                     <span data-bind="widgetLocaleText:'personalizationConsentText'">Mostra contenuti sito e promozioni rilevanti durante l'esplorazione.</span>
+                                                                                                                                 </label>
+                                                                                                                             </div>
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <input type="checkbox" class="col-md-5 col-xs-2 form-control" id="CC-userRegistration-privacy">
+                                                                                                                             <span id="CC-privacyText" data-bind="widgetLocaleText:'personalizationPrivacyText'">Dichiaro di aver letto l'informativa sulla privacy e di accettare il trattamento dei dati personali.</span> <a href="https://www.toscablu.com/it-IT/privacy" target="_blank">Privacy</a>
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <button class="cc-button-primary" id="CC-userRegistrationSubmit" data-bind="click: function(data, event) { registerUser.bind(data, $parent, event)() }, widgetLocaleText: 'buttonCreateAccount', event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Crea account</button>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-loginUserPane">
+                                                                                                             <div class="cross-icon-modal" style="text-align: right;">
+                                                                                                                 <span data-dismiss="modal" class="glyphicon glyphicon-remove"></span>
+                                                                                                             </div>
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 data-bind="widgetLocaleText:'titleLogin'">Login</h3>
+                                                                                                                 <img class="icon-cross" id="CC-userRegistrationCancel" data-bind="click: cancelRegistration.bind($data, $parent), event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}" src="/file/general/cross.svg">
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-messages-login" data-bind="visible: showErrorMessage" role="alert" style="display: none;">
+                                                                                                                     <div role="alert" class="text-danger cc-error-message" data-bind="text: modalMessageText"></div>
+                                                                                                                 </div>
+                                                                                                                 <div id="CC-userLogin" data-bind="with: $parent.user">
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-login-input" data-bind="widgetLocaleText:'emailAddressText'">Indirizzo e-mail</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-login-error" data-bind="validationMessage: login" style="display: none;"></span>
+                                                                                                                             <input type="email" class="col-md-5 form-control" id="CC-login-input" aria-required="true" data-bind="validatableValue: login, valueUpdate: 'afterkeydown',
+                          widgetLocaleText : {value:'emailAddressText', attr:'placeholder'}, event: {keydown: function(data, event) { return $parent.handleLogin.bind(data, $parents[1], event)() }, blur: $parent.emailAddressLostFocus.bind($parents[1], $parents[1]), focus: $parent.emailAddressFocused.bind($parents[1], $parents[1])}" required="required" placeholder="Indirizzo e-mail">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-login-password-input" data-bind="widgetLocaleText:'passwordText'">Password</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-login-password-input-error" data-bind="validationMessage: password" style="display: none;"></span>
+                                                                                                                             <input type="password" class="col-md-5 form-control" id="CC-login-password-input" aria-required="true" data-bind="validatableValue: password,
+                        widgetLocaleText : {value:'passwordText', attr:'placeholder'}, valueUpdate: 'afterkeydown', event: {keydown: function(data, event) { return $parent.handleLogin.bind(data, $parents[1], event)() }}" required="required" placeholder="Password">
+                                                                                                                             <div id="CC-header-forgotPasswd">
+                                                                                                                                 <a href="#CC-headermodalpane" id="CC-linkForgotPasswd" data-original-title="forgotPassword" data-bind="click: $parent.showForgotPasswordSection.bind($parent),widgetLocaleText: 'forgotPasswordLinkText', event: {mousedown: $parent.handleMouseDown.bind($parent, $parents[1]), mouseup: $parent.handleMouseUp.bind($parent, $parents[1])}">Password dimenticata?</a>
+                                                                                                                             </div>
+                                                                                                                             <div class="change-password-october">
+                                                                                                                                 <!-- ko if: $parents[2].locale() == 'it' -->
+                                                                                                                                 Ti sei registrato prima del 17 ottobre 2018? <br><a href="#CC-headermodalpane" data-original-title="forgotPassword" data-bind="click: $parent.showForgotPasswordSection.bind($parent), event: {mousedown: $parent.handleMouseDown.bind($parent, $parents[1]), mouseup: $parent.handleMouseUp.bind($parent, $parents[1])}">Cambia password per continuare.</a>
+                                                                                                                                 <!-- /ko -->
+                                                                                                                                 <!-- ko if: $parents[2].locale() == 'en' --><!-- /ko -->
+                                                                                                                                 <!-- ko if: $parents[2].locale() == 'ru' --><!-- /ko -->
+                                                                                                                             </div>
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <div id="CC-login-modal-footer" class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="text-right">
+                                                                                                                     <button type="button" id="CC-userLoginSubmit" class="cc-button-primary" data-bind="click: function(data, event) { handleLogin.bind(data, $parent, event)() }, widgetLocaleText: 'buttonLogin', event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Accedi</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <br>
+                                                                                                             <div id="CC-signup">
+                                                                                                                 <div class="CC-createAccount-div">
+                                                                                                                     <h4 data-bind="widgetLocaleText:'noAccountText'" align="center">Non sei registrato?</h4>
+                                                                                                                     <button type="button" class="cc-button-primary" id="CC-loginHeader-createAccount" data-bind="click: showRegistrationSection.bind($data, $parent), widgetLocaleText: 'buttonCreateAccount', event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Crea account</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-forgotPasswordSectionPane">
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 class="modal-title" id="CC-forgotPwdText-title" data-bind="widgetLocaleText: 'resetPwdText'">Reimposta password</h3>
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div>
+                                                                                                                     <div id="CC-forgotPassword-messagePart1" data-bind="widgetLocaleText: 'forgotPasswordHelpText'">Inserire l'indirizzo e-mail per ricevere un collegamento sicuro che consente di reimpostare la password.</div>
+                                                                                                                 </div>
+                                                                                                                 <div id="CC-forgotPasswordSection" data-bind="with: $parent.user">
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-forgotPwd-input" data-bind="widgetLocaleText:'emailAddressText'">Indirizzo e-mail</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-forgotPwd-emailAddress-error" data-bind="validationMessage: emailAddressForForgottenPwd" style="display: none;"></span>
+                                                                                                                             <input type="email" class="col-md-5 form-control" id="CC-forgotPwd-input" aria-required="true" data-bind="validatableValue: emailAddressForForgottenPwd, valueUpdate: 'afterkeydown', widgetLocaleText : {value:'emailAddressText', attr:'placeholder'},
+                      event:{keydown: function(data, event) { return $parent.resetForgotPassword.bind(data, $parents[1], event)() }, blur: $parent.emailAddressLostFocus.bind($parents[1]), focus: $parent.emailAddressFocused.bind($parents[1]) }" required="required" placeholder="Indirizzo e-mail">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="center-block">
+                                                                                                                     <button type="button" id="CC-sendRequestSubmit" class="cc-button-primary" data-bind="widgetLocaleText: 'sendRequestText', click: function(data, event) { resetForgotPassword.bind($data, $parent, event)() }, event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Invia richiesta</button>
+                                                                                                                     <button type="button" id="CC-sendRequestCancel" class="cc-button-secondary" data-bind="widgetLocaleText: 'buttonCancel', click: function(data, event) { handleCancelForgottenPassword.bind(data, $parent, event)() }, event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}" data-dismiss="modal">Annulla</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-forgotPasswordMessagePane">
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 class="modal-title" id="CC-forgotPwdText-titleMessage" data-bind="widgetLocaleText: 'resetPwdText'">Reimposta password</h3>
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-forgotPassword-message" class="alert alert-success" data-bind="widgetLocaleText: 'resetPasswordMessage'">La richiesta di reimpostazione della password è stata inviata. Un nuovo collegamento alla password è stato inviato all'account e-mail dell'utente per consentire l'esecuzione di un nuovo accesso.</div><br>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="center-block">
+                                                                                                                     <button type="button" id="CC-messagePaneClose" class="cc-button-secondary" data-bind="widgetLocaleText: 'closeText'" data-dismiss="modal">Chiudi</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-updatePasswordPane">
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 data-bind="widgetLocaleText:'updatePasswordText'">Aggiorna password</h3>
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-updatePassword" data-bind="with: $parent.user">
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-updatePassword-email" data-bind="widgetLocaleText:'emailAddressText'">Indirizzo e-mail</label>
+                                                                                                                             <div class="password-errors" role="alert">
+                                                                                                                                 <div class="text-danger" id="CC-updatePassword-email-error" data-bind="validationMessage: emailAddressForForgottenPwd" style="display: none;"></div>
+                                                                                                                             </div>
+                                                                                                                             <input type="text" class="col-md-5 form-control" id="CC-updatePassword-email" aria-required="true" data-bind="validatableValue: emailAddressForForgottenPwd, widgetLocaleText : {value:'emailAddressText', attr:'placeholder'}, event:
+                            {keydown: function(data, event) { return $parent.savePassword.bind(data, $parents[1], event)() }, blur:
+                            $parent.emailAddressLostFocus.bind($parents[1], $parents[1]), focus: $parent.emailAddressFocused.bind($parents[1], $parents[1]}" required="required" placeholder="Indirizzo e-mail">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-updatePassword-password" data-bind="widgetLocaleText:'newPasswdText'">Nuova password</label>
+                                                                                                                             <div class="password-errors" role="alert">
+                                                                                                                                 <div class="text-muted" id="CC-updatePassword-password-embeddedAssistance" data-bind="embeddedAssistance: newPassword" style="display: none;"></div>
+                                                                                                                                 <div class="text-danger" id="CC-updatePassword-password-error" data-bind="validationMessage: newPassword" style="display: none;"></div>
+                                                                                                                             </div>
+                                                                                                                             <input type="password" class="col-md-5 form-control" id="CC-updatePassword-password" aria-required="true" data-bind="validatableValue: newPassword, widgetLocaleText : {value:'newPasswdText', attr:'placeholder'},
+                              event:{keydown: function(data, event) { return $parent.savePassword.bind(data, $parents[1], event)() }, blur:
+                              $parent.passwordFieldLostFocus.bind($parents[1]), focus: $parent.passwordFieldFocused.bind($parents[1])}" required="required" placeholder="Nuova password">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                     <div class="form-group row">
+                                                                                                                         <div class="controls col-md-12">
+                                                                                                                             <label class="control-label inline" for="CC-updatePassword-confirmPassword" data-bind="widgetLocaleText:'newConfirmPasswordText'">Conferma nuova password</label>
+                                                                                                                             <span role="alert" class="text-danger" id="CC-updatePassword-cPassword-error" data-bind="validationMessage: confirmPassword" style="display: none;"></span>
+                                                                                                                             <input type="password" class="col-md-5 form-control" id="CC-updatePassword-confirmPassword" aria-required="true" data-bind="validatableValue: confirmPassword, widgetLocaleText : {value:'confirmPasswordText', attr:'placeholder'},valueUpdate: 'afterkeydown',event:
+                            {keydown: function(data, event) { return $parent.savePassword.bind(data, $parents[1], event)() },blur:
+                            $parent.confirmPwdFieldLostFocus.bind($parents[1]), focus: $parent.confirmPwdFieldFocused.bind($parents[1])}" required="required" placeholder="Conferma password">
+                                                                                                                         </div>
+                                                                                                                     </div>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="center-block">
+                                                                                                                     <button type="button" class="cc-button-primary" id="CC-updatePasswordSave" data-bind="click: function(data, event) { savePassword.bind(data, $parent, event)() }, widgetLocaleText: 'buttonSave', event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Salva</button>
+                                                                                                                     <button class="cc-button-secondary" id="CC-updatePasswordCancel" data-dismiss="modal" data-bind="click: function(data, event) { handleCancelForgottenPassword.bind(data, $parent, event)() }, widgetLocaleText: 'buttonCancel', event: {mousedown: handleMouseDown.bind($data, $parent), mouseup: handleMouseUp.bind($data, $parent)}">Annulla</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-updatePasswordMessagePane">
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 class="modal-title" id="CC-updatePasswordMsg-titleMessage" data-bind="widgetLocaleText: 'updatePasswordText'">Aggiorna password</h3>
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-updatePasswordMsg-message" class="alert alert-success" data-bind="widgetLocaleText: 'updatePasswordSuccessMessage'">Aggiornamento della password riuscito.</div><br>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="center-block">
+                                                                                                                     <button type="button" id="CC-updatePasswordMsgContinue" class="cc-button-primary" data-bind="widgetLocaleText: 'continueText'" data-dismiss="modal">Continua</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                         <div id="CC-updatePasswordErrorMessagePane">
+                                                                                                             <div class="modal-header CC-header-modal-heading">
+                                                                                                                 <h3 class="modal-title" id="CC-updatePasswordErrorMsg-titleMessage" data-bind="widgetLocaleText: 'updatePasswordText'">Aggiorna password</h3>
+                                                                                                             </div>
+                                                                                                             <div class="modal-body cc-modal-body">
+                                                                                                                 <div id="CC-updatePasswordErrorMsg-message" class="alert alert-error" data-bind="widgetLocaleText: 'updatePasswordErrorMessage'">Errore durante l'aggiornamento della password. Riprovare.</div><br>
+                                                                                                             </div>
+                                                                                                             <div class="modal-footer CC-header-modal-footer">
+                                                                                                                 <div class="center-block">
+                                                                                                                     <button type="button" id="CC-updatePasswordErrorMsgContinue" class="cc-button-primary" data-bind="click: function(data, event) { handleCancelForgottenPassword.bind(data, $parent, event)() }, widgetLocaleText: 'continueText'" data-dismiss="modal">Continua</button>
+                                                                                                                 </div>
+                                                                                                             </div>
+                                                                                                         </div>
+                                                                                                     </div>
+                                                                                                 </div>
+                                                                                             </div>
+                                                                                             <!-- /ko -->
+                                                                                             <!-- /ko -->
+                                                                                             <!--<img class="headerIcon" id="basketIcon" src="/file/general/basket2.png" />-->
+                                                                                             <!-- ko if: initialized() && $data.elements.hasOwnProperty('header-dropdown-minicart') -->
+                                                                                             
+                                                                                             <!-- /ko -->
+
+
+
+
+
+
+
+
+                                                                                         </div>
+
+                                                    </span>
+                                                    <!-- /oc -->
+                                                    <!-- oc section: header-dropdown-minicart -->
+                                                    <div data-bind="element: 'header-dropdown-minicart'" id="headerWidgetInst-header-dropdown-minicart-id">
+                                                        <!-- ko if: initialized() && $data.elements.hasOwnProperty('header-dropdown-minicart') -->
+                                                        <div class="row">
+                                                            <h2 class="label-hidden" data-bind="widgetLocaleText : 'shoppingCartHeader'">Riepilogo carrello</h2>
+                                                            <div class="col-xs-12 hidden-xs" id="dropdowncart">
+                                                                <div class="pull-right">
+                                                                    <h3 class="label-hidden" data-bind="widgetLocaleText : 'cartOperationsText'">Operazioni carrello</h3>
+                                                                    <div class="heading">
+                                                                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                                        <a data-bind="visible: cart().allItems().length > 0 , click: toggleDropDownCart, widgetLocaleText: {attr: 'aria-label', value: 'miniShoppingCartTitle'}, event: {keydown: $data.keypressHandler}" href="#" id="CC-header-cart-total" data-original-title="Shopping Cart" class="cc-cartlink-anchor" aria-label="Mini carrello" style="">
+                                                                            <span data-bind="text: cartLinkText">1 articolo - €214,00</span>
+                                                                        </a>
+                                                                        <a data-bind="visible: cart().allItems().length == 0, ccLink: 'cart', widgetLocaleText: {attr: 'aria-label', value: 'miniShoppingCartTitle'}" class="cart" id="CC-header-cart-empty" data-original-title="Shopping Cart" style="display: none;" href="/it-IT/cart" aria-label="Mini carrello">
+                                                                            <span data-bind="text: cartLinkText">1 articolo - €214,00</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <div class="content" data-bind="visible: cartVisible()" style="display: none;">
+                                                                        <h4 data-bind="widgetLocaleText : 'cartHeading'">Carrello utente</h4>
+
+                                                                        <!-- ko with: $data['elements']['header-dropdown-minicart'] -->
+                                                                        <div class="text-center scroll" data-bind="visible: $parent.cart().allItems().length >
+                                                                            $parent.miniCartNumberOfItems(),
+                                                                            css: {scrollDivActive: (currentSection() > 1)}" style="display: none;">
+                                                                            <a id="CC-headerShoppingCart-scrollUp" class="linkTag disabled" href="#" data-bind="disabled: {condition: (currentSection() == 1),
+          click: $parent.miniCartScrollUp}, inTabFlow: (currentSection() != 1), widgetLocaleText : {value:'miniShoppingCartScrollUp', attr:'aria-label'}" tabindex="-1" aria-label="Fare clic per visualizzare il set di prodotti precedente">
+                                                                                <i data-bind="css: {scrollInactive: (currentSection() == 1)}" id="scrollUpIcon" class="fa fa-caret-up scrollActive scrollInactive" aria-label="Scroll Up"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                        <table class="table dropdowncartItems items" data-bind="widgetLocaleText:{value:'minicartText',attr:'summary'}, style: {minHeight: ((currentSection() > 1) ? (dropdowncartItemsHeight()) : ''), height: ((currentSection() > 1) ? (dropdowncartItemsHeight()) : ''), display:'block'}" summary="Mini carrello" style="display: block;">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th class="firstColumn col-sm-3" scope="col" data-bind="widgetLocaleText : 'itemText'">Articolo</th>
+                                                                                    <th class="col-sm-5" scope="col"><div class="sr-only" data-bind="widgetLocaleText : 'itemNameText'">Nome</div></th>
+                                                                                    <th class="col-sm-1" scope="col" data-bind="widgetLocaleText: 'quantityText'">Quantità</th>
+                                                                                    <th class="col-sm-2" scope="col" data-bind="widgetLocaleText : 'itemTotalText'">Totale articoli</th>
+                                                                                    <th class="col-sm-1" scope="col"><div class="sr-only" data-bind="widgetLocaleText : 'removeItemText'">Rimuovi</div></th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <!-- ko foreach: displayedMiniCartItems -->
+                                                                                <!--ko ifnot: ($data.isPlaceHolderItem) -->
+                                                                                <tr class="item">
+                                                                                    <td class="firstColumn col-sm-3 image" data-bind="with: productData" role="presentation">
+                                                                                        <a data-bind="ccLink : $data, attr: {id: 'CC-header-dropdown-minicart-image-'+id+$parent.catRefId}" onclick="$('#dropdowncart').removeClass('active');" href="/it-IT/borsa-a-mano-grande/product/TS19LB170" id="CC-header-dropdown-minicart-image-TS19LB1708058573758141">
+                                                                                            <img class="imageSize" data-bind="productVariantImageSource:
+                   {src: $data, imageType: 'thumb',
+                    errorSrc: '/img/no-image.jpg',
+                    alt: displayName,
+                    errorAlt: 'Missing Product Image'}" src="/ccstore/v1/images/?source=/file/v9134384041309586215/products/TS19LB170.C21-1.jpg&amp;height=100&amp;width=100" alt="Borsa a mano grande" title="Borsa a mano grande">
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <td data-bind="with: productData" class="col-sm-5 name">
+                                                                                        <a data-bind="ccLink : $data, attr: {id: 'CC-header-dropdown-minicart-productName-'+id+$parent.catRefId}" onclick="$('#dropdowncart').removeClass('active');" href="/it-IT/borsa-a-mano-grande/product/TS19LB170" id="CC-header-dropdown-minicart-productName-TS19LB1708058573758141">Borsa a mano grande</a>
+                                                                                        <div class="optionsText">
+                                                                                            <!-- ko foreach: $parent.selectedOptions -->
+                                                                                            <small>
+                                                                                                <!-- ko if: $data.optionValue -->
+                                                                                                <span class="cc-text-overflow" data-bind="text : $parents[1].optionText($index()), attr: { id: 'CC-header-cart-productOptions-' + $parents[1].productId + $parents[1].catRefId + $parents[1].removeSpaces($data.optionValue)}" id="CC-header-cart-productOptions-TS19LB1708058573758141UNI">Taglia: UNI,</span>
+                                                                                                <!-- /ko -->
+                                                                                            </small>
+
+                                                                                            <small>
+                                                                                                <!-- ko if: $data.optionValue -->
+                                                                                                <span class="cc-text-overflow" data-bind="text : $parents[1].optionText($index()), attr: { id: 'CC-header-cart-productOptions-' + $parents[1].productId + $parents[1].catRefId + $parents[1].removeSpaces($data.optionValue)}" id="CC-header-cart-productOptions-TS19LB1708058573758141C21">Color: C21</span>
+                                                                                                <!-- /ko -->
+                                                                                            </small>
+                                                                                            <!-- /ko -->
+                                                                                        </div>
+                                                                                        <!-- ko if: $parent.availabilityDate() != null && $parent.stockState() != 'IN_STOCK'--><!-- /ko -->
+                                                                                    </td>
+                                                                                    <td class="col-sm-1">
+                                                                                        <span class="sr-only">Quantity: </span><span data-bind="ccNumber: quantity" class="qty">1</span>
+                                                                                    </td>
+                                                                                    <td class="col-sm-2">
+                                                                                        <span class="sr-only">Cost: </span><span data-bind="customcurrencys: {price: itemTotal(), currencyObj: $parents[1].cart().currency}">€ 214,00</span>
+                                                                                    </td>
+                                                                                    <td class="col-sm-1 shiftRight">
+                                                                                        <a href="#" data-bind="click: $parents[1].handleRemoveFromCart">
+                                                                                            <img class="removeFromCartIcon" src="/img/remove.png" data-bind="widgetLocaleText: {attr: 'alt', value: 'buttonRemoveItem'}" alt="Rimuovi" width="16" height="16">
+                                                                                        </a>
+                                                                                    </td>
+                                                                                    <th class="firstColumn" scope="col"><div class="sr-only" data-bind="widgetLocaleText : 'itemDetailsText'">Dettagli articoli</div></th>
+                                                                                </tr>
+                                                                                <!-- /ko -->
+                                                                                <!-- ko if: ($data.isPlaceHolderItem) --><!-- /ko -->
+                                                                                <!-- /ko -->
+                                                                            </tbody>
+                                                                        </table>
+
+                                                                        <div class="text-center scroll" data-bind="visible: $parent.cart().allItems().length >
+                                                                            $parent.miniCartNumberOfItems(),
+                                                                            css: {scrollDivActive: (currentSection() < totalSections())}" style="display: none;">
+                                                                            <a id="CC-headerShoppingCart-scrollDown" class="linkTag disabled" href="#" data-bind="disabled: {condition: (currentSection() == totalSections()),
+            click: $parent.miniCartScrollDown}, inTabFlow: (currentSection() != totalSections()), widgetLocaleText : {value:'miniShoppingCartScrollDown', attr:'aria-label'}" tabindex="-1" aria-label="Fare clic per visualizzare il set di prodotti successivo">
+                                                                                <i data-bind="css: {scrollInactive: (currentSection() == totalSections())}" id="scrollDownIcon" class="fa fa-caret-down scrollActive scrollInactive" aria-label="Scroll Down"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                        <div class="gwpQualifiedMessage text-center" data-bind="visible: gwpQualifiedMessage(), text: gwpQualifiedMessage()" style="display: none;"></div>
+                                                                        <!-- /ko -->
+                                                                        <table class="total" data-bind="widgetLocaleText: {attr: 'summary', value: 'totalTableSummary'}" summary="Totali carrello.">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <th scope="row" class="right"><b><span data-bind="widgetLocaleText:'totalTableTotal'">Totale:</span></b></th>
+                                                                                    <td class="right"><span data-bind="customcurrencys: {price: cart().subTotal(), currencyObj: $data.cart().currency}">€ 214,00</span></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <div class="checkout">
+                                                                            <a data-bind="disabled: {condition : cart().allItems().length == 0, link: 'cart'}, click: hideDropDownCart" id="CC-headerShoppingCart-Edit" class="cc-button-primary" role="button" href="/it-IT/cart">
+                                                                                <span data-bind="widgetLocaleText: 'buttonEditCart'">Modifica carrello</span>
+                                                                            </a>
+                                                                            <a data-bind="click: handleDropDownCheckout, ccNavigation: 'prevent', disabled: {condition : cart().allItems().length == 0, link: 'checkout'} ,
+              event: {keydown: $data.keypressHandler}" id="CC-headerShoppingCart-Checkout" class="cc-button-primary" role="button" href="/it-IT/checkout">
+                                                                                <span data-bind="widgetLocaleText: 'buttonCheckout'">Checkout</span>
+                                                                            </a>
+                                                                        </div>
+                                                                        <a id="closecart" class="close" data-dismiss="item" onclick="$('#dropdowncart').removeClass('active');">
+                                                                            ×
+                                                                        </a>
+                                                                    </div>
+                                                                    <a data-bind="click: handleValidateCart, ccNavigation: 'prevent', disabled: {condition: cart().allItems().length == 0, link : 'checkout'}, inTabFlow: cart().allItems().length != 0, attr: { 'aria-disabled': cart().allItems().length == 0 ? 'true' : 'false'}" id="CC-header-checkout" class="cc-button-primary" role="button" href="/it-IT/checkout" tabindex="0" aria-disabled="false">
+                                                                        <span id="CC-headerCheckout" data-bind="widgetLocaleText: 'buttonCheckout'">Checkout</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-xs-12 visible-xs">
+                                                                <h2 class="label-hidden" data-bind="widgetLocaleText : 'shoppingCartHeader'">Riepilogo carrello</h2>
+                                                                <div class="pull-right cc-cartlink-xs">
+                                                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                                                    <a data-bind="ccLink: 'cart', widgetLocaleText: {attr: 'aria-label', value: 'miniShoppingCartTitle'}" class="cc-cartlink-anchor" data-original-title="Shopping Cart" href="/it-IT/cart" aria-label="Mini carrello">
+                                                                        <span data-bind="text: cartLinkText">1 articolo - €214,00</span>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /ko -->
+
+                                                    </div>
+                                                    <!-- /oc -->
+
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="row">
+
+                                                <div class="oc-panel col-md-12" data-oc-id="panel-1-0">
+
+                                                </div>
+
+
+                                            </div>
+                                            <!-- /oc -->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc --><!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="tb-megaMenu_v5-wi500180">
+                            <div id="CC-megaMenu">
+                                <h3 class="label-hidden" data-bind="widgetLocaleText: 'categoryHeader'">Menu navigazione categoria</h3>
+
+                                <!-- ko setContextVariable:{name:'widgetViewModel',value:$data} -->
+                                <!-- DESKTOP MEGA MENU -->
+                                <!--  ko ifnot: $data.isMobile() -->
+                                <nav class="mega-menu navbar" role="navigation">
+                                    <div class="collapse navbar-collapse mega-menu-fullwidth-collapse">
+                                        <div class="nav navbar-nav navbar-container" data-bind="foreach: categories">
+                                            <ul class="nav navbar-nav" data-bind="foreach: childCategories">
+                                                <!-- ko if: ($data.childCategories !== undefined) -->
+                                                <li class="dropdown mega-menu-fullwidth menu-item cc-desktop-dropdown" data-bind="attr: { id: $data.id }" id="tb-borse">
+                                                    <a class="dropdown-toggle Level1" data-toggle="dropdown" data-bind="attr: { id: $data.id , title: $data.displayName },
+                                                                               click: $parent.megaMenuClick,
+                                                                               ccLink : $data.childCategories[childCategories.length-1],
+                                                                               widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                                                              params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                                                              ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" id="tb-borse" title="Borse" href="/it-IT/vedi-tutto/category/tb-bagall" aria-label="Borse ha 9 sottocategorie">
+                                                        <span data-bind="text: displayName">Borse</span>
+                                                    </a>
+                                                    <!-- ko if: $data.childCategories.length > 0 -->
+                                                    <ul class="dropdown-menu" style="top: auto;">
+                                                        <li>
+                                                            <div class="category-img-container" data-bind="attr: {id: $data.id}" id="tb-borse">
+                                                                <img src="/images/tb/20190208_menu_borse.jpg">
+                                                            </div>
+                                                            <div class="subcategories-container">
+
+                                                                <div class="row" data-bind="foreach: childCategories">
+                                                                    <div class="child-category-container first" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bmano" title="Borse a mano" href="/it-IT/borse-a-mano/category/tb-bmano" aria-label="Borse a mano non ha sottocategorie">Borse a mano</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bspalla" title="Borse a spalla" href="/it-IT/borse-a-spalla/category/tb-bspalla" aria-label="Borse a spalla non ha sottocategorie">Borse a spalla</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-btracolla" title="Borse a tracolla" href="/it-IT/borse-a-tracolla/category/tb-btracolla" aria-label="Borse a tracolla non ha sottocategorie">Borse a tracolla</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bshop" title="Shopping Bag" href="/it-IT/shopping-bag/category/tb-bshop" aria-label="Shopping Bag non ha sottocategorie">Shopping Bag</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bzaini" title="Zaini" href="/it-IT/zaini/category/tb-bzaini" aria-label="Zaini non ha sottocategorie">Zaini</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bbaul" title="Bauletti" href="/it-IT/bauletti/category/tb-bbaul" aria-label="Bauletti non ha sottocategorie">Bauletti</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bpochette" title="Pochette" href="/it-IT/pochette/category/tb-bpochette" aria-label="Pochette non ha sottocategorie">Pochette</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bviag" title="Borse viaggio" href="/it-IT/borse-viaggio/category/tb-bviag" aria-label="Borse viaggio non ha sottocategorie">Borse viaggio</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container last" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-bagall" title="Vedi tutto" href="/it-IT/vedi-tutto/category/tb-bagall" aria-label="Vedi tutto non ha sottocategorie">Vedi tutto</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!-- /ko -->
+                                                </li>
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.childCategories --><!-- /ko -->
+                                                <!-- ko if: ($data.childCategories !== undefined) -->
+                                                <li class="dropdown mega-menu-fullwidth menu-item cc-desktop-dropdown" data-bind="attr: { id: $data.id }" id="tb-scarpe">
+                                                    <a class="dropdown-toggle Level1" data-toggle="dropdown" data-bind="attr: { id: $data.id , title: $data.displayName },
+                                                                               click: $parent.megaMenuClick,
+                                                                               ccLink : $data.childCategories[childCategories.length-1],
+                                                                               widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                                                              params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                                                              ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" id="tb-scarpe" title="Scarpe" href="/it-IT/vedi-tutto/category/tb-shoesall" aria-label="Scarpe ha 8 sottocategorie">
+                                                        <span data-bind="text: displayName">Scarpe</span>
+                                                    </a>
+                                                    <!-- ko if: $data.childCategories.length > 0 -->
+                                                    <ul class="dropdown-menu" style=" top: auto;">
+                                                        <li>
+                                                            <div class="category-img-container" data-bind="attr: {id: $data.id}" id="tb-scarpe">
+                                                                <img src="/images/tb/20190208_menu_scarpe.jpg">
+                                                            </div>
+                                                            <div class="subcategories-container">
+
+                                                                <div class="row" data-bind="foreach: childCategories">
+                                                                    <div class="child-category-container first" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-ssandali" title="Sandali" href="/it-IT/sandali/category/tb-ssandali" aria-label="Sandali non ha sottocategorie">Sandali</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-smocass" title="Mocassini" href="/it-IT/mocassini/category/tb-smocass" aria-label="Mocassini non ha sottocategorie">Mocassini</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-sdecoll" title="Decollete" href="/it-IT/decollete/category/tb-sdecoll" aria-label="Decollete non ha sottocategorie">Decollete</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-sciabatte" title="Ciabatte" href="/it-IT/ciabatte/category/tb-sciabatte" aria-label="Ciabatte non ha sottocategorie">Ciabatte</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-sball" title="Ballerine" href="/it-IT/ballerine/category/tb-sball" aria-label="Ballerine non ha sottocategorie">Ballerine</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-sinfra" title="Infradito" href="/it-IT/infradito/category/tb-sinfra" aria-label="Infradito non ha sottocategorie">Infradito</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-ssneaker" title="Sneakers" href="/it-IT/sneakers/category/tb-ssneaker" aria-label="Sneakers non ha sottocategorie">Sneakers</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container last" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-shoesall" title="Vedi tutto" href="/it-IT/vedi-tutto/category/tb-shoesall" aria-label="Vedi tutto non ha sottocategorie">Vedi tutto</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!-- /ko -->
+                                                </li>
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.childCategories --><!-- /ko -->
+                                                <!-- ko if: ($data.childCategories !== undefined) -->
+                                                <li class="dropdown mega-menu-fullwidth menu-item cc-desktop-dropdown" data-bind="attr: { id: $data.id }" id="tb-acc">
+                                                    <a class="dropdown-toggle Level1" data-toggle="dropdown" data-bind="attr: { id: $data.id , title: $data.displayName },
+                                                                               click: $parent.megaMenuClick,
+                                                                               ccLink : $data.childCategories[childCategories.length-1],
+                                                                               widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                                                              params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                                                              ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" id="tb-acc" title="Accessori" href="/it-IT/vedi-tutto/category/tb-accall" aria-label="Accessori ha 5 sottocategorie">
+                                                        <span data-bind="text: displayName">Accessori</span>
+                                                    </a>
+                                                    <!-- ko if: $data.childCategories.length > 0 -->
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <div class="category-img-container" data-bind="attr: {id: $data.id}" id="tb-acc">
+                                                                <img src="/images/tb/20190208_menu_accessori.jpg">
+                                                            </div>
+                                                            <div class="subcategories-container">
+
+                                                                <div class="row" data-bind="foreach: childCategories">
+                                                                    <div class="child-category-container first" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-accport" title="Portafogli" href="/it-IT/portafogli/category/tb-accport" aria-label="Portafogli non ha sottocategorie">Portafogli</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-accfoul" title="Foulard &amp; Sciarpe" href="/it-IT/foulard-sciarpe/category/tb-accfoul" aria-label="Foulard &amp; Sciarpe non ha sottocategorie">Foulard &amp; Sciarpe</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-acccint" title="Cinture" href="/it-IT/cinture/category/tb-acccint" aria-label="Cinture non ha sottocategorie">Cinture</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-accbeauty" title="Beauty" href="/it-IT/beauty/category/tb-accbeauty" aria-label="Beauty non ha sottocategorie">Beauty</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+
+                                                                    <div class="child-category-container last" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-accall" title="Vedi tutto" href="/it-IT/vedi-tutto/category/tb-accall" aria-label="Vedi tutto non ha sottocategorie">Vedi tutto</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!-- /ko -->
+                                                </li>
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.childCategories --><!-- /ko -->
+                                                <!-- ko if: ($data.childCategories !== undefined) -->
+                                                <li class="dropdown mega-menu-fullwidth menu-item cc-desktop-dropdown" data-bind="attr: { id: $data.id }" id="tb-abb">
+                                                    <a class="dropdown-toggle Level1" data-toggle="dropdown" data-bind="attr: { id: $data.id , title: $data.displayName },
+                                                                               click: $parent.megaMenuClick,
+                                                                               ccLink : $data.childCategories[childCategories.length-1],
+                                                                               widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                                                              params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                                                              ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" id="tb-abb" title="Abbigliamento" href="/it-IT/capispalla/category/tb-capispalla" aria-label="Abbigliamento ha 1 sottocategorie">
+                                                        <span data-bind="text: displayName">Abbigliamento</span>
+                                                    </a>
+                                                    <!-- ko if: $data.childCategories.length > 0 -->
+                                                    <ul class="dropdown-menu">
+                                                        <li>
+                                                            <div class="category-img-container" data-bind="attr: {id: $data.id}" id="tb-abb">
+                                                                <img src="/images/tb/20190308_menu.jpg">
+                                                            </div>
+                                                            <div class="subcategories-container">
+
+                                                                <div class="row" data-bind="foreach: childCategories">
+                                                                    <div class="child-category-container last first" data-bind="css:{'last': ($index() === $parent.childCategories.length - 1), 'first': ($index() === 0)}">
+                                                                        <a tabindex="0" data-bind="attr:{id: $data.id , title: $data.displayName},
+                                        click : $widgetViewModel.catMenuClick,
+                                        ccLink : $data,
+                                        widgetLocaleText: (($data.childCategories === undefined)? false : true) ? ({value:'categoryNavScreenReaderText', attr:'aria-label',
+                                          params: {displayName: displayName, categoryLength: childCategories.length}}) :
+                                          ({value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}})" class="category-header Level2" id="tb-capispalla" title="Capispalla" href="/it-IT/capispalla/category/tb-capispalla" aria-label="Capispalla non ha sottocategorie">Capispalla</a>
+                                                                        <ul data-bind="foreach: $data.childCategories"></ul>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <!-- /ko -->
+                                                </li>
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.childCategories --><!-- /ko -->
+                                                <!-- ko if: ($data.childCategories !== undefined) --><!-- /ko -->
+                                                <!-- ko ifnot: $data.childCategories -->
+                                                <li role="menuitem" class="rootCategoryChild menu-item">
+                                                    <a data-bind="click : $widgetViewModel.catMenuClick,
+                ccLink : $data,
+                attr: { id: $data.id, title: $data.displayName },
+                event: { keydown : $data.keybindFunc, click: $data.otherItemClick},
+                widgetLocaleText: {value:'noSubCategoriesText', attr:'aria-label', params: {displayName: displayName}}" class="Level1 cf-cta" href="/it-IT/-blutoscablu/category/tb-blutb" id="tb-blutb" title="#blutoscablu" aria-label="#blutoscablu non ha sottocategorie">
+                                                        <span data-bind="text: displayName">#blutoscablu</span>
+                                                    </a>
+                                                </li>
+                                                <!-- /ko -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <!-- /ko -->
+                                <!-- MOBILE MEGA MENU -->
+                                <!-- ko if: $data.isMobile() --><!-- /ko -->
+                                <!-- /ko -->
+                            </div>
+                            <div id="newSearchBar">
+                                <div id="searchForm">
+                                    <input id="searchInput" data-bind="widgetLocaleText: {attr: 'placeholder', value: 'searchPlaceholder'}" type="text" placeholder="Immettere qui il testo da ricercare.">
+                                    <span id="searchButton">Cerca</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko ifnot: global  -->
+                        <!-- ko if: initialized  -->
+                        <!-- ko if: $data.elementsSrc --><!-- /ko -->
+                        <!-- ko if: isPreview --><!-- /ko -->
+                        <!-- ko ifnot: $data.templateSrc --><!-- /ko -->
+                        <!-- ko if: $data.templateSrc -->
+                        <div data-bind="template: {name: templateUrl(),templateSrc: templateSrc()}, attr: {id: typeId()+&quot;-&quot;+id()}, visible:($masterViewModel.storeConfiguration.enablePrioritizedLoading) ? (occPrioritizedDisplay ? occPrioritizedDisplay : true):true" id="popupNewsletter_v1-wi700007">
+
+                            <div class="modal fade" id="CC-newsletterModalPanel" tabindex="-1" role="link">
+                                <div class="modal-dialog cc-modal-dialog" id="CC-newsletter">
+                                    <div class="modal-content">
+                                        <div class="row">
+
+                                            <div class="left-block">
+                                                <img id="newsletter-image" data-bind="attr: {src: $data.newsletterImg1.src()}" src="/file/v8912965877658480506/general/Tosca-Blu-popup-NL.jpg">
+                                            </div>
+                                            <span class="glyphicon glyphicon-remove" id="nlPopupCloseBtn"></span>
+                                            <div class="right-block">
+                                                <div class="modal-header CC-header-modal-heading col-md-8">
+                                                    <span data-bind="widgetLocaleText: 'newsletterTitle'">Newsletter</span>
+                                                </div>
+                                                <div class="modal-header col-md-12">
+                                                    <p id="successText" style="display:none;text-align: center" data-bind="widgetLocaleText: 'successText'">Registrazione avvenuta con successo</p>
+                                                </div>
+                                                <div class="modal-header CC-header-modal-heading col-md-12">
+                                                    <p data-bind="widgetLocaleText: 'newsletterSubtitle'">Entra a far parte del nostro mondo! Per te uno sconto del 10% sul tuo prossimo acquisto!</p>
+                                                </div>
+
+                                                <div class="newsletterForm">
+                                                    <div class="form-group row">
+                                                        <div class="controls col-md-12">
+                                                            <input type="text" class="col-md-10 form-control" id="CC-newsletter-email" aria-required="true" data-bind="widgetLocaleText : {value:'newsletterEmailText', attr:'placeholder'}" placeholder="Email*">
+                                                            <span role="alert" class="text-danger validate-popup active" id="email-error" data-bind="widgetLocaleText: 'emailErrorMsg'" style="display:none">Email non valida</span>
+                                                            <span role="alert" class="text-danger validate-popup active" id="email-error-alreadyExists" data-bind="widgetLocaleText: 'emailErrorMsgalreadyExists'" style="display:none">Email già esistente</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="controls col-md-12">
+                                                            <input type="text" class="col-md-10 form-control" id="CC-newsletter-firstname" aria-required="true" data-bind="widgetLocaleText : {value:'newsletterNameText', attr:'placeholder'}" placeholder="Nome*">
+                                                            <span role="alert" class="text-danger validate-popup active" id="name-error" data-bind="widgetLocaleText: 'nameErrorMsg'" style="display:none">Nome non valido</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="controls col-md-12">
+                                                            <input type="text" class="col-md-10 form-control" id="CC-newsletter-lastname" aria-required="true" data-bind="widgetLocaleText : {value:'newsletterLastNameText', attr:'placeholder'}" placeholder="Cognome">
+                                                            <span role="alert" class="text-danger validate-popup active" id="lastname-error" data-bind="widgetLocaleText: 'lastNameErrorMsg'" style="display:none">Cognome non valido</span>
+                                                        </div>
+                                                    </div>
+                                                    <p class="date-text" data-bind="widgetLocaleText: 'newsletterDateText'">Data di nascita*</p>
+                                                    <div class="form-group row">
+                                                        <div id="CC-newsletter-day" class="controls col-md-6">
+                                                            <!--<input type="text" class="col-md-4 form-control" aria-required="true"
+                                                            data-bind="widgetLocaleText : {value:'newsletterGiornoText', attr:'placeholder'}"/>-->
+                                                            <select id="day-select" name="day-select" class="col-md-4 form-control">
+                                                                <option value="01">01</option>
+                                                                <option value="02">02</option>
+                                                                <option value="03">03</option>
+                                                                <option value="04">04</option>
+                                                                <option value="05">05</option>
+                                                                <option value="06">06</option>
+                                                                <option value="07">07</option>
+                                                                <option value="08">08</option>
+                                                                <option value="09">09</option>
+                                                                <option value="10">10</option>
+                                                                <option value="11">11</option>
+                                                                <option value="12">12</option>
+                                                                <option value="13">13</option>
+                                                                <option value="14">14</option>
+                                                                <option value="15">15</option>
+                                                                <option value="16">16</option>
+                                                                <option value="17">17</option>
+                                                                <option value="18">18</option>
+                                                                <option value="19">19</option>
+                                                                <option value="20">20</option>
+                                                                <option value="21">21</option>
+                                                                <option value="22">22</option>
+                                                                <option value="23">23</option>
+                                                                <option value="24">24</option>
+                                                                <option value="25">25</option>
+                                                                <option value="26">26</option>
+                                                                <option value="27">27</option>
+                                                                <option value="28">28</option>
+                                                                <option value="29">29</option>
+                                                                <option value="30">30</option>
+                                                                <option value="31">31</option>
+                                                            </select>
+                                                            <span role="alert" class="text-danger validate-popup active" id="day-error" data-bind="widgetLocaleText: 'dayErrorMsg'" style="display:none">Giorno non valido</span>
+                                                        </div>
+                                                        <div id="CC-newsletter-month" class="controls col-md-6">
+                                                            <!--<input type="text" class="col-md-4 form-control" aria-required="true"
+                                                            data-bind="widgetLocaleText : {value:'newsletterMeseText', attr:'placeholder'}"/>-->
+                                                            <select id="month-select" name="month-select" class="col-md-4 form-control">
+                                                                <option data-bind="widgetLocaleText: 'month_01'" value="01">Gennaio</option>
+                                                                <option data-bind="widgetLocaleText: 'month_02'" value="02">Febbraio</option>
+                                                                <option data-bind="widgetLocaleText: 'month_03'" value="03">Marzo</option>
+                                                                <option data-bind="widgetLocaleText: 'month_04'" value="04">Aprile</option>
+                                                                <option data-bind="widgetLocaleText: 'month_05'" value="05">Maggio</option>
+                                                                <option data-bind="widgetLocaleText: 'month_06'" value="06">Giugno</option>
+                                                                <option data-bind="widgetLocaleText: 'month_07'" value="07">Luglio</option>
+                                                                <option data-bind="widgetLocaleText: 'month_08'" value="08">Agosto</option>
+                                                                <option data-bind="widgetLocaleText: 'month_09'" value="09">Settembre</option>
+                                                                <option data-bind="widgetLocaleText: 'month_10'" value="10">Ottobre</option>
+                                                                <option data-bind="widgetLocaleText: 'month_11'" value="11">Novembre</option>
+                                                                <option data-bind="widgetLocaleText: 'month_12'" value="12">Dicembre</option>
+                                                            </select>
+                                                            <span role="alert" class="text-danger validate-popup active" id="month-error" data-bind="widgetLocaleText: 'monthErrorMsg'" style="display:none">Mese non valido</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <div class="controls col-md-12">
+                                                            <input type="checkbox" class="col-md-5 form-control" id="CC-newsletter-privacy">
+                                                            <p id="CC-privacyText"><span data-bind="widgetLocaleText: 'privacyText'">*Ho letto ed accettato le clausole</span> <a href="https://www.toscablu.com/it-IT/privacy" target="_blank">"<span data-bind="widgetLocaleText: 'newsletterPrivacyText'">Informative sulla privacy</span>"</a></p>
+                                                            <span role="alert" class="text-danger validate-popup active" id="checkbox-error" data-bind="widgetLocaleText: 'newsletterRequiredText'" style="display:none">Tutti i campi sono obbligatori</span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-10">
+                                                        <span role="alert" class="text-danger" id="CC-newsletter-error"></span>
+                                                    </div>
+                                                    <div class="button-container">
+                                                        <span class="cc-button-popup" id="CC-newsletterSubmit" data-bind="click: function(data, event) { registerNewsletter.bind(data, $parent, event)() }, widgetLocaleText: 'newsletterButtonText'">Registrati ora</span>
+                                                    </div>
+                                                </div>
+                                                <div id="successBtnContainer">
+                                                    <button id="successBtn" class="cc-button-primary btn-close" type="button" data-bind="widgetLocaleText : 'buttonCloseNewsletterPopup'" style="display: none">close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </header>
+}

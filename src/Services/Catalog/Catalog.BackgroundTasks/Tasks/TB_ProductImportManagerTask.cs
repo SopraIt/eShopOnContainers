@@ -18,18 +18,18 @@ using System.Text;
 
 namespace Catalog.BackgroundTasks.Tasks
 {
-    public class ProductImportManagerTask : BackgroundService
+    public class TB_ProductImportManagerTask : BackgroundService
     {
-        private readonly ILogger<ProductImportManagerTask> _logger;
+        private readonly ILogger<TB_ProductImportManagerTask> _logger;
         private readonly BackgroundTaskSettings _settings;
         private readonly IEventBus _eventBus;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public ProductImportManagerTask(
+        public TB_ProductImportManagerTask(
             IOptions<BackgroundTaskSettings> settings,
             IEventBus eventBus,
-            ILogger<ProductImportManagerTask> logger,
+            ILogger<TB_ProductImportManagerTask> logger,
             IHttpClientFactory clientFactory,
             IHostingEnvironment hostingEnvironment)
         {
@@ -52,16 +52,25 @@ namespace Catalog.BackgroundTasks.Tasks
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogDebug("GracePeriodManagerService background task is doing background work.");
+                _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
 
                 foreach (var product in productIds.Where(x => !x.Imported))
                 {
+                    _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
+
                     string productDetail = await GetProductDetail(product.ID, token);
 
                     if (productDetail != string.Empty)
                     {
                         string result = await PutInSearch(product.ID, productDetail);
-                        product.Imported = true;
+                        if (result != string.Empty) {
+                            _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
+                            product.Imported = true;
+                        }
+                        else
+                        {
+                            _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                        }
                     }
 
                 }
@@ -70,7 +79,7 @@ namespace Catalog.BackgroundTasks.Tasks
                 await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
             }
 
-            _logger.LogDebug("GracePeriodManagerService background task is stopping.");
+            _logger.LogInformation("GracePeriodManagerService background task is stopping.");
 
             await Task.CompletedTask;
         }

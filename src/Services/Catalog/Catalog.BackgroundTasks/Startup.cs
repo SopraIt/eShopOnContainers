@@ -46,7 +46,7 @@ namespace Catalog.BackgroundTasks
 
             //configure background task
 
-            services.AddSingleton<IHostedService, ProductImportManagerTask>();
+            services.AddSingleton<IHostedService, TB_ProductImportManagerTask>();
 
             //configure event bus related services
 
