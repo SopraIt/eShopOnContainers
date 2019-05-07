@@ -34,9 +34,10 @@ steps:
 #      # You can also pass predefined and custom variables to this script using arguments
 #     preferredAzurePowerShellVersion: 5.1.1
 
-- displayName: 'Install Az Powershell Modules'
-  script: |
-   sudo /usr/bin/pwsh -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -File "$(Build.Repository.LocalPath)/k8s/helm/install-az-modules.ps1"
+- script: |
+    sudo /usr/bin/pwsh -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -File "$(Build.Repository.LocalPath)/k8s/helm/install-az-modules.ps1"
+  displayName: 'Install Az Powershell Modules'
+  
 
 - powershell: |
     .\login-k8s.ps1 -servicePrincipalSecret "$(APP_SP_SECRET)"
