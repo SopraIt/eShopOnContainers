@@ -42,44 +42,44 @@ namespace Catalog.BackgroundTasks.Tasks
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogDebug("GracePeriodManagerService is starting.");
+            // _logger.LogDebug("GracePeriodManagerService is starting.");
 
-            string token = await this.GetAuthToken();
+            // string token = await this.GetAuthToken();
 
-            List<ProductIdImport> productIds = GetProductIdFromCSV();
+            // List<ProductIdImport> productIds = GetProductIdFromCSV();
 
-            stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
+            // stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
+            // while (!stoppingToken.IsCancellationRequested)
+            // {
+            //     _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
 
-                foreach (var product in productIds.Where(x => !x.Imported))
-                {
-                    _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
+            //     foreach (var product in productIds.Where(x => !x.Imported))
+            //     {
+            //         _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
 
-                    string productDetail = await GetProductDetail(product.ID, token);
+            //         string productDetail = await GetProductDetail(product.ID, token);
 
-                    if (productDetail != string.Empty)
-                    {
-                        string result = await PutInSearch(product.ID, productDetail);
-                        if (result != string.Empty) {
-                            _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
-                            product.Imported = true;
-                        }
-                        else
-                        {
-                            _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
-                        }
-                    }
+            //         if (productDetail != string.Empty)
+            //         {
+            //             string result = await PutInSearch(product.ID, productDetail);
+            //             if (result != string.Empty) {
+            //                 _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
+            //                 product.Imported = true;
+            //             }
+            //             else
+            //             {
+            //                 _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+            //             }
+            //         }
 
-                }
+            //     }
 
 
-                await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
-            }
+            //     await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
+            // }
 
-            _logger.LogInformation("GracePeriodManagerService background task is stopping.");
+            // _logger.LogInformation("GracePeriodManagerService background task is stopping.");
 
             await Task.CompletedTask;
         }
