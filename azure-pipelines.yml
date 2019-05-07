@@ -10,15 +10,16 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: TAG=v0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml  build
+- script: TAG=0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml  build
   displayName: 'docker-compose build'
 
 - script: |
     docker login -u samuelecozzi -p $(docker_repo_pwd)
-    TAG=v0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml push
+    TAG=0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml push
   displayName: 'docker-compose push'
 
 - script: |
-    cd ./k8s/helm
-    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag v0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+
+    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+  workingDirectory: $(Build.SourcesDirectory)/k8s/helm
   displayName: 'k8s intsall all'
