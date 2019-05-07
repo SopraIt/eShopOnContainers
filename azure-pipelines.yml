@@ -18,8 +18,12 @@ steps:
     TAG=0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml push
   displayName: 'docker-compose push'
 
-- script: |
+- task: Kubernetes@0
+  displayName: 'kubectl connection'
+  inputs:
+    kubernetesServiceConnection: 'k8s-eshoponcontainer'
 
+- script: |
     .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
   displayName: 'k8s intsall all'
