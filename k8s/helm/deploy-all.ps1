@@ -65,6 +65,7 @@ Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Gr
 Write-Host "helm repo update" -ForegroundColor Green
 helm init --client-only
 helm repo update
+helm dependency update elastic-stack
 
 $infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data", "elastic-stack")
 $charts = ("eshop-common", "apigwmm", "apigwms", "apigwwm", "apigwws", "basket-api","catalog-api", "catalog-backgroundtasks","identity-api", "locations-api", "marketing-api", "mobileshoppingagg","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webmvc", "webshoppingagg", "webspa", "webstatus", "webhooks-api", "webhooks-web")
