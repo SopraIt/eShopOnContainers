@@ -94,6 +94,9 @@ else {
     Write-Host "eShopOnContainers non-infrastructure charts aren't installed (-deployCharts is false)" -ForegroundColor Yellow
 }
 
+Write-Host "helm repo update" -ForegroundColor Green
+helm repo update
+
 Write-Host "Installing: ELK Stack" -ForegroundColor Green
 helm install --name elk-stack stable/elastic-stack --version 1.6.0
 
