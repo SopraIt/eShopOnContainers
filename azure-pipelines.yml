@@ -23,24 +23,26 @@ steps:
   inputs:
     kubernetesServiceConnection: 'k8s-eshoponcontainer'
 
-# - task: AzurePowerShell@3
-#   displayName: 'Azure PowerShell script: InlineScript'
-#   inputs:
-#     azureSubscription: 'IT-BU0791-PocAIPlatform-LAB (72403a7d-eac1-44b7-b722-5101a06e422b)'
-#     ScriptType: InlineScript
-#     Inline: |
-#      # You can write your azure powershell scripts inline here. 
-#      .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
-#      # You can also pass predefined and custom variables to this script using arguments
-#     preferredAzurePowerShellVersion: 5.1.1
-
 - script: |
     sudo /usr/bin/pwsh -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Unrestricted -File "$(Build.Repository.LocalPath)/k8s/helm/install-az-modules.ps1"
   displayName: 'Install Az Powershell Modules'
+
+- task: AzurePowerShell@3
+  displayName: 'Azure PowerShell script: InlineScript'
+  inputs:
+    azureSubscription: 'IT-BU0791-PocAIPlatform-LAB (72403a7d-eac1-44b7-b722-5101a06e422b)'
+    ScriptType: InlineScript
+    Inline: |
+     # You can write your azure powershell scripts inline here. 
+     .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+     # You can also pass predefined and custom variables to this script using arguments
+    preferredAzurePowerShellVersion: 5.1.1
+
+
   
 
-- powershell: |
-    #.\login-k8s.ps1 -servicePrincipalSecret "$(APP_SP_SECRET)"
-    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
-  workingDirectory: $(Build.SourcesDirectory)/k8s/helm
-  displayName: 'k8s intsall all'
+# - powershell: |
+#     #.\login-k8s.ps1 -servicePrincipalSecret "$(APP_SP_SECRET)"
+#     .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+#   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
+#   displayName: 'k8s intsall all'
