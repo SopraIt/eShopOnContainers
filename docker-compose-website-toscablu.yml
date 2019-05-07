@@ -217,7 +217,7 @@ services:
     image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: src/Web/Websites/Toscablu/Dockerfile    
+      dockerfile: src/Web/Websites/ToscaBlu/Dockerfile    
     depends_on:
       - webshoppingagg
       - webshoppingapigw
