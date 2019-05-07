@@ -21,3 +21,4 @@ data:
   graceperiodmanager__GracePeriodTime: "{{ .Values.cfg.gracePeriodTime }}"
   catalog_productSource: "{{ .Values.inf.catalog.url }}"
   search_Url: "{{ .Values.inf.elasticsearch.url }}"
+  log_Url: "{{ .Values.inf.logstash.url }}"
