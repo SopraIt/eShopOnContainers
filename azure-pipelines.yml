@@ -23,7 +23,7 @@ steps:
   inputs:
     kubernetesServiceConnection: 'k8s-eshoponcontainer'
 
-- task: AzurePowerShell@3
+- task: AzurePowerShell@4
   displayName: 'Azure PowerShell script: InlineScript'
   inputs:
     azureSubscription: 'IT-BU0791-PocAIPlatform-LAB (72403a7d-eac1-44b7-b722-5101a06e422b)'
