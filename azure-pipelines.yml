@@ -23,8 +23,6 @@ steps:
   inputs:
     kubernetesServiceConnection: 'k8s-eshoponcontainer'
 
-- script: |
-    dir
-    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+- powershell: .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-v0.0.13 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
   displayName: 'k8s intsall all'
