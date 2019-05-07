@@ -62,7 +62,11 @@ if (-not [string]::IsNullOrEmpty($registry)) {
 
 Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Green
 
-$infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data")
+Write-Host "helm repo update" -ForegroundColor Green
+helm init --client-only
+helm repo update
+
+$infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data", "elastic-stack")
 $charts = ("eshop-common", "apigwmm", "apigwms", "apigwwm", "apigwws", "basket-api","catalog-api", "catalog-backgroundtasks","identity-api", "locations-api", "marketing-api", "mobileshoppingagg","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webmvc", "webshoppingagg", "webspa", "webstatus", "webhooks-api", "webhooks-web")
 
 if ($deployInfrastructure) {
@@ -94,12 +98,10 @@ else {
     Write-Host "eShopOnContainers non-infrastructure charts aren't installed (-deployCharts is false)" -ForegroundColor Yellow
 }
 
-Write-Host "helm repo update" -ForegroundColor Green
-helm init --client-only
-helm repo update
 
-Write-Host "Installing: ELK Stack" -ForegroundColor Green
-helm install --name elk-stack stable/elastic-stack --version 1.6.0
+
+# Write-Host "Installing: ELK Stack" -ForegroundColor Green
+# helm install --name elk-stack stable/elastic-stack --version 1.6.0
 
 Write-Host "helm charts installed." -ForegroundColor Green
 
