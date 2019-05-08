@@ -62,7 +62,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\BuildingBlocks\Devspaces.Support\Devspaces.Support.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Devspaces.Support\Devspaces.Support.csproj" />
   </ItemGroup>
 
 </Project>

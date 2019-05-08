@@ -5,7 +5,7 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
 WORKDIR /src
 COPY . .
-WORKDIR /src/src/Web/WebMVC
+WORKDIR /src/src/Web/Websites/ToscaBlu
 RUN dotnet restore -nowarn:msb3202,nu1503
 
 FROM build AS publish
