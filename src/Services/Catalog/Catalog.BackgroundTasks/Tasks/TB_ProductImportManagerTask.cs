@@ -42,44 +42,46 @@ namespace Catalog.BackgroundTasks.Tasks
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            // _logger.LogDebug("GracePeriodManagerService is starting.");
+            _logger.LogDebug("GracePeriodManagerService is starting.");
 
-            // string token = await this.GetAuthToken();
+            string token = await this.GetAuthToken();
 
-            // List<ProductIdImport> productIds = GetProductIdFromCSV();
+            _logger.LogInformation("Token: " + token);
 
-            // stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
+            List<ProductIdImport> productIds = GetProductIdFromCSV();
 
-            // while (!stoppingToken.IsCancellationRequested)
-            // {
-            //     _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
+            stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
 
-            //     foreach (var product in productIds.Where(x => !x.Imported))
-            //     {
-            //         _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
+            while (!stoppingToken.IsCancellationRequested)
+            {
+                _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
 
-            //         string productDetail = await GetProductDetail(product.ID, token);
+                foreach (var product in productIds.Where(x => !x.Imported))
+                {
+                    _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
 
-            //         if (productDetail != string.Empty)
-            //         {
-            //             string result = await PutInSearch(product.ID, productDetail);
-            //             if (result != string.Empty) {
-            //                 _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
-            //                 product.Imported = true;
-            //             }
-            //             else
-            //             {
-            //                 _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
-            //             }
-            //         }
+                    string productDetail = await GetProductDetail(product.ID, token);
 
-            //     }
+                    if (productDetail != string.Empty)
+                    {
+                        string result = await PutInSearch(product.ID, productDetail);
+                        if (result != string.Empty) {
+                            _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
+                            product.Imported = true;
+                        }
+                        else
+                        {
+                            _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                        }
+                    }
+
+                }
 
 
-            //     await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
-            // }
+                await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
+            }
 
-            // _logger.LogInformation("GracePeriodManagerService background task is stopping.");
+            _logger.LogInformation("GracePeriodManagerService background task is stopping.");
 
             await Task.CompletedTask;
         }
@@ -146,11 +148,13 @@ namespace Catalog.BackgroundTasks.Tasks
                 }
                 else
                 {
+                    _logger.LogInformation("Response status:" + response.StatusCode.ToString());
                     return string.Empty;
                 }
             }
             catch (Exception e)
             {
+                _logger.LogInformation(string.Format( "Exception message {0} - stack {1}", e.Message, e.StackTrace));
                 return string.Empty;
             }
 
