@@ -23,7 +23,7 @@ steps:
     az login -u $(USR) -p $(PWD)
     az account set --subscription IT-BU0791-PocAIPlatform-LAB
     az aks get-credentials --resource-group=$(AZ_RESOURCE) --name=$(AZ_K8S_NAME)
-    .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+    .\deploy-all.ps1 -externalDns 0d13a6ee3e9e420d8381.westeurope.aksapp.io -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
     kubectl apply -f aks-httpaddon-cfg.yaml
     kubectl delete pod $(kubectl get pod -l app=addon-http-application-routing-nginx-ingress -n kube-system -o jsonpath="{.items[0].metadata.name}") -n kube-system
   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
@@ -33,7 +33,7 @@ steps:
 #     az login -u $(USR) -p $(PWD)
 #     az account set --subscription IT-BU0791-PocAIPlatform-LAB
 #     az aks get-credentials --resource-group=$(AZ_RESOURCE) --name=$(AZ_K8S_NAME)
-#     .\deploy-all.ps1 -externalDns aks -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.42 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+#     .\deploy-all.ps1 -externalDns 0d13a6ee3e9e420d8381.westeurope.aksapp.io -aksName eshoponcontainers -aksRg eshop-on-containers -imageTag linux-0.0.42 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
 #     kubectl apply -f aks-httpaddon-cfg.yaml
 #     kubectl delete pod $(kubectl get pod -l app=addon-http-application-routing-nginx-ingress -n kube-system -o jsonpath="{.items[0].metadata.name}") -n kube-system
 #   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
