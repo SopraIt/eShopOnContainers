@@ -38,6 +38,53 @@ services:
       - "15672:15672"  # Important: In a production environment your should remove the external port
       - "5672:5672"    # Important: In a production environment your should remove the external port
 
+
+  fpm:
+    image: 'akeneo/fpm:php-7.2'
+    user: 'docker'
+    # volumes:
+    #   - './:/srv/pim'
+    working_dir: '/srv/pim'
+    environment:
+      COMPOSER_HOME: '/home/docker/.composer'
+      PHP_IDE_CONFIG: 'serverName=pim-ce-cli'
+      PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED:-0}"
+      XDEBUG_CONFIG: 'remote_host=172.17.0.1'
+    volumes:
+      - '~/.composer:/home/docker/.composer'
+
+  node:
+    image: 'node:10-slim'
+    user: 'node'
+    # volumes:
+    #   - './:/srv/pim'
+    working_dir: '/srv/pim'
+    environment:
+      YARN_CACHE_FOLDER: '/home/node/.yarn-cache'
+
+  httpd:
+    image: 'httpd:2.4'
+    depends_on:
+      - 'fpm'
+    volumes:
+      - './:/srv/pim:ro'
+      - './akeneo/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
+      - './akeneo/akeneo.conf:/usr/local/apache2/conf/vhost.conf:ro'
+    ports:
+      - '9400:80'
+    environment:
+      PHP_IDE_CONFIG: 'serverName=pim-ce'
+
+  mysql:
+    image: 'mysql:5.7'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_USER: 'akeneo_pim'
+      MYSQL_PASSWORD: 'akeneo_pim'
+      MYSQL_DATABASE: 'akeneo_pim'
+    ports:
+      - '33006:3306'
+
   # elasticsearch:
   #   ports:
   #     - "9200:9200"
