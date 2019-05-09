@@ -44,10 +44,6 @@ namespace Catalog.BackgroundTasks.Tasks
         {
             _logger.LogDebug("GracePeriodManagerService is starting.");
 
-            string token = await this.GetAuthToken();
-
-            _logger.LogInformation("Token: " + token);
-
             List<ProductIdImport> productIds = GetProductIdFromCSV();
 
             stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
@@ -59,6 +55,9 @@ namespace Catalog.BackgroundTasks.Tasks
                 foreach (var product in productIds.Where(x => !x.Imported))
                 {
                     _logger.LogInformation(string.Format("Elaboration of {0} Product", product.ID));
+
+                    string token = await this.GetAuthToken();
+                    _logger.LogInformation("Token: " + token);
 
                     string productDetail = await GetProductDetail(product.ID, token);
 
