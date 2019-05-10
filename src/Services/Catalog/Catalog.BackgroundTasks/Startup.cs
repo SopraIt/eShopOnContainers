@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Catalog.BackgroundTasks.Configuration;
 using Catalog.BackgroundTasks.Tasks;
+using Catalog.Nosql.Infrastructure.Repositories;
+using Catalog.Nosql.Infrastructure;
 
 namespace Catalog.BackgroundTasks
 {
@@ -42,11 +44,13 @@ namespace Catalog.BackgroundTasks
             //configure settings
 
             services.Configure<BackgroundTaskSettings>(Configuration);
+            services.Configure<CatalogNosqlSettings>(Configuration);
             services.AddOptions();
 
             //configure background task
 
             services.AddSingleton<IHostedService, TB_ProductImportManagerTask>();
+            services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
 
             //configure event bus related services
 

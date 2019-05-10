@@ -31,6 +31,8 @@ using System.Reflection;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Catalog.Nosql.Infrastructure;
+using Catalog.Nosql.Infrastructure.Repositories;
 
 namespace Microsoft.eShopOnContainers.Services.Catalog.API
 {
@@ -224,12 +226,16 @@ namespace Microsoft.eShopOnContainers.Services.Catalog.API
                                      });
             });
 
+            //services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
+
             return services;
         }
 
         public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<CatalogSettings>(configuration);
+            //services.Configure<CatalogNosqlSettings>(configuration);
+
             services.Configure<ApiBehaviorOptions>(options =>
             {
                 options.InvalidModelStateResponseFactory = context =>

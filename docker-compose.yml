@@ -231,4 +231,53 @@ services:
     depends_on:
       - webhooks.api 
 
+
+#AKENEO - START
+
+  # fpm:
+  #   image: 'akeneo/fpm:php-7.2'
+  #   user: 'docker'
+  #   volumes:
+  #     - './akeneo/:/srv/pim'
+  #   working_dir: '/srv/pim'
+  #   environment:
+  #     COMPOSER_HOME: '/home/docker/.composer'
+  #     PHP_IDE_CONFIG: 'serverName=pim-ce-cli'
+  #     PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED:-0}"
+  #     XDEBUG_CONFIG: 'remote_host=172.17.0.1'
+
+  # node:
+  #   image: 'node:10-slim'
+  #   user: 'node'
+  #   volumes:
+  #     - './akeneo/:/srv/pim'
+  #   working_dir: '/srv/pim'
+  #   environment:
+  #     YARN_CACHE_FOLDER: '/home/node/.yarn-cache'
+
+  # httpd:
+  #   image: 'httpd:2.4'
+  #   depends_on:
+  #     - 'fpm'
+  #   volumes:
+  #     - './akeneo/:/srv/pim:ro'
+  #     - './akeneo/docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
+  #     - './akeneo/docker/akeneo.conf:/usr/local/apache2/conf/vhost.conf:ro'
+  #   ports:
+  #     - '9400:80'
+  #   environment:
+  #     PHP_IDE_CONFIG: 'serverName=pim-ce'
+
+  # mysql:
+  #   image: 'mysql:5.7'
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: 'root'
+  #     MYSQL_USER: 'akeneo_pim'
+  #     MYSQL_PASSWORD: 'akeneo_pim'
+  #     MYSQL_DATABASE: 'akeneo_pim'
+  #   ports:
+  #     - '33006:3306'
+
+#AKENEO - END
+
   

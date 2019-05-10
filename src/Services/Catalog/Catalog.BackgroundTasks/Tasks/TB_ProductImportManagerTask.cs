@@ -15,6 +15,8 @@ using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Text;
+using Catalog.Nosql.Infrastructure.Repositories;
+using Catalog.Nosql.Model;
 
 namespace Catalog.BackgroundTasks.Tasks
 {
@@ -25,19 +27,22 @@ namespace Catalog.BackgroundTasks.Tasks
         private readonly IEventBus _eventBus;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly ICatalogDataRepository _repo;
 
         public TB_ProductImportManagerTask(
             IOptions<BackgroundTaskSettings> settings,
             IEventBus eventBus,
             ILogger<TB_ProductImportManagerTask> logger,
             IHttpClientFactory clientFactory,
-            IHostingEnvironment hostingEnvironment)
+            IHostingEnvironment hostingEnvironment,
+            ICatalogDataRepository dataReopsitory)
         {
             _settings = settings?.Value ?? throw new ArgumentNullException(nameof(settings));
             _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
             _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            _repo = dataReopsitory ?? throw new ArgumentNullException(nameof(dataReopsitory));
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -60,17 +65,22 @@ namespace Catalog.BackgroundTasks.Tasks
                     _logger.LogInformation("Token: " + token);
 
                     string productDetail = await GetProductDetail(product.ID, token);
+                    productDetail = productDetail.Replace("-","_");
 
                     if (productDetail != string.Empty)
                     {
-                        string result = await PutInSearch(product.ID, productDetail);
-                        if (result != string.Empty) {
-                            _logger.LogInformation(string.Format("Elaboration of {0} Product OK!", product.ID));
-                            product.Imported = true;
-                        }
-                        else
-                        {
+                        string result_search = await PutInSearch(product.ID, productDetail);
+                        if (result_search == string.Empty) {
                             _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                        }
+
+                        string result_nosql = await putInNoSql(product.ID, productDetail);
+                        if (result_nosql == string.Empty) {
+                            _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                        }
+
+                        if(!string.IsNullOrEmpty(result_search) && !string.IsNullOrEmpty(result_nosql)){
+                            product.Imported = true;
                         }
                     }
 
@@ -153,7 +163,7 @@ namespace Catalog.BackgroundTasks.Tasks
             }
             catch (Exception e)
             {
-                _logger.LogInformation(string.Format( "Exception message {0} - stack {1}", e.Message, e.StackTrace));
+                _logger.LogError(string.Format( "Exception message {0} - stack {1}", e.Message, e.StackTrace));
                 return string.Empty;
             }
 
@@ -231,6 +241,33 @@ namespace Catalog.BackgroundTasks.Tasks
             }
             catch (Exception e)
             {
+                _logger.LogError(string.Format( "Exception message {0} - stack {1}", e.Message, e.StackTrace));
+                return string.Empty;
+            }
+        }
+
+        private async Task<string> putInNoSql(string productId, string json){
+            try
+            {
+                Product product = new Product(){
+                    Id = productId,
+                    json = json
+                };
+
+                string _id = await _repo.UpsertAsync(product);
+
+                if(_id != string.Empty){
+                    return _id;
+                }
+                else
+                {
+                    _logger.LogError(string.Format( "Exception message: Errore nell'inserimento nel nosql db"));
+                    return string.Empty;
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(string.Format( "Exception message {0} - stack {1}", e.Message, e.StackTrace));
                 return string.Empty;
             }
         }

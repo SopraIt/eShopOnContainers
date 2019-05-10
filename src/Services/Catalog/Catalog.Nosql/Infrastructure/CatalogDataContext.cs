@@ -2,7 +2,8 @@ namespace Catalog.Nosql.Infrastructure
 {
     using Microsoft.Extensions.Options;
     using MongoDB.Driver;
-    using Catalog.Nosql.Models;
+    using MongoDB.Bson;
+
     public class CatalogDataContext
     {
         private readonly IMongoDatabase _database = null;
@@ -17,11 +18,11 @@ namespace Catalog.Nosql.Infrastructure
             }
         }
 
-        public IMongoCollection<Product> CatalogData
+        public IMongoCollection<BsonDocument> CatalogData
         {
             get
             {
-                return _database.GetCollection<Product>("CatalogDataModel");
+                return _database.GetCollection<BsonDocument>("CatalogDataModel");
             }
         }        
     }
