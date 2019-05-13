@@ -13,34 +13,35 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.eShopOnContainers.Services.Catalog.API;
 using Catalog.Nosql.Infrastructure.Repositories;
+using Catalog.Nosql.Model;
 using Newtonsoft.Json;
 
 namespace Catalog.API.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class NoSqlCatalog : ControllerBase
+    public class NoSqlCatalogController : ControllerBase
     {
         private readonly CatalogSettings _settings;
         private readonly ICatalogDataRepository _repo;
-        public NoSqlCatalog(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo){
+        public NoSqlCatalogController(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo){
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _settings = settings.Value;
         }
 
         [HttpGet]
-        [Route("items/{id:string}")]
+        [Route("items/{sku}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(object), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<object>> ItemByIdAsync(string id)
+        public async Task<ActionResult<object>> ItemByIdAsync(string sku)
         {
-            if (string.IsNullOrEmpty(id))
+            if (string.IsNullOrEmpty(sku))
             {
                 return BadRequest();
             }
 
-            var item = await _repo.GetAsync(id);
+            var item = await _repo.GetAsync(sku);
 
             // var baseUri = _settings.PicBaseUrl;
             // var azureStorageEnabled = _settings.AzureStorageEnabled;

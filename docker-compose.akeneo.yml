@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+
+  fpm:
+    image: samuelecozzi/akeneo-pim:1.0.0
+    depends_on:
+      - 'mysql'
+    networks:
+      - 'akeneo'
+  
+  mysql:
+    image: samuelecozzi/akeneo-mysql:1.0.0
+    networks:
+      - 'akeneo'
+
+  httpd:
+    image: 'httpd:2.4'
+    depends_on:
+      - 'fpm'
+    ports:
+      - '6001:80'
+    volumes:
+      - '../pim-community-standard/:/srv/pim:ro'
+      - '../pim-community-standard/docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
+      - '../pim-community-standard/docker/akeneo.conf:/usr/local/apache2/conf/vhost.conf:ro'
+    networks:
+      - 'akeneo'
+
+  # akeneo-httpd:
+  #   image: samuelecozzi/akeneo-httpd:2.4
+  #   depends_on:
+  #     - 'akeneo-pim'
+  #   ports:
+  #     - 6000:80
+  #   networks:
+  #     - 'akeneo'
+
+networks:
+  akeneo:

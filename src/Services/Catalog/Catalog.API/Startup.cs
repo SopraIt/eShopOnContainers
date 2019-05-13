@@ -226,7 +226,7 @@ namespace Microsoft.eShopOnContainers.Services.Catalog.API
                                      });
             });
 
-            //services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
+            services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
 
             return services;
         }
@@ -234,7 +234,7 @@ namespace Microsoft.eShopOnContainers.Services.Catalog.API
         public static IServiceCollection AddCustomOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<CatalogSettings>(configuration);
-            //services.Configure<CatalogNosqlSettings>(configuration);
+            services.Configure<CatalogNosqlSettings>(configuration);
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
