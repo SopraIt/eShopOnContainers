@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  
+  nopcommerce_web:
+    image: ${REGISTRY:-eshop}/nopcommerce:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: nopCommerce/Dockerfile
+    depends_on:
+        - nopcommerce_database
+    ports:
+        - "5300:80"
+  
+  nopcommerce_database:
+    image: "microsoft/mssql-server-linux"
+    container_name: nopcommerce_${REGISTRY:-eshop}_mssql_server_${PLATFORM:-linux}-${TAG:-latest}
+    ports:
+        - "1433:1433"
+    environment:
+        SA_PASSWORD: "nopCommerce_db_password"
+        ACCEPT_EULA: "Y"
+        MSSQL_PID: "Express" 
