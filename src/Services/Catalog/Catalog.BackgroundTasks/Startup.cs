@@ -49,7 +49,8 @@ namespace Catalog.BackgroundTasks
 
             //configure background task
 
-            services.AddSingleton<IHostedService, TB_ProductImportManagerTask>();
+            //services.AddSingleton<IHostedService, TB_ProductImportManagerTask>();
+            services.AddSingleton<IHostedService, VUE_ProductImportManagerTask>();
             services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
 
             //configure event bus related services

@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
 
+
   identity.api:
     image: ${REGISTRY:-eshop}/identity.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
@@ -208,10 +209,10 @@ services:
     build:
       context: .
       dockerfile: src/Web/WebSPA/Dockerfile    
-#    depends_on:
-#      - webshoppingagg
-#      - webshoppingapigw
-#      - webmarketingapigw
+    depends_on:
+     - webshoppingagg
+     - webshoppingapigw
+     - webmarketingapigw
 
   webmvc:
     image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}

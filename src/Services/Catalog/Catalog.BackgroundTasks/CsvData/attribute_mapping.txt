@@ -1,0 +1,23 @@
+{
+    "settings" : {
+        "number_of_shards" : 1
+    },
+  "mappings": {
+    "properties": {
+        "id": {
+            "type": "long"
+        },
+        "attribute_id": {
+            "type": "long"
+        },
+        "options": {
+            "properties": {
+                "value": {
+                    "type": "text",
+                    "index": "not_analyzed"
+                }
+            }
+        }
+    }
+  }
+}
