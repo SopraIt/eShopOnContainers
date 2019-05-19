@@ -206,7 +206,7 @@ services:
 
   webspa:
     # image: divante/vue-storefront:latest
-    image: ${REGISTRY:-eshop}/webpwa:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-eshop}/webspa:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: ./src/Web/vue-storefront
       dockerfile: docker/vue-storefront/Dockerfile

@@ -15,7 +15,7 @@ steps:
 
 - script: |
    docker login -u samuelecozzi -p $(docker_repo_pwd)
-   TAG=0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml push
+   TAG=0.0.$(Build.BuildId) docker-compose -f docker-compose.yml -f docker-compose.override.yml -f docker-compose.infrrastructure.yml push
   displayName: 'docker-compose push'
 
 - powershell: |
