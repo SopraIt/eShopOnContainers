@@ -205,10 +205,31 @@ services:
       dockerfile: src/Web/WebStatus/Dockerfile
 
   webspa:
-    image: ${REGISTRY:-eshop}/webspa:${PLATFORM:-linux}-${TAG:-latest}
+    # image: divante/vue-storefront:latest
+    image: ${REGISTRY:-eshop}/webpwa:${PLATFORM:-linux}-${TAG:-latest}
     build:
-      context: .
-      dockerfile: src/Web/WebSPA/Dockerfile    
+      context: ./src/Web/vue-storefront
+      dockerfile: docker/vue-storefront/Dockerfile
+    env_file: src/Web/vue-storefront/docker/vue-storefront/default.env
+    environment:
+      VS_ENV: dev
+    network_mode: host
+    volumes:
+      - './src/Web/vue-storefront/babel.config.js:/var/www/babel.config.js'
+      - './src/Web/vue-storefront/config:/var/www/config'
+      - './src/Web/vue-storefront/core:/var/www/core'
+      - './src/Web/vue-storefront/ecosystem.json:/var/www/ecosystem.json'
+      - './src/Web/vue-storefront/.eslintignore:/var/www/.eslintignore'
+      - './src/Web/vue-storefront/.eslintrc.js:/var/www/.eslintrc.js'
+      - './src/Web/vue-storefront/lerna.json:/var/www/lerna.json'
+      - './src/Web/vue-storefront/tsconfig.json:/var/www/tsconfig.json'
+      - './src/Web/vue-storefront/tsconfig-build.json:/var/www/tsconfig-build.json'
+      - './src/Web/vue-storefront/shims.d.ts:/var/www/shims.d.ts'
+      - './src/Web/vue-storefront/package.json:/var/www/package.json'
+      - './src/Web/vue-storefront/src:/var/www/src'
+      - './src/Web/vue-storefront/var:/var/www/var'
+    tmpfs:
+      - /var/www/dist
     depends_on:
      - webshoppingagg
      - webshoppingapigw
