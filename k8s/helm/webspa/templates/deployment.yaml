@@ -31,8 +31,8 @@ spec:
           image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: PATH_BASE
-              value: {{ include "pathBase" . }}
+            # - name: PATH_BASE
+            #   value: {{ include "pathBase" . }}
             - name: k8sname
               value: {{ .Values.clusterName }}
           {{- if .Values.env.values -}}
