@@ -16,4 +16,4 @@ RUN apk add --no-cache --virtual .build-deps ca-certificates wget git \
 
 COPY docker/vue-storefront/vue-storefront.sh /usr/local/bin/
 
-CMD ["vue-storefront.sh"]
+#CMD ["vue-storefront.sh"]
