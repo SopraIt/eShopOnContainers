@@ -208,8 +208,8 @@ services:
     # image: divante/vue-storefront:latest
     image: ${REGISTRY:-eshop}/webspa:${PLATFORM:-linux}-${TAG:-latest}
     build:
-      context: ./src/Web/vue-storefront
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: src/Web/vue-storefront/Dockerfile
     env_file: src/Web/vue-storefront/docker/vue-storefront/default.env
     environment:
       VS_ENV: dev

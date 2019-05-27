@@ -2,9 +2,10 @@ using System;
 using Catalog.Nosql.Model;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
-
+using System.Collections.Generic;
 
 namespace Catalog.Nosql.Infrastructure.Repositories
 {
@@ -25,6 +26,26 @@ namespace Catalog.Nosql.Infrastructure.Repositories
             var db_result = await _context.CatalogData
                                  .Find(filter)
                                  .FirstOrDefaultAsync();
+
+            if (db_result != null)
+            {
+                Product result = new Product()
+                {
+                    Id = db_result["id"].ToString(),
+                    json = db_result.ToJson()
+                };
+
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<Product> GetBySkuAsync(string Sku)
+        {
+            var db_result = await this.GetBySkuAsyncFromDB(Sku);
 
             if (db_result != null)
             {
@@ -64,6 +85,47 @@ namespace Catalog.Nosql.Infrastructure.Repositories
             {
                 return string.Empty;
             }
+        }
+    
+        public async Task<bool> CheckStock(string Sku){
+            try {
+                var db_result = await this.GetBySkuAsyncFromDB(Sku);
+
+                var is_in_stock = bool.Parse(db_result["stock"]["is_in_stock"].ToString());
+
+                if (is_in_stock){
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            } catch (Exception e){
+                return false;
+            }
+        }
+        public async Task<List<Stock>> CheckStockList(List<string> skus){
+            try {
+
+                return new List<Stock>();
+            } catch (Exception e){
+                return new List<Stock>();
+            }
+        }
+
+
+
+        private async Task<BsonDocument> GetBySkuAsyncFromDB(string Sku){
+            
+            var filter = Builders<BsonDocument>.Filter.Eq("sku", Sku);
+            var projection = Builders<BsonDocument>.Projection.Exclude("_id");
+            projection = projection.Exclude("tsk");
+
+            var db_result = await  _context.CatalogData
+                                 .Find(filter)
+                                 .Project(projection)
+                                 .FirstOrDefaultAsync();
+            return db_result;
         }
     }
 

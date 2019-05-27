@@ -18,13 +18,13 @@ using Newtonsoft.Json;
 
 namespace Catalog.API.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/core/v2/Product")]
     [ApiController]
-    public class NoSqlCatalogController : ControllerBase
+    public class Product2Controller : ControllerBase
     {
         private readonly CatalogSettings _settings;
         private readonly ICatalogDataRepository _repo;
-        public NoSqlCatalogController(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo){
+        public Product2Controller(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo){
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _settings = settings.Value;
         }
@@ -41,7 +41,7 @@ namespace Catalog.API.Controllers
                 return BadRequest();
             }
 
-            var item = await _repo.GetAsync(sku);
+            var item = await _repo.GetBySkuAsync(sku);
 
             // var baseUri = _settings.PicBaseUrl;
             // var azureStorageEnabled = _settings.AzureStorageEnabled;
@@ -51,7 +51,7 @@ namespace Catalog.API.Controllers
             if (item != null)
             {
                 var result = JsonConvert.DeserializeObject(item.json);
-                return item;
+                return result;
             }
 
             return NotFound();
