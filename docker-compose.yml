@@ -213,7 +213,7 @@ services:
     env_file: src/Web/vue-storefront/docker/vue-storefront/default.env
     environment:
       VS_ENV: dev
-    network_mode: host
+    #network_mode: host
     # volumes:
     #   - './src/Web/vue-storefront/babel.config.js:/var/www/babel.config.js'
     #   - './src/Web/vue-storefront/config:/var/www/config'
