@@ -17,7 +17,7 @@ COPY ./src/Web/vue-storefront/tsconfig-build.json .
 COPY ./src/Web/vue-storefront/shims.d.ts .
 COPY ./src/Web/vue-storefront/package.json .
 COPY ./src/Web/vue-storefront/src ./src
-COPY ./src/Web/vue-storefront/var ./var
+#COPY ./src/Web/vue-storefront/var ./var
 
 COPY ./src/Web/vue-storefront/docker/vue-storefront/vue-storefront.sh /usr/local/bin
 
