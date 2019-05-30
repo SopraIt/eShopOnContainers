@@ -17,10 +17,10 @@ COPY ./src/Web/vue-storefront/tsconfig-build.json .
 COPY ./src/Web/vue-storefront/shims.d.ts .
 COPY ./src/Web/vue-storefront/package.json .
 COPY ./src/Web/vue-storefront/src ./src
-#COPY ./src/Web/vue-storefront/var ./var
-COPY ./src/Web/vue-storefront/docker ./docker
+COPY ./src/Web/vue-storefront/var ./var
+COPY ./src/Web/vue-storefront/docker/vue-storefront/vue-storefront.sh .
 
-COPY ./src/Web/vue-storefront/docker/vue-storefront/vue-storefront.sh /usr/local/bin
+#COPY ./src/Web/vue-storefront/docker/vue-storefront/vue-storefront.sh /usr/local/bin
 
 # WORKDIR /var/www
 
@@ -31,5 +31,5 @@ RUN apk del .build-deps
 
 
 
-CMD ["sh","./docker/vue-storefront/vue-storefront.sh"]
+CMD ["sh","./vue-storefront.sh"]
 #CMD ["vue-storefront.sh"]
