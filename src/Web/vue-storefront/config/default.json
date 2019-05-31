@@ -1,7 +1,7 @@
 {
     "server": {
       "host": "localhost",
-      "port": 3000,
+      "port": 80,
       "protocol": "http",
       "api": "api",
       "devServiceWorker": false,
