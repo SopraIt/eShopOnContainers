@@ -54,11 +54,11 @@ export class SearchAdapter {
       sort: Request.sort
     }
 
-    if (Request._sourceExcludes) {
-      httpQuery._source_excludes = Request._sourceExclude.join(',')
+    if (Request._sourceExclude) {
+      httpQuery._source_exclude = Request._sourceExclude.join(',')
     }
-    if (Request._sourceIncludes) {
-      httpQuery._source_excludes = Request._sourceInclude.join(',')
+    if (Request._sourceInclude) {
+      httpQuery._source_include = Request._sourceInclude.join(',')
     }
     if (Request.q) {
       httpQuery.q = Request.q
@@ -68,8 +68,7 @@ export class SearchAdapter {
       throw new Error('Query.index and Query.type are required arguments for executing ElasticSearch query')
     }
     if (rootStore.state.config.elasticsearch.queryMethod === 'GET') {
-      httpQuery.source = JSON.stringify(ElasticsearchQueryBody)
-      httpQuery.source_content_type = "application/json"
+      httpQuery.request = JSON.stringify(ElasticsearchQueryBody)
     }
     url = url + '/' + encodeURIComponent(Request.index) + '/' + encodeURIComponent(Request.type) + '/_search'
     url = url + '?' + queryString.stringify(httpQuery)
