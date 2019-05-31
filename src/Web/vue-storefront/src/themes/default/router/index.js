@@ -43,7 +43,7 @@ let routes = [
   { name: 'cms-block-demo-page-ssr', path: '/cms-block-demo-page-ssr', component: CmsBlockDemoPageSsr },
   { name: 'cms-page-sync', path: '/cms-page-sync', component: CmsData, props: {identifier: 'about-us', type: 'Page', sync: true} },
   { name: 'hc', path: '/hc', component: Static, props: {page: 'lorem', title: 'hc'}, meta: {title: 'hc', description: 'hc'} },
-  { name: 'liveness', path: '/liveness', component: Static, props: {page: 'lorem', title: 'liveness'}, meta: {title: 'liveness', description: 'liveness'} },
+  { name: 'liveness', path: '/liveness', component: Static, props: {page: 'lorem', title: 'liveness'}, meta: {title: 'liveness', description: 'liveness'} }
 ]
 if (!config.products.useShortCatalogUrls) {
   routes = routes.concat([
