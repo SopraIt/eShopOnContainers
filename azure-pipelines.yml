@@ -33,6 +33,7 @@ steps:
     az account set --subscription 4aa07404-052e-4c07-9aaa-343dc4ebba89
     az aks get-credentials --resource-group=$(AZ_RESOURCE) --name=$(AZ_K8S_NAME)
     .\deploy-all.ps1 -externalDns $(AZ_DNS) -aksName $(AZ_K8S_NAME) -aksRg $(AZ_RESOURCE) -imageTag linux-0.0.$(Build.BuildId) -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword $(docker_repo_pwd)
+    #.\deploy-all.ps1 -externalDns 4d1fb6b347c0421f9616.westeurope.aksapp.io -aksName vueshoponcontainer -aksRg eShopOnContainer -imageTag linux-0.0.79 -useCustomRegistry $True -registry docker.io -dockerUser samuelecozzi -dockerPassword bxi4MhIAELJe
     kubectl apply -f aks-httpaddon-cfg.yaml
     kubectl delete pod $(kubectl get pod -l app=addon-http-application-routing-nginx-ingress -n kube-system -o jsonpath="{.items[0].metadata.name}") -n kube-system
   workingDirectory: $(Build.SourcesDirectory)/k8s/helm
