@@ -93,35 +93,35 @@ services:
     depends_on:
       - sql.data    
 
-  mobileshoppingapigw:
-    image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: src/ApiGateways/ApiGw-Base/Dockerfile
-    depends_on:
-      - nosql.data
-      - sql.data
-      - identity.api
-      - rabbitmq
-      - ordering.api
-      - marketing.api
-      - catalog.api
-      - basket.api
+  # mobileshoppingapigw:
+  #   image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: src/ApiGateways/ApiGw-Base/Dockerfile
+  #   depends_on:
+  #     - nosql.data
+  #     - sql.data
+  #     - identity.api
+  #     - rabbitmq
+  #     - ordering.api
+  #     - marketing.api
+  #     - catalog.api
+  #     - basket.api
 
-  mobilemarketingapigw:
-    image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: src/ApiGateways/ApiGw-Base/Dockerfile
-    depends_on:
-      - nosql.data
-      - sql.data
-      - identity.api
-      - rabbitmq
-      - ordering.api
-      - marketing.api
-      - catalog.api
-      - basket.api
+  # mobilemarketingapigw:
+  #   image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: src/ApiGateways/ApiGw-Base/Dockerfile
+  #   depends_on:
+  #     - nosql.data
+  #     - sql.data
+  #     - identity.api
+  #     - rabbitmq
+  #     - ordering.api
+  #     - marketing.api
+  #     - catalog.api
+  #     - basket.api
 
   webshoppingapigw:
     image: ${REGISTRY:-eshop}/ocelotapigw:${PLATFORM:-linux}-${TAG:-latest}
@@ -153,20 +153,20 @@ services:
       - catalog.api
       - basket.api
 
-  mobileshoppingagg:
-    image: ${REGISTRY:-eshop}/mobileshoppingagg:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: src/ApiGateways/Mobile.Bff.Shopping/aggregator/Dockerfile
-    depends_on:
-      - nosql.data
-      - sql.data
-      - identity.api
-      - rabbitmq
-      - ordering.api
-      - marketing.api
-      - catalog.api
-      - basket.api
+  # mobileshoppingagg:
+  #   image: ${REGISTRY:-eshop}/mobileshoppingagg:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: src/ApiGateways/Mobile.Bff.Shopping/aggregator/Dockerfile
+  #   depends_on:
+  #     - nosql.data
+  #     - sql.data
+  #     - identity.api
+  #     - rabbitmq
+  #     - ordering.api
+  #     - marketing.api
+  #     - catalog.api
+  #     - basket.api
 
   webshoppingagg:
     image: ${REGISTRY:-eshop}/webshoppingagg:${PLATFORM:-linux}-${TAG:-latest}
@@ -213,21 +213,6 @@ services:
     env_file: src/Web/vue-storefront/docker/vue-storefront/default.env
     environment:
       VS_ENV: dev
-    #network_mode: host
-    # volumes:
-    #   - './src/Web/vue-storefront/babel.config.js:/var/www/babel.config.js'
-    #   - './src/Web/vue-storefront/config:/var/www/config'
-    #   - './src/Web/vue-storefront/core:/var/www/core'
-    #   - './src/Web/vue-storefront/ecosystem.json:/var/www/ecosystem.json'
-    #   - './src/Web/vue-storefront/.eslintignore:/var/www/.eslintignore'
-    #   - './src/Web/vue-storefront/.eslintrc.js:/var/www/.eslintrc.js'
-    #   - './src/Web/vue-storefront/lerna.json:/var/www/lerna.json'
-    #   - './src/Web/vue-storefront/tsconfig.json:/var/www/tsconfig.json'
-    #   - './src/Web/vue-storefront/tsconfig-build.json:/var/www/tsconfig-build.json'
-    #   - './src/Web/vue-storefront/shims.d.ts:/var/www/shims.d.ts'
-    #   - './src/Web/vue-storefront/package.json:/var/www/package.json'
-    #   - './src/Web/vue-storefront/src:/var/www/src'
-    #   - './src/Web/vue-storefront/var:/var/www/var'
     tmpfs:
       - /var/www/dist
     depends_on:
@@ -235,15 +220,15 @@ services:
      - webshoppingapigw
      - webmarketingapigw
 
-  webmvc:
-    image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: src/Web/WebMVC/Dockerfile    
-    depends_on:
-      - webshoppingagg
-      - webshoppingapigw
-      - webmarketingapigw
+  # webmvc:
+  #   image: ${REGISTRY:-eshop}/webmvc:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: src/Web/WebMVC/Dockerfile    
+  #   depends_on:
+  #     - webshoppingagg
+  #     - webshoppingapigw
+  #     - webmarketingapigw
 
   webhooks.client:
     image: ${REGISTRY:-eshop}/webhooks.client:${PLATFORM:-linux}-${TAG:-latest}
@@ -252,54 +237,5 @@ services:
       dockerfile: src/Web/WebhookClient/Dockerfile
     depends_on:
       - webhooks.api 
-
-
-#AKENEO - START
-
-  # fpm:
-  #   image: 'akeneo/fpm:php-7.2'
-  #   user: 'docker'
-  #   volumes:
-  #     - './akeneo/:/srv/pim'
-  #   working_dir: '/srv/pim'
-  #   environment:
-  #     COMPOSER_HOME: '/home/docker/.composer'
-  #     PHP_IDE_CONFIG: 'serverName=pim-ce-cli'
-  #     PHP_XDEBUG_ENABLED: "${PHP_XDEBUG_ENABLED:-0}"
-  #     XDEBUG_CONFIG: 'remote_host=172.17.0.1'
-
-  # node:
-  #   image: 'node:10-slim'
-  #   user: 'node'
-  #   volumes:
-  #     - './akeneo/:/srv/pim'
-  #   working_dir: '/srv/pim'
-  #   environment:
-  #     YARN_CACHE_FOLDER: '/home/node/.yarn-cache'
-
-  # httpd:
-  #   image: 'httpd:2.4'
-  #   depends_on:
-  #     - 'fpm'
-  #   volumes:
-  #     - './akeneo/:/srv/pim:ro'
-  #     - './akeneo/docker/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro'
-  #     - './akeneo/docker/akeneo.conf:/usr/local/apache2/conf/vhost.conf:ro'
-  #   ports:
-  #     - '9400:80'
-  #   environment:
-  #     PHP_IDE_CONFIG: 'serverName=pim-ce'
-
-  # mysql:
-  #   image: 'mysql:5.7'
-  #   environment:
-  #     MYSQL_ROOT_PASSWORD: 'root'
-  #     MYSQL_USER: 'akeneo_pim'
-  #     MYSQL_PASSWORD: 'akeneo_pim'
-  #     MYSQL_DATABASE: 'akeneo_pim'
-  #   ports:
-  #     - '33006:3306'
-
-#AKENEO - END
 
   
