@@ -1,7 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -9,11 +9,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/catalog",
+      "UpstreamPathTemplate": "/catalog/{everything}",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -21,11 +21,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/basket",
+      "UpstreamPathTemplate": "/basket/{everything}",
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -33,11 +33,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/ordering",
+      "UpstreamPathTemplate": "/ordering/{everything}",
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -45,11 +45,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/marketing",
+      "UpstreamPathTemplate": "/marketing/{everything}",
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -57,7 +57,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/swagger/location",
+      "UpstreamPathTemplate": "/location/{everything}",
       "UpstreamHttpMethod": []
     },
 
