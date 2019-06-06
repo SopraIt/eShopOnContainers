@@ -1,33 +1,107 @@
 {
-    "ReRoutes": [
-      {
-        "DownstreamPathTemplate": "/{index}/_search",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "elasticsearch",
-            "Port": 9200
-          }
-        ],
-        "UpstreamPathTemplate": "/api/catalog/vue_storefront_catalog_temp/{index}/_search",
-        "UpstreamHttpMethod": [ "GET" ]
-      },
-      {
-        "DownstreamPathTemplate": "/{url}",
-        "DownstreamScheme": "http",
-        "DownstreamHostAndPorts": [
-          {
-            "Host": "localhost",
-            "Port": 8080
-          }
-        ],
-        "UpstreamPathTemplate": "/{url}",
-        "UpstreamHttpMethod": [ "GET", "POST", "PUT", "PATCH", "DELETE" ]
-      }
-    ],
-      "GlobalConfiguration": {
-        "RequestIdKey": "OcRequestId",
-        "AdministrationPath": "/administration"
-      }
+  "ReRoutes": [
+    {
+      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/catalog",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/basket",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/ordering",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "marketing.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/marketing",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/index.html",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "locations.api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/swagger/location",
+      "UpstreamHttpMethod": []
+    },
+
+    {
+      "DownstreamPathTemplate": "/{index}/_search",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "elasticsearch",
+          "Port": 9200
+        }
+      ],
+      "UpstreamPathTemplate": "/api/catalog/vue_storefront_catalog_temp/{index}/_search",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/core/v2/Stock/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/api/stock/{everything}",
+      "UpstreamHttpMethod": [ "GET"]
+    },
+    {
+      "DownstreamPathTemplate": "/{url}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/{url}",
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "PATCH", "DELETE" ]
     }
     
+  ],
+    "GlobalConfiguration": {
+      "RequestIdKey": "OcRequestId",
+      "AdministrationPath": "/administration"
+    }
+  }
+  
