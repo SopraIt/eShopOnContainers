@@ -3,7 +3,8 @@ export default interface HttpQuery {
   size: number
   from: number
   sort: string
-  request?: string,
-  _source_exclude?: string
-  _source_include?: string
+  source?: string,
+  _source_excludes?: string
+  _source_includes?: string
+  source_content_type?: string
 }

@@ -43,12 +43,16 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API.Configuration
                 {
                     ClientId = "js",
                     ClientName = "eShop SPA OpenId Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowAccessTokensViaBrowser = true,
-                    RedirectUris =           { $"{clientsUrl["Spa"]}/" },
-                    RequireConsent = false,
-                    PostLogoutRedirectUris = { $"{clientsUrl["Spa"]}/" },
-                    AllowedCorsOrigins =     { $"{clientsUrl["Spa"]}" },
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    //Used to retrieve the access token on the back channel.
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    //RedirectUris =           { $"{clientsUrl["Spa"]}/" },
+                    //RequireConsent = false,
+                    //PostLogoutRedirectUris = { $"{clientsUrl["Spa"]}/" },
+                    //AllowedCorsOrigins =     { $"{clientsUrl["Spa"]}" },
                     AllowedScopes =
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
