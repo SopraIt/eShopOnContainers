@@ -64,20 +64,7 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API.Controllers
                     
                     var claims = GetClaimsFromUser(user);
         
-                    
-                    //claims.Add(new Claim(JwtClaimTypes.SessionId, client.SessionId));
-                    
-        
-                    var token = await _identityServerTools.IssueJwtAsync(10000, claims);
-                    //var token = await _identityServerTools.IssueClientJwtAsync("js",3600);
-
-                    // var props = new AuthenticationProperties
-                    // {
-                    //     ExpiresUtc = DateTimeOffset.UtcNow.AddHours(2),
-                    //     AllowRefresh = true
-                    // };
-
-                    // await _loginService.SignInAsync(user, props);
+                    var token = await _identityServerTools.IssueJwtAsync(3600, claims);
 
                     return new LoginRensponse()
                     {
@@ -159,20 +146,6 @@ namespace Microsoft.eShopOnContainers.Services.Identity.API.Controllers
             };
         }
 
-        [Authorize]
-
-        [HttpGet("me")]
-        public async Task<ActionResult<UserResponse>> Me(string token)
-        {
-            
-
-            return new UserResponse()
-            {
-                Code = 500
-            };
-        }
-
-        
         private IEnumerable<Claim> GetClaimsFromUser(ApplicationUser user)
         {
             var claims = new List<Claim>

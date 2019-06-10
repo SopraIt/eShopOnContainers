@@ -27,8 +27,8 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
         private readonly ILogger<OrdersController> _logger;
 
         public UserController(
-            IMediator mediator, 
-            IOrderQueries orderQueries, 
+            IMediator mediator,
+            IOrderQueries orderQueries,
             IIdentityService identityService,
             ILogger<OrdersController> logger)
         {
@@ -40,14 +40,48 @@ namespace Microsoft.eShopOnContainers.Services.Ordering.API.Controllers
 
         [HttpGet]
         [Route("me")]
-        public async Task<ActionResult<UserResponse>> Me(string token)
+        public async Task<ActionResult<UserResponse>> Me()
         {
-            
-
-            return new UserResponse()
+            try
             {
-                Code = 500
-            };
-        }        
+                return new UserResponse()
+                {
+                    Code = 200,
+                    Result = new User(){
+                        UserId = User.FindFirst("sub")?.Value,
+                        Email = User.FindFirst("preferred_username")?.Value,
+                        Firstname = User.FindFirst("name")?.Value,
+                        Lastname = User.FindFirst("last_name")?.Value
+                    }
+                };
+            }
+            catch (Exception e)
+            {
+                return new UserResponse()
+                {
+                    Code = 500
+                };
+            }
+        }    
+
+        [HttpGet]
+        [Route("order-hystory")]
+        public async Task<ActionResult<UserResponse>> OrderHistory()
+        {
+            try
+            {
+                return new UserResponse()
+                {
+                    Code = 200
+                };
+            }
+            catch (Exception e)
+            {
+                return new UserResponse()
+                {
+                    Code = 500
+                };
+            }
+        }    
     }
 }

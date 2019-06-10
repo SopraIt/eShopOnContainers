@@ -16,6 +16,8 @@ namespace Ordering.API.Application.Models
     {
         [JsonProperty("id")]
         public long Id { get; set; }
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
 
         [JsonProperty("group_id")]
         public long GroupId { get; set; }
