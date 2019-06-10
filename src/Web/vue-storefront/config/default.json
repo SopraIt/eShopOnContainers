@@ -32,7 +32,7 @@
       "port": 8080
     },
     "api": {
-      "url": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw"
+      "url": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw"
     },
     "elasticsearch": {
       "httpAuth": "",
@@ -239,17 +239,17 @@
       "askBeforeRemoveProduct": true,
       "displayItemDiscounts": true,
       "minicartCountType": "quantities",
-      "create_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/create?token={{token}}",
-      "updateitem_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/update?token={{token}}&cartId={{cartId}}",
-      "deleteitem_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/delete?token={{token}}&cartId={{cartId}}",
-      "pull_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/pull?token={{token}}&cartId={{cartId}}",
-      "totals_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/totals?token={{token}}&cartId={{cartId}}",
-      "paymentmethods_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/payment-methods?token={{token}}&cartId={{cartId}}",
-      "shippingmethods_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/shipping-methods?token={{token}}&cartId={{cartId}}",
-      "shippinginfo_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/shipping-information?token={{token}}&cartId={{cartId}}",
-      "collecttotals_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/collect-totals?token={{token}}&cartId={{cartId}}",
-      "deletecoupon_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/delete-coupon?token={{token}}&cartId={{cartId}}",
-      "applycoupon_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/apply-coupon?token={{token}}&cartId={{cartId}}&coupon={{coupon}}"
+      "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/create?token={{token}}",
+      "updateitem_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/update?token={{token}}&cartId={{cartId}}",
+      "deleteitem_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/delete?token={{token}}&cartId={{cartId}}",
+      "pull_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/pull?token={{token}}&cartId={{cartId}}",
+      "totals_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/totals?token={{token}}&cartId={{cartId}}",
+      "paymentmethods_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/payment-methods?token={{token}}&cartId={{cartId}}",
+      "shippingmethods_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/shipping-methods?token={{token}}&cartId={{cartId}}",
+      "shippinginfo_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/shipping-information?token={{token}}&cartId={{cartId}}",
+      "collecttotals_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/collect-totals?token={{token}}&cartId={{cartId}}",
+      "deletecoupon_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/delete-coupon?token={{token}}&cartId={{cartId}}",
+      "applycoupon_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/basket-api/api/cart/apply-coupon?token={{token}}&cartId={{cartId}}&coupon={{coupon}}"
     },
     "products": {
       "useShortCatalogUrls": false,
@@ -265,7 +265,7 @@
       "clearPricesBeforePlatformSync": false,
       "waitForPlatformSync": false,
       "setupVariantByAttributeCode": true,
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/product",
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/product",
       "defaultFilters": ["color", "size", "price", "erin_recommends"],
       "filterFieldMapping": {
         "category.name": "category.name.keyword"
@@ -293,7 +293,7 @@
     },
     "orders": {
       "directBackendSync": true,
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/order-api/api/order",
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/order",
       "payment_methods_mapping": {
       },
       "offline_orders": {
@@ -325,23 +325,23 @@
       }
     },
     "reviews": {
-      "create_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/review/create"
+      "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/review/create"
     },
     "users": {
       "autoRefreshTokens": true,
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user",
-      "history_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/order-history?token={{token}}",
-      "resetPassword_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/reset-password",
-      "changePassword_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/change-password?token={{token}}",
-      "login_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/login",
-      "create_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/create",
-      "me_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/me?token={{token}}",
-      "refresh_endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/identity/api/user/refresh"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user",
+      "history_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/order-history?token={{token}}",
+      "resetPassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/reset-password",
+      "changePassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/change-password?token={{token}}",
+      "login_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/login",
+      "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/create",
+      "me_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/me?token={{token}}",
+      "refresh_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/refresh"
     },
     "stock": {
       "synchronize": true,
       "allowOutOfStockInCart": true,
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/stock"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/catalog-api/api/stock"
     },
     "images": {
       "useExactUrlsNoProxy": false,
@@ -386,12 +386,12 @@
       "bundleAllStoreviewLanguages": true
     },
     "mailchimp": {
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mailchimp-subscribe/subscribe"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mailchimp-subscribe/subscribe"
     },
     "mailer": {
       "endpoint": {
-        "send": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/send-email",
-        "token": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/get-token"
+        "send": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/send-email",
+        "token": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/get-token"
       },
       "contactAddress": "contributors@vuestorefront.io",
       "sendConfirmation": true
@@ -404,8 +404,8 @@
       "id": false
     },
     "cms": {
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/cms-api/api/ext/cms-data/cms{{type}}/{{cmsId}}",
-      "endpointIdentifier": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/cms-api/api/ext/cms-data/cms{{type}}Identifier/{{cmsIdentifier}}/storeId/{{storeId}}"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/cms-api/api/ext/cms-data/cms{{type}}/{{cmsId}}",
+      "endpointIdentifier": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/cms-api/api/ext/cms-data/cms{{type}}Identifier/{{cmsIdentifier}}/storeId/{{storeId}}"
     },
     "cms_block": {
       "max_count": 500

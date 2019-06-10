@@ -38,6 +38,10 @@
     using HealthChecks.UI.Client;
     using Microsoft.AspNetCore.Diagnostics.HealthChecks;
     using Microsoft.Extensions.Diagnostics.HealthChecks;
+    using Microsoft.Extensions.Primitives;
+    using System.Threading.Tasks;
+    using System.Net;
+    using System.Linq;
 
     public class Startup
     {
@@ -131,7 +135,7 @@
             {
                 app.UseMiddleware<ByPassAuthMiddleware>();
             }
-
+            
             app.UseAuthentication();
         }
     }
@@ -415,6 +419,42 @@
                 options.Authority = identityUrl;
                 options.RequireHttpsMetadata = false;
                 options.Audience = "orders";
+
+                options.Events = new JwtBearerEvents {
+                    OnMessageReceived = (context) => {
+                        StringValues values;
+
+                        if (!context.Request.Query.TryGetValue("token", out values)) {
+                            return Task.CompletedTask;
+                        }
+
+                        if (values.Count > 1) {
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            context.Fail(
+                                "Only one 'access_token' query string parameter can be defined. " +
+                                $"However, {values.Count:N0} were included in the request."
+                            );
+
+                            return Task.CompletedTask;
+                        }
+
+                        var token = values.Single();
+
+                        if (String.IsNullOrWhiteSpace(token)) {
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            context.Fail(
+                                "The 'access_token' query string parameter was defined, " +
+                                "but a value to represent the token was not included."
+                            );
+
+                            return Task.CompletedTask;
+                        }
+
+                        context.Token = token;
+
+                        return Task.CompletedTask;
+                    }
+                };
             });
 
             return services;
