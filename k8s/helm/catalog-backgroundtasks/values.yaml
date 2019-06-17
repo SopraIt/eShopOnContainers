@@ -56,6 +56,10 @@ env:
       key: search_Url
     - name: Serilog__LogstashgUrl
       key: log_Url
+    - name: MongoConnectionString
+      key: catalog__MongoConnectionString
+    - name: MongoDatabase
+      key: catalog__MongoDatabase
       # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: ASPNETCORE_ENVIRONMENT

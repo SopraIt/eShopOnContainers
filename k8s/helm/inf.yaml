@@ -24,6 +24,10 @@ inf:
       database: LocationsDb
     marketing:
       database: MarketingDb
+    catalog:
+      database: CatalogDb
+    basket:
+      database: BasketDb
   redis:                    # inf.redis defines the redis' connection strings
     basket:     
       svc: basket-data      # Name of k8s svc for basket redis     

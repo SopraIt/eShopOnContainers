@@ -3,5 +3,7 @@
     public class BasketSettings
     {
         public string ConnectionString { get; set; }
+        public string MongoConnectionString { get; set; }
+        public string MongoDatabase { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 {{- $name := include "catalog-backgroundtasks.fullname" . -}}
 {{- $sqlsrv := include "sql-name" . -}}
 {{- $cfgname :=  printf "cfg-%s" $name | trunc 63  }}
+{{- $mongo := include "mongo-name" . -}}
 
 apiVersion: v1
 kind: ConfigMap
@@ -22,3 +23,5 @@ data:
   catalog_productSource: "{{ .Values.inf.catalog.url }}"
   search_Url: "{{ .Values.inf.elasticsearch.url }}"
   log_Url: "{{ .Values.inf.logstash.url }}"
+  catalog__MongoConnectionString: mongodb://{{ $mongo }}
+  catalog__MongoDatabase: {{ .Values.inf.mongo.marketing.database }} 

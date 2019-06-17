@@ -37,6 +37,10 @@ env:
       key: urls__IdentityUrl
     - name: UseLoadTest
       key: basket__EnableLoadTest
+    - name: MongoConnectionString
+      key: basket__MongoConnectionString
+    - name: MongoDatabase
+      key: basket__MongoDatabase
   # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: OrchestratorType

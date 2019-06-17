@@ -329,14 +329,14 @@
     },
     "users": {
       "autoRefreshTokens": true,
-      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user",
-      "history_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/order-history?token={{token}}",
-      "resetPassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/reset-password",
-      "changePassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/change-password?token={{token}}",
-      "login_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/login",
-      "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/create",
-      "me_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/me?token={{token}}",
-      "refresh_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/identity/api/user/refresh"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user",
+      "history_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/user/order-history?token={{token}}",
+      "resetPassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/reset-password",
+      "changePassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/change-password?token={{token}}",
+      "login_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/login",
+      "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/create",
+      "me_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/user/me?token={{token}}",
+      "refresh_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/refresh"
     },
     "stock": {
       "synchronize": true,
