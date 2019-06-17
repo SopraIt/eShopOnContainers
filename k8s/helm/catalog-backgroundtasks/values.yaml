@@ -19,7 +19,7 @@ ingress:
   tls: []
 
 cfg:
-  checkUpdateTime: "15000"
+  checkUpdateTime: "200000"
   gracePeriodTime: "1"
 
 resources: {}

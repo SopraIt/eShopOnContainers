@@ -51,6 +51,8 @@ namespace Catalog.BackgroundTasks.Tasks
         {
             _logger.LogDebug("GracePeriodManagerService is starting.");
 
+            await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
+            
             List<Import> rows = GetRowsFromFile();
 
             string mapping_json = string.Empty;
