@@ -116,13 +116,13 @@
       },
       "it": {
         "storeCode": "it",
-        "disabled": true,
+        "disabled": false,
         "storeId": 4,
         "name": "Italian Store",
         "url": "/it",
         "elasticsearch": {
           "host": "/api/catalog",
-          "index": "vue_storefront_catalog_it"
+          "index": "vue_storefront_catalog"
         },
         "tax": {
           "sourcePriceIncludesTax": false,

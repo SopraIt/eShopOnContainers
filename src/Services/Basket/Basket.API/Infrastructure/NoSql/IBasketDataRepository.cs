@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using System.Collections.Generic;
+using Basket.API.Model;
 
 namespace Basket.API.Infrastructure.NoSql
 {
@@ -8,11 +9,7 @@ namespace Basket.API.Infrastructure.NoSql
 
     public interface IBasketDataRepository
     {
-        // Task<Product> GetAsync (string Id);
-        // Task<Product> GetBySkuAsync(string Sku);
-        // Task<string> UpsertAsync(Product product);
-
-        // Task<bool> CheckStock(string sku);
-        // Task<List<Stock>> CheckStockList(List<string> skus);
+        Task<List<CartItem>> GetAsync (string Id);
+        Task<string> UpsertAsync (string Id ,CartItem cart);
     }
 }

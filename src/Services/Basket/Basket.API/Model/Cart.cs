@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace Basket.API.Model
 {
 
-    public partial class Cart
+    public partial class CartItem
     {
         [JsonProperty("item_id")]
         public long ItemId { get; set; }

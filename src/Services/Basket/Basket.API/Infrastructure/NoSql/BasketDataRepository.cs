@@ -5,6 +5,9 @@ using MongoDB.Bson;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using Microsoft.eShopOnContainers.Services.Basket.API;
+using Basket.API.Model;
+using Newtonsoft.Json;
+using MongoDB.Bson.IO;
 
 namespace Basket.API.Infrastructure.NoSql
 {
@@ -18,114 +21,74 @@ namespace Basket.API.Infrastructure.NoSql
             _context = new BasketDataContext(settings);
         }
 
-        // public async Task<Product> GetAsync(string Id)
-        // {
+        public async Task<List<CartItem>> GetAsync(string Id)
+        {
 
-        //     var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
-        //     var db_result = await _context.CatalogData
-        //                          .Find(filter)
-        //                          .FirstOrDefaultAsync();
+            var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
+            var db_result = await _context.BasketData
+                                 .Find(filter)
+                                 .FirstOrDefaultAsync();
 
-        //     if (db_result != null)
-        //     {
-        //         Product result = new Product()
-        //         {
-        //             Id = db_result["id"].ToString(),
-        //             json = db_result.ToJson()
-        //         };
+            if (db_result != null)
+            {
+                var json_cart = db_result["cart_items"].AsBsonArray.ToJson(new JsonWriterSettings { OutputMode = JsonOutputMode.Strict });
+                
+                List<CartItem> cart = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartItem>>(json_cart);
+                return cart;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
-        //         return result;
-        //     }
-        //     else
-        //     {
-        //         return null;
-        //     }
-        // }
+        public async Task<string> UpsertAsync(string id, CartItem cart)
+        {
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("id", id);
 
-        // public async Task<Product> GetBySkuAsync(string Sku)
-        // {
-        //     var db_result = await this.GetBySkuAsyncFromDB(Sku);
+                if (cart != null)
+                {
+                    var db_result = await _context.BasketData
+                                 .Find(filter)
+                                 .FirstOrDefaultAsync();
+                    
+                    var filter_item = Builders<BsonDocument>.Filter.And(
+                        Builders<BsonDocument>.Filter.Eq("id", id),
+                        Builders<BsonDocument>.Filter.Eq("cart_items.ItemId", cart.ItemId)
+                    );
+                    var db_cart_item = await _context.BasketData
+                                 .Find(filter_item)
+                                 .FirstOrDefaultAsync();
 
-        //     if (db_result != null)
-        //     {
-        //         Product result = new Product()
-        //         {
-        //             Id = db_result["id"].ToString(),
-        //             json = db_result.ToJson()
-        //         };
+                    if(db_cart_item != null){
+                        db_result["cart_items"].AsBsonArray.Remove(db_cart_item);
+                    }
+                    db_result["cart_items"].AsBsonArray.Add(cart.ToBsonDocument());
 
-        //         return result;
-        //     }
-        //     else
-        //     {
-        //         return null;
-        //     }
-        // }
+                        var result = await _context.BasketData.ReplaceOneAsync(filter, db_result, new UpdateOptions { IsUpsert = true });
+                        return result.ModifiedCount > 0 ? id : string.Empty;
+                }
+                else
+                {
+                    await _context.BasketData.DeleteOneAsync(filter);
 
-        // public async Task<string> UpsertAsync(Product product)
-        // {
-        //     try
-        //     {
-        //         Product _prod = await this.GetAsync(product.Id);
-        //         BsonDocument document = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<BsonDocument>(product.json);
-        //         if (_prod != null)
-        //         {
-        //             var filter = Builders<BsonDocument>.Filter.Eq("id", product.Id);
-        //             var result = await _context.CatalogData.ReplaceOneAsync(filter, document, new UpdateOptions { IsUpsert = true });
-        //             return result.ModifiedCount>0 ? product.Id : string.Empty;
-        //         }
-        //         else
-        //         {
-        //             await _context.CatalogData.InsertOneAsync(document);
-        //             return product.Id;
-        //         }
-        //     }
-        //     catch (Exception e)
-        //     {
-        //         return string.Empty;
-        //     }
-        // }
-    
-        // public async Task<bool> CheckStock(string Sku){
-        //     try {
-        //         var db_result = await this.GetBySkuAsyncFromDB(Sku);
-
-        //         var is_in_stock = bool.Parse(db_result["stock"]["is_in_stock"].ToString());
-
-        //         if (is_in_stock){
-        //             return true;
-        //         }
-        //         else
-        //         {
-        //             return false;
-        //         }
-        //     } catch (Exception e){
-        //         return false;
-        //     }
-        // }
-        // public async Task<List<Stock>> CheckStockList(List<string> skus){
-        //     try {
-
-        //         return new List<Stock>();
-        //     } catch (Exception e){
-        //         return new List<Stock>();
-        //     }
-        // }
-
-
-
-        // private async Task<BsonDocument> GetBySkuAsyncFromDB(string Sku){
-            
-        //     var filter = Builders<BsonDocument>.Filter.Eq("sku", Sku);
-        //     var projection = Builders<BsonDocument>.Projection.Exclude("_id");
-        //     projection = projection.Exclude("tsk");
-
-        //     var db_result = await  _context.CatalogData
-        //                          .Find(filter)
-        //                          .Project(projection)
-        //                          .FirstOrDefaultAsync();
-        //     return db_result;
-        // }
+                    BsonDocument cart_bson = new BsonDocument {
+                        { "id", id },
+                        { "user_id", id },
+                        { "cart_items", new BsonArray()}
+                    };
+                    
+                    await _context.BasketData.InsertOneAsync(cart_bson);
+                    return id;
+                }
+            }
+            catch (Exception e)
+            {
+                return string.Empty;
+            }
+        }
     }
 
 }

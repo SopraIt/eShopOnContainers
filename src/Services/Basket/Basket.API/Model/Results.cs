@@ -10,7 +10,7 @@ namespace Basket.API.Model
         public long Code { get; set; }
 
         [JsonProperty("result")]
-        public List<Cart> Result { get; set; }
+        public List<CartItem> Result { get; set; }
     }
 
     public partial class CartCreateResult
@@ -21,6 +21,12 @@ namespace Basket.API.Model
         [JsonProperty("result")]
         public string Result { get; set; }
     }
+
+    public partial class CartUpdateRequest
+    {
+        [JsonProperty("cartItem")]
+        public CartItem CartItem { get; set; }
+    }
     
     public partial class CartUpdateResult
     {
@@ -28,7 +34,7 @@ namespace Basket.API.Model
         public long Code { get; set; }
 
         [JsonProperty("result")]
-        public string Result { get; set; }
+        public CartItem Result { get; set; }
     }
 
 }

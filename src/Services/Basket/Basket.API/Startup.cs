@@ -2,6 +2,7 @@
 using Autofac.Extensions.DependencyInjection;
 using Basket.API.Infrastructure.Filters;
 using Basket.API.Infrastructure.Middlewares;
+using Basket.API.Infrastructure.NoSql;
 using Basket.API.IntegrationEvents.EventHandling;
 using Basket.API.IntegrationEvents.Events;
 using HealthChecks.UI.Client;
@@ -28,12 +29,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using RabbitMQ.Client;
 using StackExchange.Redis;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Microsoft.eShopOnContainers.Services.Basket.API
 {
@@ -62,9 +67,10 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddControllersAsServices();
 
-            ConfigureAuthService(services);
+            //ConfigureAuthService(services);
 
-            services.AddCustomHealthCheck(Configuration);
+            services.AddCustomHealthCheck(Configuration)
+                .AddCustomAuthentication(Configuration);
 
             services.Configure<BasketSettings>(Configuration);
 
@@ -168,6 +174,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IBasketRepository, RedisBasketRepository>();
+            services.AddTransient<IBasketDataRepository, BasketDataRepository>();
             services.AddTransient<IIdentityService, IdentityService>();
 
             services.AddOptions();
@@ -239,25 +246,25 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
             }
         }
 
-        private void ConfigureAuthService(IServiceCollection services)
-        {
-            // prevent from mapping "sub" claim to nameidentifier.
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        // private void ConfigureAuthService(IServiceCollection services)
+        // {
+        //     // prevent from mapping "sub" claim to nameidentifier.
+        //     JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            var identityUrl = Configuration.GetValue<string>("IdentityUrl"); 
+        //     var identityUrl = Configuration.GetValue<string>("IdentityUrl"); 
                 
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        //     services.AddAuthentication(options =>
+        //     {
+        //         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        //         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = identityUrl;
-                options.RequireHttpsMetadata = false;
-                options.Audience = "basket";
-            });
-        }
+        //     }).AddJwtBearer(options =>
+        //     {
+        //         options.Authority = identityUrl;
+        //         options.RequireHttpsMetadata = false;
+        //         options.Audience = "basket";
+        //     });
+        // }
 
         protected virtual void ConfigureAuth(IApplicationBuilder app)
         {
@@ -354,5 +361,63 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
 
             return services;
         }
-    }
+
+        public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
+        {
+            // prevent from mapping "sub" claim to nameidentifier.
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
+
+            var identityUrl = configuration.GetValue<string>("IdentityUrl");
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.Authority = identityUrl;
+                options.RequireHttpsMetadata = false;
+                options.Audience = "orders";
+
+                options.Events = new JwtBearerEvents {
+                    OnMessageReceived = (context) => {
+                        StringValues values;
+
+                        if (!context.Request.Query.TryGetValue("token", out values)) {
+                            return Task.CompletedTask;
+                        }
+
+                        if (values.Count > 1) {
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            context.Fail(
+                                "Only one 'access_token' query string parameter can be defined. " +
+                                $"However, {values.Count:N0} were included in the request."
+                            );
+
+                            return Task.CompletedTask;
+                        }
+
+                        var token = values.Single();
+
+                        if (String.IsNullOrWhiteSpace(token)) {
+                            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                            context.Fail(
+                                "The 'access_token' query string parameter was defined, " +
+                                "but a value to represent the token was not included."
+                            );
+
+                            return Task.CompletedTask;
+                        }
+
+                        context.Token = token;
+
+                        return Task.CompletedTask;
+                    }
+                };
+            });
+
+            return services;
+        }
+    }    
 }
