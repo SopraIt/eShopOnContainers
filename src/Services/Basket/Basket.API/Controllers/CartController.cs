@@ -39,7 +39,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         public async Task<ActionResult<CartResult>> GetBasketAsync(string cartId)
         {
             var UserId = User.FindFirst("sub")?.Value;
-            var cart = await _repo.GetAsync(UserId);
+            var cart = await _repo.GetCartItemsAsync(UserId);
 
             return new CartResult(){
                 Result = cart,

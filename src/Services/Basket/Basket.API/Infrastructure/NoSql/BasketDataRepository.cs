@@ -8,6 +8,8 @@ using Microsoft.eShopOnContainers.Services.Basket.API;
 using Basket.API.Model;
 using Newtonsoft.Json;
 using MongoDB.Bson.IO;
+using MongoDB.Bson.Serialization;
+using Microsoft.Extensions.Logging;
 
 namespace Basket.API.Infrastructure.NoSql
 {
@@ -15,25 +17,27 @@ namespace Basket.API.Infrastructure.NoSql
     : IBasketDataRepository
     {
         private readonly BasketDataContext _context;
+        private readonly ILogger<BasketDataRepository> _logger;
 
-        public BasketDataRepository(IOptions<BasketSettings> settings)
+        public BasketDataRepository(
+            IOptions<BasketSettings> settings,
+            ILogger<BasketDataRepository> logger)
         {
             _context = new BasketDataContext(settings);
         }
 
-        public async Task<List<CartItem>> GetAsync(string Id)
+
+        public async Task<Cart> GetCartAsync(string Id)
         {
 
-            var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
+            var filter = Builders<BsonDocument>.Filter.Eq("user_id", Id);
             var db_result = await _context.BasketData
                                  .Find(filter)
                                  .FirstOrDefaultAsync();
 
             if (db_result != null)
             {
-                var json_cart = db_result["cart_items"].AsBsonArray.ToJson(new JsonWriterSettings { OutputMode = JsonOutputMode.Strict });
-                
-                List<CartItem> cart = Newtonsoft.Json.JsonConvert.DeserializeObject<List<CartItem>>(json_cart);
+                Cart cart = BsonSerializer.Deserialize<Cart>(db_result.AsBsonDocument);
                 return cart;
             }
             else
@@ -42,53 +46,65 @@ namespace Basket.API.Infrastructure.NoSql
             }
         }
 
-        public async Task<string> UpsertAsync(string id, CartItem cart)
+        public async Task<List<CartItem>> GetCartItemsAsync(string Id)
+        {
+            Cart cart = await this.GetCartAsync(Id);
+
+            if (cart != null)
+            {
+                return cart.cart_items;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
+        public async Task<string> UpsertAsync(string id, CartItem cart_item)
         {
             try
             {
-                var filter = Builders<BsonDocument>.Filter.Eq("id", id);
+                var filter = Builders<BsonDocument>.Filter.Eq("user_id", id);
 
-                if (cart != null)
+                Cart cart = await this.GetCartAsync(id);
+
+                if (cart_item != null)
                 {
-                    var db_result = await _context.BasketData
-                                 .Find(filter)
-                                 .FirstOrDefaultAsync();
-                    
-                    var filter_item = Builders<BsonDocument>.Filter.And(
-                        Builders<BsonDocument>.Filter.Eq("id", id),
-                        Builders<BsonDocument>.Filter.Eq("cart_items.ItemId", cart.ItemId)
-                    );
-                    var db_cart_item = await _context.BasketData
-                                 .Find(filter_item)
-                                 .FirstOrDefaultAsync();
-
-                    if(db_cart_item != null){
-                        db_result["cart_items"].AsBsonArray.Remove(db_cart_item);
+                    if (cart.cart_items.Exists(x => x.ItemId == cart_item.ItemId))
+                    {
+                        cart.cart_items.RemoveAll(x => x.ItemId == cart_item.ItemId);
                     }
-                    db_result["cart_items"].AsBsonArray.Add(cart.ToBsonDocument());
+                    cart.cart_items.Add(cart_item);
 
-                        var result = await _context.BasketData.ReplaceOneAsync(filter, db_result, new UpdateOptions { IsUpsert = true });
-                        return result.ModifiedCount > 0 ? id : string.Empty;
+                    var db_cart = await _context.BasketData
+                                .ReplaceOneAsync(filter, cart.ToBsonDocument());
+
+                    return db_cart.ModifiedCount > 0 ? id : string.Empty;
                 }
                 else
                 {
-                    await _context.BasketData.DeleteOneAsync(filter);
+                    if (cart == null)
+                    {
+                        await _context.BasketData.DeleteOneAsync(filter);
 
-                    BsonDocument cart_bson = new BsonDocument {
-                        { "id", id },
+                        BsonDocument cart_bson = new BsonDocument {
                         { "user_id", id },
                         { "cart_items", new BsonArray()}
                     };
-                    
-                    await _context.BasketData.InsertOneAsync(cart_bson);
+                    }
+
                     return id;
                 }
             }
             catch (Exception e)
             {
+                _logger.LogError(e, "Upsert of cart failed!");
                 return string.Empty;
             }
         }
     }
 
 }
+
