@@ -38,10 +38,14 @@ env:
       key: name__mvc__hc
     - name: HealthChecks-UI__HealthChecks__0__Uri
       key: internalurls__mvc__hc
+    # - name: HealthChecks-UI__HealthChecks__1__Name
+    #   key: name__spa__hc
+    # - name: HealthChecks-UI__HealthChecks__1__Uri
+    #   key: internalurls__spa__hc
     - name: HealthChecks-UI__HealthChecks__1__Name
-      key: name__spa__hc
+      key: name__payment__hc
     - name: HealthChecks-UI__HealthChecks__1__Uri
-      key: internalurls__spa__hc
+      key: internalurls__payment__hc
     - name: HealthChecks-UI__HealthChecks__2__Name
       key: name__apigwws__hc
     - name: HealthChecks-UI__HealthChecks__2__Uri
@@ -98,10 +102,7 @@ env:
       key: name__locations__hc
     - name: HealthChecks-UI__HealthChecks__15__Uri
       key: internalurls__locations__hc
-    - name: HealthChecks-UI__HealthChecks__16__Name
-      key: name__payment__hc
-    - name: HealthChecks-UI__HealthChecks__16__Uri
-      key: internalurls__payment__hc
+    
       # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: ASPNETCORE_ENVIRONMENT
