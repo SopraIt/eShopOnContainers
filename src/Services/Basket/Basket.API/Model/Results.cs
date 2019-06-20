@@ -37,4 +37,22 @@ namespace Basket.API.Model
         public CartItem Result { get; set; }
     }
 
+    public partial class PaymentMethodResult
+    {
+        [JsonProperty("code")]
+        public long Code { get; set; }
+
+        [JsonProperty("result")]
+        public List<PaymentMethod> Result { get; set; }
+    }
+
+    public partial class ShippingMethodResult
+    {
+        [JsonProperty("code")]
+        public long Code { get; set; }
+
+        [JsonProperty("result")]
+        public List<ShippingMethod> Result { get; set; }
+    }
+
 }
