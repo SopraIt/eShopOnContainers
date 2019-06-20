@@ -116,7 +116,7 @@
       },
       "it": {
         "storeCode": "it",
-        "disabled": false,
+        "disabled": true,
         "storeId": 4,
         "name": "Italian Store",
         "url": "/it",
