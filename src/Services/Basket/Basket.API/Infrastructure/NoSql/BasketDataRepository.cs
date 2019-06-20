@@ -87,13 +87,15 @@ namespace Basket.API.Infrastructure.NoSql
                 {
                     if (cart == null)
                     {
-                        await _context.BasketData.DeleteOneAsync(filter);
-
                         BsonDocument cart_bson = new BsonDocument {
-                        { "user_id", id },
-                        { "cart_items", new BsonArray()}
-                    };
+                            { "user_id", id },
+                            { "cart_items", new BsonArray()}
+                        };
+
+                        await _context.BasketData.InsertOneAsync(cart_bson);
                     }
+
+                    
 
                     return id;
                 }

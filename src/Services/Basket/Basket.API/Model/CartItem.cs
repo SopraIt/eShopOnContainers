@@ -31,6 +31,59 @@ namespace Basket.API.Model
 
         [JsonProperty("product_option", NullValueHandling = NullValueHandling.Ignore)]
         public ProductOption ProductOption { get; set; }
+
+
+
+        [JsonProperty("base_price")]
+        public double? BasePrice { get; set; }
+
+        [JsonProperty("row_total")]
+        public double? RowTotal { get; set; }
+
+        [JsonProperty("base_row_total")]
+        public double? BaseRowTotal { get; set; }
+
+        [JsonProperty("row_total_with_discount")]
+        public double? RowTotalWithDiscount { get; set; }
+
+        [JsonProperty("tax_amount")]
+        public double? TaxAmount { get; set; }
+
+        [JsonProperty("base_tax_amount")]
+        public double? BaseTaxAmount { get; set; }
+
+        [JsonProperty("tax_percent")]
+        public double? TaxPercent { get; set; }
+
+        [JsonProperty("discount_amount")]
+        public double? DiscountAmount { get; set; }
+
+        [JsonProperty("base_discount_amount")]
+        public double? BaseDiscountAmount { get; set; }
+
+        [JsonProperty("discount_percent")]
+        public double? DiscountPercent { get; set; }
+
+        [JsonProperty("price_incl_tax")]
+        public double? PriceInclTax { get; set; }
+
+        [JsonProperty("base_price_incl_tax")]
+        public double? BasePriceInclTax { get; set; }
+
+        [JsonProperty("row_total_incl_tax")]
+        public double? RowTotalInclTax { get; set; }
+
+        [JsonProperty("base_row_total_incl_tax")]
+        public double? BaseRowTotalInclTax { get; set; }
+
+        [JsonProperty("options")]
+        public string Options { get; set; }
+
+        [JsonProperty("weee_tax_applied_amount")]
+        public double? WeeeTaxAppliedAmount { get; set; }
+
+        [JsonProperty("weee_tax_applied")]
+        public double? WeeeTaxApplied { get; set; }
     }
 
     public partial class ProductOption

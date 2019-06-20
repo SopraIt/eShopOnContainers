@@ -24,4 +24,4 @@ data:
   search_Url: "{{ .Values.inf.elasticsearch.url }}"
   log_Url: "{{ .Values.inf.logstash.url }}"
   catalog__MongoConnectionString: mongodb://{{ $mongo }}
-  catalog__MongoDatabase: {{ .Values.inf.mongo.marketing.database }} 
+  catalog__MongoDatabase: {{ .Values.inf.mongo.catalog.database }} 

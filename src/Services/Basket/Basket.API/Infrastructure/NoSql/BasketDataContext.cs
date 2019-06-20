@@ -17,7 +17,7 @@ namespace Basket.API.Infrastructure.NoSql
 
             if (client != null)
             {
-                _database = client.GetDatabase(settings.Value.MongoDatabase);
+                _database = client.GetDatabase(settings.Value.CartMongoDatabase);
             }
         }
 

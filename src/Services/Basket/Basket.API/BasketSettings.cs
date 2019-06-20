@@ -4,6 +4,6 @@
     {
         public string ConnectionString { get; set; }
         public string MongoConnectionString { get; set; }
-        public string MongoDatabase { get; set; }
+        public string CartMongoDatabase { get; set; }
     }
 }

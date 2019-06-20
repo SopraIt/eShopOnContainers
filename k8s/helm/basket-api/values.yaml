@@ -41,6 +41,8 @@ env:
       key: basket__MongoConnectionString
     - name: MongoDatabase
       key: basket__MongoDatabase
+    - name: CartMongoDatabase
+      key: basket__CartMongoDatabase
   # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: OrchestratorType
