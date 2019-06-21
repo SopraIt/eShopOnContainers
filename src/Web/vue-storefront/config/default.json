@@ -293,7 +293,7 @@
     },
     "orders": {
       "directBackendSync": true,
-      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/order",
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/order",
       "payment_methods_mapping": {
       },
       "offline_orders": {
@@ -330,12 +330,12 @@
     "users": {
       "autoRefreshTokens": true,
       "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user",
-      "history_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/user/order-history?token={{token}}",
+      "history_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/user/order-history?token={{token}}",
       "resetPassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/reset-password",
       "changePassword_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/change-password?token={{token}}",
       "login_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/login",
       "create_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/create",
-      "me_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/user/me?token={{token}}",
+      "me_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/user/me?token={{token}}",
       "refresh_endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/identity/api/user/refresh"
     },
     "stock": {
@@ -386,12 +386,12 @@
       "bundleAllStoreviewLanguages": true
     },
     "mailchimp": {
-      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mailchimp-subscribe/subscribe"
+      "endpoint": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/ext/mailchimp-subscribe/subscribe"
     },
     "mailer": {
       "endpoint": {
-        "send": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/send-email",
-        "token": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/order-api/api/ext/mail-service/get-token"
+        "send": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/ext/mail-service/send-email",
+        "token": "http://0d13a6ee3e9e420d8381.westeurope.aksapp.io/webshoppingapigw/orders-api/api/ext/mail-service/get-token"
       },
       "contactAddress": "contributors@vuestorefront.io",
       "sendConfirmation": true

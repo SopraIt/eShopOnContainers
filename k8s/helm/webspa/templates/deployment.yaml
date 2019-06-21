@@ -29,13 +29,6 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
-          resources:
-          requests:
-            memory: "1Gi"
-            cpu: "250m"
-          limits:
-            memory: "4Gi"
-            cpu: "500m"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PATH_BASE
