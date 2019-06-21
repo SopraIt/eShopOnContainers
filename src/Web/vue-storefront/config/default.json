@@ -122,7 +122,7 @@
         "url": "/it",
         "elasticsearch": {
           "host": "/api/catalog",
-          "index": "vue_storefront_catalog"
+          "index": "vue_storefront_catalog_it"
         },
         "tax": {
           "sourcePriceIncludesTax": false,
