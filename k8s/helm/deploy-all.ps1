@@ -12,7 +12,7 @@ Param(
     [parameter(Mandatory=$false)][string]$imageTag="latest",
     [parameter(Mandatory=$false)][bool]$useLocalk8s=$false,
     [parameter(Mandatory=$false)][bool]$useCustomRegistry=$false
-    )
+    ) 
 
 $dns = $externalDns
 
