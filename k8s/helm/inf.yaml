@@ -46,7 +46,7 @@ inf:
   catalog:
     url: https://ccadmin-test-ze1a.oracleoutsourcing.com
   appinsights:
-      key: ""               # App insights to use
+    key: ""               # App insights to use
   k8s:                      # inf.k8s defines Kubernetes cluster global config
     dns:  ""                # k8s external  DNS. This value or ip value MUST BE PROVIDED
   misc:                     # inf.misc contains miscellaneous configuration related to infrastructure
