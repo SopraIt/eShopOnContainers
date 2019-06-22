@@ -10,5 +10,5 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:
-  {{ (.Files.Glob "configuration-web-shopping.json").AsConfig | indent 2 }}
+  {{ (.Files.Glob "configuration-web-shopping.json").AsConfig | indent 2 -}}
 
