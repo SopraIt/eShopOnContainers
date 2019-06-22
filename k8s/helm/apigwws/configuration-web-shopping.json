@@ -94,9 +94,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/catalog/vue_storefront_catalog/{index}/_search",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
+      "UpstreamHttpMethod": ["GET"]
     },
     {
       "DownstreamPathTemplate": "/api/core/v2/Stock/{everything}",
@@ -108,9 +106,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/stock/{everything}",
-      "UpstreamHttpMethod": [
-        "GET"
-      ]
+      "UpstreamHttpMethod": ["GET"]
     },
     {
       "DownstreamPathTemplate": "/{url}",
@@ -122,13 +118,7 @@
         }
       ],
       "UpstreamPathTemplate": "/{url}",
-      "UpstreamHttpMethod": [
-        "GET",
-        "POST",
-        "PUT",
-        "PATCH",
-        "DELETE"
-      ]
+      "UpstreamHttpMethod": ["GET","POST","PUT","PATCH","DELETE"]
     }
   ],
   "GlobalConfiguration": {
