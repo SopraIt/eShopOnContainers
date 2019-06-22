@@ -1,55 +1,7 @@
 {
   "ReRoutes": [
     {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "ordering",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/orders-api/api/{everything}",
-      "UpstreamHttpMethod": []
-    },
-    {
-      "DownstreamPathTemplate": "/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "ordering-signalrhub",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/hub/{everything}",
-      "UpstreamHttpMethod": []
-    },
-    {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "basket",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/basket-api/api/{everything}",
-      "UpstreamHttpMethod": []
-    },
-    {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "catalog",
-          "Port": 80
-        }
-      ],
-      "UpstreamPathTemplate": "/catalog-api/api/{everything}",
-      "UpstreamHttpMethod": []
-    },
-    {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -57,11 +9,143 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/marketing-api/api/{everything}",
+      "UpstreamPathTemplate": "/api/{version}/m/{everything}",
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "locations",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/l/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/c/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/b/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{version}/o/{everything}",
+      "UpstreamHttpMethod": [],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "webshoppingagg",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/{everything}",
+      "UpstreamHttpMethod": [ "POST", "PUT", "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "IdentityApiKey",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/orders-api/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+      {
+        "Host": "ordering-signalrhub",
+        "Port": 80
+      }
+    ],
+      "UpstreamPathTemplate": "/hub/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/basket-api/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/catalog-api/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "marketing",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/marketing-api/{everything}",
+      "UpstreamHttpMethod": []
+    },
+    {
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -69,11 +153,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/payment-api/api/{everything}",
+      "UpstreamPathTemplate": "/payment-api/{everything}",
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -81,9 +165,10 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/location-api/api/{everything}",
+      "UpstreamPathTemplate": "/location-api/{everything}",
       "UpstreamHttpMethod": []
     },
+
     {
       "DownstreamPathTemplate": "/{index}/_search",
       "DownstreamScheme": "http",
@@ -94,7 +179,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/catalog/vue_storefront_catalog/{index}/_search",
-      "UpstreamHttpMethod": ["GET"]
+      "UpstreamHttpMethod": [ "GET" ]
     },
     {
       "DownstreamPathTemplate": "/api/core/v2/Stock/{everything}",
@@ -106,7 +191,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/stock/{everything}",
-      "UpstreamHttpMethod": ["GET"]
+      "UpstreamHttpMethod": [ "GET"]
     },
     {
       "DownstreamPathTemplate": "/{url}",
@@ -118,11 +203,13 @@
         }
       ],
       "UpstreamPathTemplate": "/{url}",
-      "UpstreamHttpMethod": ["GET","POST","PUT","PATCH","DELETE"]
+      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "PATCH", "DELETE" ]
     }
+    
   ],
-  "GlobalConfiguration": {
-    "RequestIdKey": "OcRequestId",
-    "AdministrationPath": "/administration"
+    "GlobalConfiguration": {
+      "RequestIdKey": "OcRequestId",
+      "AdministrationPath": "/administration"
+    }
   }
-}
+  
