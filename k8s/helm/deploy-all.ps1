@@ -64,6 +64,7 @@ if (-not [string]::IsNullOrEmpty($registry)) {
 Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Green
 
 Write-Host "helm repo update" -ForegroundColor Green
+helm init --upgrade
 helm init --client-only
 helm repo update
 helm dependency update elastic-stack
