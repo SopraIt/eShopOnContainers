@@ -44,6 +44,8 @@ if ([string]::IsNullOrEmpty($dns)) {
     Write-Host "No DNS specified. Ingress resources will be bound to public ip" -ForegroundColor Yellow
 }
 
+helm init --upgrade
+
 if ($clean) {
     Write-Host "Cleaning previous helm releases..." -ForegroundColor Green
     helm delete --purge $(helm ls -q) 
@@ -64,7 +66,6 @@ if (-not [string]::IsNullOrEmpty($registry)) {
 Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Green
 
 Write-Host "helm repo update" -ForegroundColor Green
-helm init --upgrade
 helm init --client-only
 helm repo update
 helm dependency update elastic-stack
