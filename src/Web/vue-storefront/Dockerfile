@@ -28,6 +28,9 @@ COPY ./src/Web/vue-storefront/docker/vue-storefront/vue-storefront.sh .
 RUN apk add --no-cache --virtual .build-deps ca-certificates wget git 
 RUN yarn install --no-cache 
 RUN apk del .build-deps
+RUN yarn build:client 
+RUN yarn build:server 
+RUN yarn build:sw
 
 
 

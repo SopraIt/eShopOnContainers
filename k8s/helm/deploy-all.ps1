@@ -44,7 +44,7 @@ if ([string]::IsNullOrEmpty($dns)) {
     Write-Host "No DNS specified. Ingress resources will be bound to public ip" -ForegroundColor Yellow
 }
 
-helm init --upgrade
+#helm init --upgrade
 
 if ($clean) {
     Write-Host "Cleaning previous helm releases..." -ForegroundColor Green
@@ -73,7 +73,7 @@ helm dependency update elastic-stack
 #$infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data","elasticsearch","kibana","logstash")
 #$charts = ("eshop-common", "apigwmm", "apigwms", "apigwwm", "apigwws", "basket-api","catalog-api", "catalog-backgroundtasks","identity-api", "locations-api", "marketing-api", "mobileshoppingagg","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webmvc", "webshoppingagg", "webspa", "webstatus", "webhooks-api", "webhooks-web")
 $infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data","elasticsearch","kibana","logstash")
-$charts = ("eshop-common", "apigwwm", "apigwws", "basket-api","catalog-api", "catalog-backgroundtasks","identity-api", "locations-api", "marketing-api","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webshoppingagg", "webspa", "webstatus", "webhooks-api", "webhooks-web")
+$charts = ("eshop-common", "apigwws", "basket-api","catalog-api", "catalog-backgroundtasks","identity-api", "locations-api", "marketing-api","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webspa", "webstatus", "webhooks-api", "webhooks-web")
 
 if ($deployInfrastructure) {
     foreach ($infra in $infras) {
