@@ -36,15 +36,15 @@ service:
     #   port: 1514
     #   targetPort: syslog-tcp
     #   protocol: TCP
-    beats:
-      port: 5044
-      targetPort: beats
-      protocol: TCP
-    # http:
-    #  port: 8080
-    #  targetPort: http
-    #  protocol: TCP
-    # loadBalancerIP: 10.0.0.1
+    # beats:
+    #   port: 5044
+    #   targetPort: beats
+    #   protocol: TCP
+    http:
+     port: 8080
+     targetPort: http
+     protocol: TCP
+    #loadBalancerIP: 10.0.0.1
 ports:
   # - name: syslog-udp
   #   containerPort: 1514
@@ -52,12 +52,12 @@ ports:
   # - name: syslog-tcp
   #   containerPort: 1514
   #   protocol: TCP
-  - name: beats
-    containerPort: 5044
-    protocol: TCP
-  # - name: http
-  #   containerPort: 8080
+  # - name: beats
+  #   containerPort: 5044
   #   protocol: TCP
+  - name: http
+    containerPort: 8080
+    protocol: TCP
 
 ingress:
   enabled: false
@@ -198,7 +198,7 @@ exporter:
       successThreshold: 1
 
 elasticsearch:
-  host: elasticsearch-master:9200
+  host: http://elasticsearch-master
   port: 9200
 
 ## ref: https://github.com/elastic/logstash-docker/blob/master/build/logstash/env2yaml/env2yaml.go
@@ -261,12 +261,12 @@ inputs:
       #   port => 1514
       #   type => syslog
       # }
-      beats {
-        port => 5044
-      }
-      # http {
-      #   port => 8080
+      # beats {
+      #   port => 5044
       # }
+      http {
+        port => 8080
+      }
       # kafka {
       #   ## ref: https://www.elastic.co/guide/en/logstash/current/plugins-inputs-kafka.html
       #   bootstrap_servers => "kafka-input:9092"
@@ -289,8 +289,7 @@ outputs:
       elasticsearch {
         hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
         manage_template => false
-        index => "%{[@metadata][beat]}-%{+YYYY.MM.dd}"
-        document_type => "%{[@metadata][type]}"
+        index => "eshop-%{+YYYY.MM.dd}"
       }
       # kafka {
       #   ## ref: https://www.elastic.co/guide/en/logstash/current/plugins-outputs-kafka.html

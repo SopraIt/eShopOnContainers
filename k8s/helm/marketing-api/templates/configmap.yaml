@@ -24,3 +24,4 @@ data:
   marketing__MongoConnectionString: mongodb://{{ $mongo }}
   marketing__MongoDatabase: {{ .Values.inf.mongo.marketing.database }} 
   marketing__PicBaseUrl: http://{{ $webshoppingapigw }}/api/v1/c/catalog/items/[0]/pic/
+  log_Url: "{{ .Values.inf.logstash.url }}"

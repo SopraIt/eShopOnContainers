@@ -50,6 +50,8 @@ env:
       key: graceperiodmanager__CheckUpdateTime
     - name: GracePeriodTime
       key: graceperiodmanager__GracePeriodTime
+    - name: Serilog__LogstashgUrl
+      key: log_Url
       # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: ASPNETCORE_ENVIRONMENT

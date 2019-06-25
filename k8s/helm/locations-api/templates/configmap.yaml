@@ -20,3 +20,4 @@ data:
   urls__IdentityUrl: {{ $identity }}
   locations__ConnectionString: mongodb://{{ $mongo }}
   locations__Database: {{ .Values.inf.mongo.locations.database }}
+  log_Url: "{{ .Values.inf.logstash.url }}"

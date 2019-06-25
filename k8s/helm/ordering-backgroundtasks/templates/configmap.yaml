@@ -19,3 +19,4 @@ data:
   all__UseAzureServiceBus: "{{ .Values.inf.eventbus.useAzure }}"
   graceperiodmanager__CheckUpdateTime: "{{ .Values.cfg.checkUpdateTime }}"
   graceperiodmanager__GracePeriodTime: "{{ .Values.cfg.gracePeriodTime }}"
+  log_Url: "{{ .Values.inf.logstash.url }}"

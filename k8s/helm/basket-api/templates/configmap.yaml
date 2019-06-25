@@ -21,3 +21,4 @@ data:
   basket__MongoConnectionString: mongodb://{{ $mongo }}
   basket__MongoDatabase: {{ .Values.inf.mongo.catalog.database }} 
   basket__CartMongoDatabase: {{ .Values.inf.mongo.basket.database }}
+  log_Url: "{{ .Values.inf.logstash.url }}"

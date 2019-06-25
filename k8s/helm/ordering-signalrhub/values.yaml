@@ -46,6 +46,8 @@ env:
       key: urls__IdentityUrl
     - name: SignalrStoreConnectionString
       key: signalr__StoreConnectionString
+    - name: Serilog__LogstashgUrl
+      key: log_Url
       # values define environment variables with a fixed value (no configmap involved) (name is name of var, and value is its value)
   values:
     - name: ASPNETCORE_ENVIRONMENT

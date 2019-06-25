@@ -60,6 +60,8 @@ env:
       key: webhooksweb_e
     - name: EnableDevspaces
       key: enableDevspaces
+    - name: Serilog__LogstashgUrl
+      key: log_Url
   values:
     - name: ASPNETCORE_ENVIRONMENT
       value: Development

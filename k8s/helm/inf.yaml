@@ -42,7 +42,7 @@ inf:
   elasticsearch:
     url: http://elasticsearch-master:9200
   logstash:
-    url: http://eshop-elastic-stack-logstash-client:8080
+    url: http://eshop-logstash:8080
   catalog:
     url: https://ccadmin-test-ze1a.oracleoutsourcing.com
   appinsights:

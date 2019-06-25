@@ -37,3 +37,4 @@ data:
   webhooksapi_e:  http://{{ $webhooks_url }}
   webhooksweb_e: http://{{ $webhooksweb_url }}
   enableDevspaces: "{{ .Values.enableDevspaces }}"
+  log_Url: "{{ .Values.inf.logstash.url }}"
