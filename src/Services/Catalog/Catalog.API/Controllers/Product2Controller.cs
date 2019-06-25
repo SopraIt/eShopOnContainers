@@ -18,7 +18,7 @@ using Newtonsoft.Json;
 
 namespace Catalog.API.Controllers
 {
-    [Route("api/core/v2/Product")]
+    [Route("api/v2/Product")]
     [ApiController]
     public class Product2Controller : ControllerBase
     {

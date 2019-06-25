@@ -14,7 +14,7 @@ namespace Microsoft.eShopOnContainers.Services.Catalog.API.Controllers
 {
     
     [ApiController]
-    [Route("api/core/v2/Stock")]
+    [Route("api/v2/Stock")]
     public class Stock2Controller : ControllerBase
     {
         private readonly IHostingEnvironment _env;

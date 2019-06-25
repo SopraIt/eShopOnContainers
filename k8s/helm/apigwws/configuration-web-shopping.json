@@ -37,7 +37,7 @@
       "UpstreamHttpMethod": []
     },
     {
-      "DownstreamPathTemplate": "/api/v1/{everything}",
+      "DownstreamPathTemplate": "/api/v2/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
