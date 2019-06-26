@@ -6,6 +6,7 @@ using System;
 using System.Threading.Tasks;
 using System.Linq;
 using Basket.API.Infrastructure.NoSql;
+using System.Collections.Generic;
 
 namespace Microsoft.eShopOnContainers.Services.Basket.API.Services
 {
@@ -62,6 +63,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Services
             var shipping_tax_amount = 0;
 
             var base_grand_total = grand_total + base_tax_amount + shipping_tax_amount;
+            var shipping_amount = base_shipping_amount + base_shipping_discount_amount + shipping_tax_amount;
 
             Total total = new Total(){
                 BaseSubtotal = base_sub_total,
@@ -73,6 +75,28 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Services
                 ShippingAmount = shipping_tax_amount,
                 BaseGrandTotal = base_grand_total
             };
+
+            total.TotalSegments = new List<TotalSegment>();
+            total.TotalSegments.Add(new TotalSegment(){
+                Code = "subtotal",
+                Title = "Subtotal",
+                Value = base_sub_total_with_discount
+            });
+            total.TotalSegments.Add(new TotalSegment(){
+                Code = "shipping",
+                Title = "Shipping",
+                Value = shipping_amount
+            });
+            total.TotalSegments.Add(new TotalSegment(){
+                Code = "tax",
+                Title = "Tax",
+                Value = base_tax_amount
+            });
+            total.TotalSegments.Add(new TotalSegment(){
+                Code = "grand_total",
+                Title = "Grand Total",
+                Value = base_sub_total_with_discount + shipping_amount + base_tax_amount
+            });
 
             cart.total = total;
 

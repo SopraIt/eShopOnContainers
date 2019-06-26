@@ -40,9 +40,9 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         public async Task<ActionResult<OrderResult>> SaveOrder(Cart cart)
         {
             //var UserId = User.FindFirst("sub")?.Value;
-            var _cart = await _repo.GetCartAsync(cart.user_id);
+            var _cart = await _repo.GetCartAsync(cart.cart_id);
             var id = _repo.InsertOrderAsync(_cart);
-            var delete_count = _repo.DeleteCartAsync(cart.user_id);
+            var delete_count = _repo.DeleteCartAsync(cart.cart_id);
 
             string json = JsonConvert.SerializeObject(_cart);
 

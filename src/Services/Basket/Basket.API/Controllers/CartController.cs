@@ -77,5 +77,18 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
             };
         }
 
+        [HttpPost("delete")]
+        [ProducesResponseType(typeof(CartUpdateResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<CartDeleteResult>> DeleteBasketAsync(string cartId, CartUpdateRequest cart_delete)
+        {
+            var UserId = User.FindFirst("sub")?.Value;
+            string result = await _repo.DeleteCartItemAsync(UserId, cart_delete.CartItem);
+
+            return new CartDeleteResult(){
+                Result = true,
+                Code = 200
+            };
+        }
+
     }
 }

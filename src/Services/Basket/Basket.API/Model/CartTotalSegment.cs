@@ -8,7 +8,7 @@ namespace Basket.API.Model
     {
         public string Code { get; set; }
         public string Title { get; set; }
-        public double Value { get; set; }
+        public decimal Value { get; set; }
         public string Area { get; set; }
         //public ExtensionAttributes ExtensionAttributes { get; set; }
     }

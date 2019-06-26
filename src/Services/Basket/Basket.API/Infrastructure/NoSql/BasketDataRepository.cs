@@ -135,6 +135,36 @@ namespace Basket.API.Infrastructure.NoSql
             }
         }
 
+        public async Task<string> DeleteCartItemAsync (string id ,CartItem cart_item){
+            try
+            {
+                Cart cart = await this.GetCartAsync(id);
+
+                if (cart_item != null)
+                {
+                    if (cart.Products.Exists(x => x.ItemId == cart_item.ItemId))
+                    {
+                        cart.Products.RemoveAll(x => x.ItemId == cart_item.ItemId);
+                    }
+
+                    var filter = Builders<BsonDocument>.Filter.Eq("user_id", id);
+
+                    var db_cart = await _context.BasketData
+                                .ReplaceOneAsync(filter, cart.ToBsonDocument());
+
+                    return db_cart.ModifiedCount > 0 ? id : string.Empty;
+                }
+                else
+                {
+                    return await UpsertCartAsync(id);
+                }
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Upsert of cart failed!");
+                return string.Empty;
+            }
+        }
         public async Task<string> UpsertCartTotalAsync(string id, Total total)
         {
             try
