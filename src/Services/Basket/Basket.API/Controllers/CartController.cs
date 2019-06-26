@@ -23,15 +23,18 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         private readonly IEventBus _eventBus;
         private readonly ILogger<BasketController> _logger;
         private readonly IBasketDataRepository _repo;
+        private readonly ICartService _cartService;
 
         public CartController(
             ILogger<BasketController> logger,
             IBasketDataRepository repository,
-            IEventBus eventBus)
+            IEventBus eventBus,
+            ICartService cartService)
         {
             _logger = logger;
             _eventBus = eventBus;
             _repo = repository;
+            _cartService = cartService;
         }
 
         [HttpGet("pull")]
@@ -52,7 +55,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         public async Task<ActionResult<CartCreateResult>> CreateBasketAsync()
         {
             var UserId = User.FindFirst("sub")?.Value;
-            string result = await _repo.UpsertAsync(UserId, null);
+            string result = await _repo.UpsertCartAsync(UserId);
 
             return new CartCreateResult(){
                 Result = result,
@@ -62,13 +65,14 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
 
         [HttpPost("update")]
         [ProducesResponseType(typeof(CartUpdateResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<CartUpdateResult>> UpdateBasketAsync(string cartId, CartUpdateRequest cart)
+        public async Task<ActionResult<CartUpdateResult>> UpdateBasketAsync(string cartId, CartUpdateRequest cart_update)
         {
             var UserId = User.FindFirst("sub")?.Value;
-            string result = await _repo.UpsertAsync(UserId, cart.CartItem);
+            var cart_item = await _cartService.CalculateCartItem(cart_update.CartItem);
+            string result = await _repo.UpsertCartItemAsync(UserId, cart_item);
 
             return new CartUpdateResult(){
-                Result = cart.CartItem,
+                Result = cart_update.CartItem,
                 Code = 200
             };
         }

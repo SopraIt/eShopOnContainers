@@ -20,91 +20,27 @@ namespace Basket.API.Model
         public string Name { get; set; }
 
         [JsonProperty("price")]
-        public long Price { get; set; }
+        public decimal Price { get; set; }
+
+        [JsonProperty("final_price")]
+        public decimal final_price { get; set; }
+
+        [JsonProperty("special_price")]
+        public decimal? special_price { get; set; }
+
+        [JsonProperty("regular_price")]
+        public decimal regular_price { get; set; }
 
         [JsonProperty("product_type")]
         public string ProductType { get; set; }
 
         [JsonProperty("quote_id")]
-        //[JsonConverter(typeof(ParseStringConverter))]
-        public long QuoteId { get; set; }
+        public string QuoteId { get; set; }
 
-        [JsonProperty("product_option", NullValueHandling = NullValueHandling.Ignore)]
-        public ProductOption ProductOption { get; set; }
+        [JsonProperty("totals")]
+        public CartItemTotal Totals { get; set; }
 
-
-
-        [JsonProperty("base_price")]
-        public double? BasePrice { get; set; }
-
-        [JsonProperty("row_total")]
-        public double? RowTotal { get; set; }
-
-        [JsonProperty("base_row_total")]
-        public double? BaseRowTotal { get; set; }
-
-        [JsonProperty("row_total_with_discount")]
-        public double? RowTotalWithDiscount { get; set; }
-
-        [JsonProperty("tax_amount")]
-        public double? TaxAmount { get; set; }
-
-        [JsonProperty("base_tax_amount")]
-        public double? BaseTaxAmount { get; set; }
-
-        [JsonProperty("tax_percent")]
-        public double? TaxPercent { get; set; }
-
-        [JsonProperty("discount_amount")]
-        public double? DiscountAmount { get; set; }
-
-        [JsonProperty("base_discount_amount")]
-        public double? BaseDiscountAmount { get; set; }
-
-        [JsonProperty("discount_percent")]
-        public double? DiscountPercent { get; set; }
-
-        [JsonProperty("price_incl_tax")]
-        public double? PriceInclTax { get; set; }
-
-        [JsonProperty("base_price_incl_tax")]
-        public double? BasePriceInclTax { get; set; }
-
-        [JsonProperty("row_total_incl_tax")]
-        public double? RowTotalInclTax { get; set; }
-
-        [JsonProperty("base_row_total_incl_tax")]
-        public double? BaseRowTotalInclTax { get; set; }
-
-        [JsonProperty("options")]
-        public string Options { get; set; }
-
-        [JsonProperty("weee_tax_applied_amount")]
-        public double? WeeeTaxAppliedAmount { get; set; }
-
-        [JsonProperty("weee_tax_applied")]
-        public double? WeeeTaxApplied { get; set; }
-    }
-
-    public partial class ProductOption
-    {
-        [JsonProperty("extension_attributes")]
-        public ExtensionAttributes ExtensionAttributes { get; set; }
-    }
-
-    public partial class ExtensionAttributes
-    {
-        [JsonProperty("configurable_item_options")]
-        public List<ConfigurableItemOption> ConfigurableItemOptions { get; set; }
-    }
-
-    public partial class ConfigurableItemOption
-    {
-        [JsonProperty("option_id")]
-        //[JsonConverter(typeof(ParseStringConverter))]
-        public long OptionId { get; set; }
-
-        [JsonProperty("option_value")]
-        public long OptionValue { get; set; }
+        [JsonProperty("stock")]
+        public CartItemStock Stock { get; set; }
     }
 }

@@ -55,4 +55,13 @@ namespace Basket.API.Model
         public List<ShippingMethod> Result { get; set; }
     }
 
+    public partial class ShippingInformationResult
+    {
+        [JsonProperty("code")]
+        public long Code { get; set; }
+
+        [JsonProperty("result")]
+        public ShippingInformation Result { get; set; }
+    }
+
 }

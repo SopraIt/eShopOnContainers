@@ -10,9 +10,9 @@ namespace Basket.API.Model
         public Address Address { get; set; }
     }
 
-    public partial class Address
+    public partial class ShippingInformationRequest
     {
-        [JsonProperty("country_id")]
-        public string CountryId { get; set; }
+        [JsonProperty("addressInformation")]
+        public AddressInformation AddressInformation { get; set; }
     }
 }

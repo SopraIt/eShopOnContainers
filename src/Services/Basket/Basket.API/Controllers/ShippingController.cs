@@ -23,37 +23,52 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         private readonly IEventBus _eventBus;
         private readonly ILogger<BasketController> _logger;
         private readonly IBasketDataRepository _repo;
+        private readonly IConfigDataRepository _repo_config;
+        private readonly ICartService _cartService;
 
         public ShippingController(
             ILogger<BasketController> logger,
             IBasketDataRepository repository,
-            IEventBus eventBus)
+            IEventBus eventBus,
+            ICartService cartService,
+            IConfigDataRepository repository_config)
         {
             _logger = logger;
             _eventBus = eventBus;
             _repo = repository;
+            _repo_config = repository_config;
+            _cartService = cartService;
         }
 
         [HttpPost("shipping-methods")]
         [ProducesResponseType(typeof(ShippingMethodResult), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<ShippingMethodResult>> GetPaymentMethodAsync(ShippingMethodRequest req)
+        public async Task<ActionResult<ShippingMethodResult>> GetShippingMethodsAsync(ShippingMethodRequest req)
         {
-            var shipping_methods = new List<ShippingMethod>();
-            shipping_methods.Add(new ShippingMethod(){
-                CarrierCode = "flatrate",
-                MethodCode = "flatrate",
-                CarrierTitle = "Flat Rate",
-                MethodTitle = "Fixed",
-                Amount = 30,
-                BaseAmount = 30,
-                Available = true,
-                ErrorMessage = "",
-                PriceExclTax = 30,
-                PriceInclTax = 30
-            });
+            var shipping_methods = await _repo_config.GetShippingMethosAsync();
 
             return new ShippingMethodResult(){
                 Result = shipping_methods,
+                Code = 200
+            };
+        }
+
+        [HttpPost("shipping-information")]
+        [ProducesResponseType(typeof(ShippingMethodResult), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ShippingInformationResult>> GetShippingInformationAsync(ShippingInformationRequest req)
+        {
+            var UserId = User.FindFirst("sub")?.Value;
+            var cart = await _repo.GetCartAsync(UserId);
+
+            var cart_total = await _cartService.CalculateCartTotal(cart, req.AddressInformation);
+            string result = await _repo.UpsertCartTotalAsync(UserId, cart_total.total);
+
+            ShippingInformation ship = new ShippingInformation(){
+                PaymentMethods = new List<PaymentMethod>(),
+                Totals = new Total()
+            };
+
+            return new ShippingInformationResult(){
+                Result = null,
                 Code = 200
             };
         }

@@ -5,6 +5,8 @@ using Basket.API.Infrastructure.Middlewares;
 using Basket.API.Infrastructure.NoSql;
 using Basket.API.IntegrationEvents.EventHandling;
 using Basket.API.IntegrationEvents.Events;
+using Catalog.Nosql.Infrastructure;
+using Catalog.Nosql.Infrastructure.Repositories;
 using HealthChecks.UI.Client;
 
 using Microsoft.ApplicationInsights.Extensibility;
@@ -73,6 +75,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
                 .AddCustomAuthentication(Configuration);
 
             services.Configure<BasketSettings>(Configuration);
+            services.Configure<CatalogNosqlSettings>(Configuration);
 
             //By connecting here we are making sure that our service
             //cannot start until redis is ready. This might slow down startup,
@@ -173,9 +176,12 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API
                     .AllowCredentials());
             });
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<ICatalogDataRepository, CatalogDataRepository>();
             services.AddTransient<IBasketRepository, RedisBasketRepository>();
             services.AddTransient<IBasketDataRepository, BasketDataRepository>();
             services.AddTransient<IIdentityService, IdentityService>();
+            services.AddTransient<ICartService, CartService>();
+            services.AddTransient<IConfigDataRepository, ConfigDataRepository>();
 
             services.AddOptions();
 

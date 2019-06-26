@@ -9,8 +9,10 @@ namespace Basket.API.Infrastructure.NoSql
 
     public interface IBasketDataRepository
     {
-        Task<List<CartItem>> GetCartItemsAsync (string Id);
         Task<Cart> GetCartAsync (string Id);
-        Task<string> UpsertAsync (string Id ,CartItem cart);
+        Task<List<CartItem>> GetCartItemsAsync (string Id);
+        Task<string> UpsertCartAsync (string user_id);
+        Task<string> UpsertCartItemAsync (string Id ,CartItem cart);
+        Task<string> UpsertCartTotalAsync (string Id ,Total total);
     }
 }

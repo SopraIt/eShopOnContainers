@@ -6,6 +6,7 @@ using MongoDB.Driver;
 using MongoDB.Bson;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using MongoDB.Bson.Serialization;
 
 namespace Catalog.Nosql.Infrastructure.Repositories
 {
@@ -43,6 +44,24 @@ namespace Catalog.Nosql.Infrastructure.Repositories
             }
         }
 
+        public async Task<ProductDetail> GetProductDetailAsync(string Id)
+        {
+            var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
+            var db_result = await _context.CatalogData
+                                 .Find(filter)
+                                 .FirstOrDefaultAsync();
+
+            if (db_result != null)
+            {
+                ProductDetail result =  BsonSerializer.Deserialize<ProductDetail>(db_result.AsBsonDocument);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public async Task<Product> GetBySkuAsync(string Sku)
         {
             var db_result = await this.GetBySkuAsyncFromDB(Sku);
@@ -62,6 +81,22 @@ namespace Catalog.Nosql.Infrastructure.Repositories
                 return null;
             }
         }
+
+        public async Task<ProductDetail> GetProductDetailBySkuAsync(string Sku)
+        {
+            var db_result = await this.GetBySkuAsyncFromDB(Sku);
+
+            if (db_result != null)
+            {
+                ProductDetail result =  BsonSerializer.Deserialize<ProductDetail>(db_result.AsBsonDocument);
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
 
         public async Task<string> UpsertAsync(Product product)
         {
@@ -104,6 +139,7 @@ namespace Catalog.Nosql.Infrastructure.Repositories
                 return false;
             }
         }
+
         public async Task<List<Stock>> CheckStockList(List<string> skus){
             try {
 
@@ -112,8 +148,6 @@ namespace Catalog.Nosql.Infrastructure.Repositories
                 return new List<Stock>();
             }
         }
-
-
 
         private async Task<BsonDocument> GetBySkuAsyncFromDB(string Sku){
             

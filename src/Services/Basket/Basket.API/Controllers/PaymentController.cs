@@ -20,17 +20,14 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly IEventBus _eventBus;
         private readonly ILogger<BasketController> _logger;
-        private readonly IBasketDataRepository _repo;
+        private readonly IConfigDataRepository _repo;
 
         public PaymentController(
             ILogger<BasketController> logger,
-            IBasketDataRepository repository,
-            IEventBus eventBus)
+            IConfigDataRepository repository)
         {
             _logger = logger;
-            _eventBus = eventBus;
             _repo = repository;
         }
 
@@ -38,19 +35,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         [ProducesResponseType(typeof(PaymentMethodResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaymentMethodResult>> GetPaymentMethodAsync(string cartId)
         {
-            var shipping_methods = new List<PaymentMethod>();
-            shipping_methods.Add(new PaymentMethod(){
-                Code = "authorizenet_directpost",
-                Title = "Credit Card Direct Post (Authorize.net)"
-            });
-            shipping_methods.Add(new PaymentMethod(){
-                Code = "cashondelivery",
-                Title = "Cash On Delivery"
-            });
-            shipping_methods.Add(new PaymentMethod(){
-                Code = "free",
-                Title = "No Payment Information Required"
-            });
+            var shipping_methods = await _repo.GetPaymentMethosAsync();
 
             return new PaymentMethodResult(){
                 Result = shipping_methods,

@@ -1,8 +1,12 @@
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace Catalog.Nosql.Model 
 {
+    [BsonIgnoreExtraElements]
     public class Stock{
-        public string Sku { get; set; }
-        public int Qty { get; set; }
-        public bool InStock { get; set; }
+        public long item_id { get; set; }
+        public string sku { get; set; }
+        public int qty { get; set; }
+        public bool is_in_stock { get; set; }
     }
 }
