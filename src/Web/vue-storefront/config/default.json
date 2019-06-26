@@ -82,9 +82,9 @@
       "initialStateFilter": ["__DEMO_MODE__", "version", "storeView"],
       "useInitialStateFilter": true
     },
-    "defaultStoreCode": "",
+    "defaultStoreCode": "it",
     "storeViews": {
-      "multistore": false,
+      "multistore": true,
       "commonCache": true,
       "mapStoreUrlsFor": ["de", "it"],
       "de": {

@@ -139,13 +139,13 @@ export function filterOutUnavailableVariants (context, product) {
 
 export function syncProductPrice (product, backProduct) { // TODO: we probably need to update the Net prices here as well
   product.sgn = backProduct.sgn // copy the signature for the modified price
-  product.priceInclTax = backProduct.price_info.final_price
-  product.originalPriceInclTax = backProduct.price_info.regular_price
-  product.specialPriceInclTax = backProduct.price_info.special_price
+  product.priceInclTax = backProduct.final_price
+  product.originalPriceInclTax = backProduct.regular_price
+  product.specialPriceInclTax = backProduct.special_price
 
-  product.special_price = backProduct.price_info.extension_attributes.tax_adjustments.special_price
-  product.price = backProduct.price_info.extension_attributes.tax_adjustments.final_price
-  product.originalPrice = backProduct.price_info.extension_attributes.tax_adjustments.regular_price
+  // product.special_price = backProduct.price_info.extension_attributes.tax_adjustments.special_price
+  // product.price = backProduct.price_info.extension_attributes.tax_adjustments.final_price
+  // product.originalPrice = backProduct.price_info.extension_attributes.tax_adjustments.regular_price
 
   product.priceTax = product.priceInclTax - product.price
   product.specialPriceTax = product.specialPriceInclTax - product.special_price
