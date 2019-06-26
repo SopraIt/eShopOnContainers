@@ -27,6 +27,14 @@ namespace Basket.API.Infrastructure.NoSql
             {
                 return _database.GetCollection<BsonDocument>("BasketDataModel");
             }
-        }        
+        }   
+
+        public IMongoCollection<BsonDocument> OrderData
+        {
+            get
+            {
+                return _database.GetCollection<BsonDocument>("OrderDataModel");
+            }
+        }       
     }
 }

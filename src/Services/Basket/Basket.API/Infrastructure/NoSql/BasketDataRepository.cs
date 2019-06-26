@@ -87,6 +87,21 @@ namespace Basket.API.Infrastructure.NoSql
             }
         }
 
+        public async Task<long> DeleteCartAsync (string user_id){
+            try
+            {
+                var filter = Builders<BsonDocument>.Filter.Eq("user_id", user_id);
+                var delete = await _context.BasketData.DeleteOneAsync(filter);
+
+                return delete.DeletedCount;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Delete of cart failed!");
+                return 0;
+            }
+        }
+
         public async Task<string> UpsertCartItemAsync(string id, CartItem cart_item)
         {
             try
@@ -138,6 +153,20 @@ namespace Basket.API.Infrastructure.NoSql
             catch (Exception e)
             {
                 _logger.LogError(e, "Upsert of cart failed!");
+                return string.Empty;
+            }
+        }
+    
+        public async Task<string> InsertOrderAsync(Cart cart){
+            try
+            {
+                await _context.OrderData.InsertOneAsync(cart.ToBsonDocument());
+
+                return cart.cart_id;
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e, "Insert of cart hystory failed!");
                 return string.Empty;
             }
         }

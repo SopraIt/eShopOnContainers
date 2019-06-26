@@ -293,7 +293,7 @@
     },
     "orders": {
       "directBackendSync": true,
-      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/orders-api/api/order",
+      "endpoint": "http://4d1fb6b347c0421f9616.westeurope.aksapp.io/webshoppingapigw/basket-api/api/order",
       "payment_methods_mapping": {
       },
       "offline_orders": {
