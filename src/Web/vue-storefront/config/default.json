@@ -82,7 +82,7 @@
       "initialStateFilter": ["__DEMO_MODE__", "version", "storeView"],
       "useInitialStateFilter": true
     },
-    "defaultStoreCode": "it",
+    "defaultStoreCode": "",
     "storeViews": {
       "multistore": true,
       "commonCache": true,
