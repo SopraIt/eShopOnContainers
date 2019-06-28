@@ -53,19 +53,31 @@ namespace Catalog.BackgroundTasks.Tasks
 
             await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
             
-            List<Import> rows = GetRowsFromFile();
+            BuildCatalog(stoppingToken, string.Empty);
+
+            BuildCatalog(stoppingToken, "_it");
+
+            BuildCatalog(stoppingToken, "_de");
+
+            _logger.LogInformation("GracePeriodManagerService background task is stopping.");
+
+            await Task.CompletedTask;
+        }
+
+        private async void BuildCatalog(CancellationToken stoppingToken, string local){
+            List<Import> rows = GetRowsFromFile(local);
 
             string mapping_json = string.Empty;
             string result_mapping = string.Empty;
 
             mapping_json = GetFromFile("catalog_mapping.txt");
-            result_mapping = await PutMappingInSearch("product", mapping_json);
+            result_mapping = await PutMappingInSearch("product", mapping_json, local);
 
             mapping_json = GetFromFile("attribute_mapping.txt");
-            result_mapping = await PutMappingInSearch("attribute", mapping_json);
+            result_mapping = await PutMappingInSearch("attribute", mapping_json, local);
 
             mapping_json = GetFromFile("category_mapping.txt");
-            result_mapping = await PutMappingInSearch("category", mapping_json);
+            result_mapping = await PutMappingInSearch("category", mapping_json, local);
 
             stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
 
@@ -83,17 +95,17 @@ namespace Catalog.BackgroundTasks.Tasks
                     switch (row._type)
                     {
                         case "category":
-                            result_search = await PutInSearch("category", row._id, json_source);
+                            result_search = await PutInSearch("category" + local, row._id, json_source);
                             break;
                         case "product":
-                            result_search = await PutInSearch("product", row._id, json_source);
+                            result_search = await PutInSearch("product" + local, row._id, json_source);
                             result_nosql = await putInNoSql(row._id, json_source);
                             break;
                         case "attribute":
-                            result_search = await PutInSearch("attribute", row._id, json_source);
+                            result_search = await PutInSearch("attribute" + local, row._id, json_source);
                             break;
                         case "review":
-                            result_search = await PutInSearch("review", row._id, json_source);
+                            result_search = await PutInSearch("review" + local, row._id, json_source);
                             break;
                         default:
                             Console.WriteLine("Default case");
@@ -139,10 +151,6 @@ namespace Catalog.BackgroundTasks.Tasks
 
                 await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
             }
-
-            _logger.LogInformation("GracePeriodManagerService background task is stopping.");
-
-            await Task.CompletedTask;
         }
 
         private async Task<string> GetAuthToken()
@@ -216,9 +224,9 @@ namespace Catalog.BackgroundTasks.Tasks
 
         }
 
-        private List<Import> GetRowsFromFile()
+        private List<Import> GetRowsFromFile(string local)
         {
-            string csvFile = Path.Combine(_hostingEnvironment.ContentRootPath, "CsvData", "catalog.txt");
+            string csvFile = Path.Combine(_hostingEnvironment.ContentRootPath, "CsvData", "catalog" + local + ".txt");
 
             if (!File.Exists(csvFile))
             {
@@ -253,14 +261,14 @@ namespace Catalog.BackgroundTasks.Tasks
             return json;
         }
 
-        private async Task<string> PutMappingInSearch(string index,  string json)
+        private async Task<string> PutMappingInSearch(string index,  string json, string local)
         {
             try
             {
                 PutSearchResult result = null;
 
                 var client = _clientFactory.CreateClient();
-                client.BaseAddress = new Uri(string.Format("{0}/{1}", _settings.SearchBaseUrl, index));
+                client.BaseAddress = new Uri(string.Format("{0}/{1}{2}", _settings.SearchBaseUrl, index, local));
 
                 var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
 
@@ -328,11 +336,7 @@ namespace Catalog.BackgroundTasks.Tasks
         {
             try
             {
-                Product product = new Product()
-                {
-                    Id = productId,
-                    json = json
-                };
+                var product = JsonConvert.DeserializeObject<ProductDetail>(json);
 
                 string _id = await _repo.UpsertAsync(product);
 

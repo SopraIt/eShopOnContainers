@@ -7,11 +7,15 @@ namespace Catalog.Nosql.Infrastructure.Repositories
 
     public interface ICatalogDataRepository
     {
-        Task<Product> GetAsync (string Id);
+        
         Task<ProductDetail> GetProductDetailAsync (string Id);
-        Task<Product> GetBySkuAsync(string Sku);
+        //Task<Product> GetAsync (string Id);
+        
         Task<ProductDetail> GetProductDetailBySkuAsync(string Sku);
-        Task<string> UpsertAsync(Product product);
+        //Task<Product> GetBySkuAsync(string Sku);
+        
+        Task<string> UpsertAsync(ProductDetail product);
+        //Task<string> UpsertAsync(Product product);
 
         Task<bool> CheckStock(string sku);
         Task<List<Stock>> CheckStockList(List<string> skus);

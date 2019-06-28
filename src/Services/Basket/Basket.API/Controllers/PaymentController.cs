@@ -4,7 +4,6 @@ using Basket.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions;
-using Microsoft.eShopOnContainers.Services.Basket.API.Model;
 using Microsoft.eShopOnContainers.Services.Basket.API.Services;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -20,11 +19,11 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
     [ApiController]
     public class PaymentController : ControllerBase
     {
-        private readonly ILogger<BasketController> _logger;
+        private readonly ILogger<PaymentController> _logger;
         private readonly IConfigDataRepository _repo;
 
         public PaymentController(
-            ILogger<BasketController> logger,
+            ILogger<PaymentController> logger,
             IConfigDataRepository repository)
         {
             _logger = logger;
@@ -35,10 +34,10 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
         [ProducesResponseType(typeof(PaymentMethodResult), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<PaymentMethodResult>> GetPaymentMethodAsync(string cartId)
         {
-            var shipping_methods = await _repo.GetPaymentMethosAsync();
+            var payment_methods = await _repo.GetPaymentMethosAsync();
 
             return new PaymentMethodResult(){
-                Result = shipping_methods,
+                Result = payment_methods,
                 Code = 200
             };
         }

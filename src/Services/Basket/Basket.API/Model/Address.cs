@@ -7,14 +7,10 @@ namespace Basket.API.Model
 {
     public partial class Address
     {
-        [JsonProperty("region")]
-        public string Region { get; set; }
-
-        [JsonProperty("region_id")]
-        public long RegionId { get; set; }
+        public string region { get; set; }
+        public long region_id { get; set; }
 
         private string _country_id;
-        [JsonProperty("CountryId")]
         public string CountryId { 
             get {
                 return _country_id;
@@ -23,8 +19,6 @@ namespace Basket.API.Model
                 _country_id = value;
             } 
         }
-
-        [JsonProperty("country_id")]
         public string country_id { 
             get {
                 return _country_id;
@@ -33,32 +27,14 @@ namespace Basket.API.Model
                 _country_id = value;
             } 
         }
-
-        [JsonProperty("street")]
-        public List<string> Street { get; set; }
-
-        [JsonProperty("telephone")]
-        public string Telephone { get; set; }
-
-        [JsonProperty("postcode")]
-        public string Postcode { get; set; }
-
-        [JsonProperty("city")]
-        public string City { get; set; }
-
-        [JsonProperty("firstname")]
-        public string Firstname { get; set; }
-
-        [JsonProperty("lastname")]
-        public string Lastname { get; set; }
-
-        [JsonProperty("email")]
-        public string Email { get; set; }
-
-        [JsonProperty("region_code")]
-        public string RegionCode { get; set; }
-
-        [JsonProperty("company", NullValueHandling = NullValueHandling.Ignore)]
-        public string Company { get; set; }
+        public List<string> street { get; set; }
+        public string telephone { get; set; }
+        public string postcode { get; set; }
+        public string city { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string email { get; set; }
+        public string region_code { get; set; }
+        public string company { get; set; }
     }
 }

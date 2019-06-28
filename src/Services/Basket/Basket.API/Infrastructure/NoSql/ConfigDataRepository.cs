@@ -13,18 +13,18 @@ namespace Basket.API.Infrastructure.NoSql
             var payment_methods = new List<PaymentMethod>();
             payment_methods.Add(new PaymentMethod()
             {
-                Code = "authorizenet_directpost",
-                Title = "Credit Card Direct Post (Authorize.net)"
+                code = "authorizenet_directpost",
+                title = "Credit Card Direct Post (Authorize.net)"
             });
             payment_methods.Add(new PaymentMethod()
             {
-                Code = "cashondelivery",
-                Title = "Cash On Delivery"
+                code = "cashondelivery",
+                title = "Cash On Delivery"
             });
             payment_methods.Add(new PaymentMethod()
             {
-                Code = "free",
-                Title = "No Payment Information Required"
+                code = "free",
+                title = "No Payment Information Required"
             });
 
             return payment_methods;
@@ -34,16 +34,16 @@ namespace Basket.API.Infrastructure.NoSql
             var shipping_methods = new List<ShippingMethod>();
             shipping_methods.Add(new ShippingMethod()
             {
-                CarrierCode = "flatrate",
-                MethodCode = "flatrate",
-                CarrierTitle = "Flat Rate",
-                MethodTitle = "Fixed",
-                Amount = 30,
-                BaseAmount = 30,
-                Available = true,
-                ErrorMessage = "",
-                PriceExclTax = 30,
-                PriceInclTax = 30
+                carrier_code = "flatrate",
+                method_code = "flatrate",
+                carrier_title = "Flat Rate",
+                method_title = "Fixed",
+                amount = 30,
+                base_amount = 30,
+                available = true,
+                error_message = "",
+                price_excl_tax = 30,
+                price_incl_tax = 30
             });
 
             return shipping_methods;

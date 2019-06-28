@@ -57,6 +57,21 @@ services:
       - sql.data
       - rabbitmq
 
+  ordering.signalrhub:
+    image: ${REGISTRY:-eshop}/ordering.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: src/Services/Ordering/Ordering.SignalrHub/Dockerfile
+    depends_on:
+      - nosql.data
+      - sql.data
+      - identity.api
+      - rabbitmq
+      - ordering.api
+      - marketing.api
+      - catalog.api
+      - basket.api
+
   marketing.api:
     image: ${REGISTRY:-eshop}/marketing.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
@@ -173,21 +188,6 @@ services:
     build:
       context: .
       dockerfile: src/ApiGateways/Web.Bff.Shopping/aggregator/Dockerfile
-    depends_on:
-      - nosql.data
-      - sql.data
-      - identity.api
-      - rabbitmq
-      - ordering.api
-      - marketing.api
-      - catalog.api
-      - basket.api
-
-  ordering.signalrhub:
-    image: ${REGISTRY:-eshop}/ordering.signalrhub:${PLATFORM:-linux}-${TAG:-latest}
-    build:
-      context: .
-      dockerfile: src/Services/Ordering/Ordering.SignalrHub/Dockerfile
     depends_on:
       - nosql.data
       - sql.data

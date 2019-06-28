@@ -20,29 +20,29 @@ namespace Catalog.Nosql.Infrastructure.Repositories
             _context = new CatalogDataContext(settings);
         }
 
-        public async Task<Product> GetAsync(string Id)
-        {
+        // public async Task<Product> GetAsync(string Id)
+        // {
 
-            var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
-            var db_result = await _context.CatalogData
-                                 .Find(filter)
-                                 .FirstOrDefaultAsync();
+        //     var filter = Builders<BsonDocument>.Filter.Eq("id", Id);
+        //     var db_result = await _context.CatalogData
+        //                          .Find(filter)
+        //                          .FirstOrDefaultAsync();
 
-            if (db_result != null)
-            {
-                Product result = new Product()
-                {
-                    Id = db_result["id"].ToString(),
-                    json = db_result.ToJson()
-                };
+        //     if (db_result != null)
+        //     {
+        //         Product result = new Product()
+        //         {
+        //             Id = db_result["id"].ToString(),
+        //             json = db_result.ToJson()
+        //         };
 
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //         return result;
+        //     }
+        //     else
+        //     {
+        //         return null;
+        //     }
+        // }
 
         public async Task<ProductDetail> GetProductDetailAsync(string Id)
         {
@@ -62,25 +62,25 @@ namespace Catalog.Nosql.Infrastructure.Repositories
             }
         }
 
-        public async Task<Product> GetBySkuAsync(string Sku)
-        {
-            var db_result = await this.GetBySkuAsyncFromDB(Sku);
+        // public async Task<Product> GetBySkuAsync(string Sku)
+        // {
+        //     var db_result = await this.GetBySkuAsyncFromDB(Sku);
 
-            if (db_result != null)
-            {
-                Product result = new Product()
-                {
-                    Id = db_result["id"].ToString(),
-                    json = db_result.ToJson()
-                };
+        //     if (db_result != null)
+        //     {
+        //         Product result = new Product()
+        //         {
+        //             Id = db_result["id"].ToString(),
+        //             json = db_result.ToJson()
+        //         };
 
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-        }
+        //         return result;
+        //     }
+        //     else
+        //     {
+        //         return null;
+        //     }
+        // }
 
         public async Task<ProductDetail> GetProductDetailBySkuAsync(string Sku)
         {
@@ -98,22 +98,47 @@ namespace Catalog.Nosql.Infrastructure.Repositories
         }
 
 
-        public async Task<string> UpsertAsync(Product product)
+        // public async Task<string> UpsertAsync(Product product)
+        // {
+        //     try
+        //     {
+        //         Product _prod = await this.GetAsync(product.Id);
+        //         BsonDocument document = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<BsonDocument>(product.json);
+        //         if (_prod != null)
+        //         {
+        //             var filter = Builders<BsonDocument>.Filter.Eq("id", product.Id);
+        //             var result = await _context.CatalogData.ReplaceOneAsync(filter, document, new UpdateOptions { IsUpsert = true });
+        //             return result.ModifiedCount>0 ? product.Id : string.Empty;
+        //         }
+        //         else
+        //         {
+        //             await _context.CatalogData.InsertOneAsync(document);
+        //             return product.Id;
+        //         }
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         return string.Empty;
+        //     }
+        // }
+
+        public async Task<string> UpsertAsync(ProductDetail product)
         {
             try
             {
-                Product _prod = await this.GetAsync(product.Id);
-                BsonDocument document = MongoDB.Bson.Serialization.BsonSerializer.Deserialize<BsonDocument>(product.json);
+                BsonDocument document = product.ToBsonDocument();;
+
+                ProductDetail _prod = await this.GetProductDetailAsync(product.id.ToString());
                 if (_prod != null)
                 {
-                    var filter = Builders<BsonDocument>.Filter.Eq("id", product.Id);
+                    var filter = Builders<BsonDocument>.Filter.Eq("id", product.id.ToString());
                     var result = await _context.CatalogData.ReplaceOneAsync(filter, document, new UpdateOptions { IsUpsert = true });
-                    return result.ModifiedCount>0 ? product.Id : string.Empty;
+                    return result.ModifiedCount>0 ? product.id.ToString() : string.Empty;
                 }
                 else
                 {
                     await _context.CatalogData.InsertOneAsync(document);
-                    return product.Id;
+                    return product.id.ToString();
                 }
             }
             catch (Exception e)

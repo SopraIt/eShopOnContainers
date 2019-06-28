@@ -24,7 +24,8 @@ namespace Catalog.API.Controllers
     {
         private readonly CatalogSettings _settings;
         private readonly ICatalogDataRepository _repo;
-        public Product2Controller(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo){
+        public Product2Controller(IOptionsSnapshot<CatalogSettings> settings, ICatalogDataRepository repo)
+        {
             _repo = repo ?? throw new ArgumentNullException(nameof(repo));
             _settings = settings.Value;
         }
@@ -33,28 +34,24 @@ namespace Catalog.API.Controllers
         [Route("items/{sku}")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType(typeof(object), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<object>> ItemByIdAsync(string sku)
+        [ProducesResponseType(typeof(ProductDetail), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<ProductDetail>> ItemByIdAsync(string sku)
         {
             if (string.IsNullOrEmpty(sku))
             {
                 return BadRequest();
             }
 
-            var item = await _repo.GetBySkuAsync(sku);
-
-            // var baseUri = _settings.PicBaseUrl;
-            // var azureStorageEnabled = _settings.AzureStorageEnabled;
-
-            // item.FillProductUrl(baseUri, azureStorageEnabled: azureStorageEnabled);
+            var item = await _repo.GetProductDetailBySkuAsync(sku);
 
             if (item != null)
             {
-                var result = JsonConvert.DeserializeObject(item.json);
-                return result;
+                return item;
             }
-
-            return NotFound();
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

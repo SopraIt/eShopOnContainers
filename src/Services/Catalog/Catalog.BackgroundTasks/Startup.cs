@@ -99,7 +99,6 @@ namespace Catalog.BackgroundTasks
                     return new DefaultRabbitMQPersistentConnection(factory, logger, retryCount);
                 });
             }
-
             RegisterEventBus(services);
 
             //create autofac based service provider

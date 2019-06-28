@@ -7,34 +7,15 @@ namespace Basket.API.Model
 
     public partial class ShippingMethod
     {
-        [JsonProperty("carrier_code")]
-        public string CarrierCode { get; set; }
-
-        [JsonProperty("method_code")]
-        public string MethodCode { get; set; }
-
-        [JsonProperty("carrier_title")]
-        public string CarrierTitle { get; set; }
-
-        [JsonProperty("method_title")]
-        public string MethodTitle { get; set; }
-
-        [JsonProperty("amount")]
-        public long Amount { get; set; }
-
-        [JsonProperty("base_amount")]
-        public long BaseAmount { get; set; }
-
-        [JsonProperty("available")]
-        public bool Available { get; set; }
-
-        [JsonProperty("error_message")]
-        public string ErrorMessage { get; set; }
-
-        [JsonProperty("price_excl_tax")]
-        public long PriceExclTax { get; set; }
-
-        [JsonProperty("price_incl_tax")]
-        public long PriceInclTax { get; set; }
+        public string carrier_code { get; set; }
+        public string method_code { get; set; }
+        public string carrier_title { get; set; }
+        public string method_title { get; set; }
+        public decimal amount { get; set; }
+        public decimal base_amount { get; set; }
+        public bool available { get; set; }
+        public string error_message { get; set; }
+        public decimal price_excl_tax { get; set; }
+        public decimal price_incl_tax { get; set; }
     }
 }

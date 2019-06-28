@@ -249,9 +249,8 @@ namespace Catalog.BackgroundTasks.Tasks
         private async Task<string> putInNoSql(string productId, string json){
             try
             {
-                Product product = new Product(){
-                    Id = productId,
-                    json = json
+                ProductDetail product = new ProductDetail(){
+                    //TODO...
                 };
 
                 string _id = await _repo.UpsertAsync(product);

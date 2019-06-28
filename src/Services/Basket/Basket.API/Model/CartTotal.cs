@@ -6,30 +6,30 @@ namespace Basket.API.Model
 {
     public partial class Total
     {
-        public decimal GrandTotal { get; set; }
-        public decimal BaseGrandTotal { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal BaseSubtotal { get; set; }
-        public decimal DiscountAmount { get; set; }
-        public decimal BaseDiscountAmount { get; set; }
-        public decimal SubtotalWithDiscount { get; set; }
-        public decimal BaseSubtotalWithDiscount { get; set; }
-        public decimal ShippingAmount { get; set; }
-        public decimal BaseShippingAmount { get; set; }
-        public decimal ShippingDiscountAmount { get; set; }
-        public decimal BaseShippingDiscountAmount { get; set; }
-        public decimal TaxAmount { get; set; }
-        public decimal BaseTaxAmount { get; set; }
-        public decimal WeeeTaxAppliedAmount { get; set; }
-        public decimal ShippingTaxAmount { get; set; }
-        public decimal BaseShippingTaxAmount { get; set; }
-        public decimal SubtotalInclTax { get; set; }
-        public decimal ShippingInclTax { get; set; }
-        public decimal BaseShippingInclTax { get; set; }
-        public string BaseCurrencyCode { get; set; }
-        public string QuoteCurrencyCode { get; set; }
-        public long ItemsQty { get; set; }
-        public List<CartItem> Items { get; set; }
-        public List<TotalSegment> TotalSegments { get; set; }
+        public decimal grand_total { get; set; }
+        public decimal base_grand_total { get; set; }
+        public decimal subtotal { get; set; }
+        public decimal base_subtotal { get; set; }
+        public decimal discount_amount { get; set; }
+        public decimal base_discount_amount { get; set; }
+        public decimal subtotal_with_discount { get; set; }
+        public decimal base_subtotal_with_discount { get; set; }
+        public decimal shipping_amount { get; set; }
+        public decimal base_shipping_amount { get; set; }
+        public decimal shipping_discount_amount { get; set; }
+        public decimal base_shipping_discount_amount { get; set; }
+        public decimal tax_amount { get; set; }
+        public decimal base_tax_amount { get; set; }
+        //public object weee_tax_applied_amount { get; set; }
+        public decimal shipping_tax_amount { get; set; }
+        public decimal base_shipping_tax_amount { get; set; }
+        public decimal subtotal_incl_tax { get; set; }
+        public decimal shipping_incl_tax { get; set; }
+        public decimal base_shipping_incl_tax { get; set; }
+        public string base_currency_code { get; set; }
+        public string quote_currency_code { get; set; }
+        public int items_qty { get; set; }
+        public List<CartItem> items { get; set; }
+        public List<TotalSegment> total_segments { get; set; }
     }
 }

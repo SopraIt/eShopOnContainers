@@ -4,7 +4,6 @@ using Basket.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions;
-using Microsoft.eShopOnContainers.Services.Basket.API.Model;
 using Microsoft.eShopOnContainers.Services.Basket.API.Services;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -21,12 +20,12 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
     public class CartController : ControllerBase
     {
         private readonly IEventBus _eventBus;
-        private readonly ILogger<BasketController> _logger;
+        private readonly ILogger<CartController> _logger;
         private readonly IBasketDataRepository _repo;
         private readonly ICartService _cartService;
 
         public CartController(
-            ILogger<BasketController> logger,
+            ILogger<CartController> logger,
             IBasketDataRepository repository,
             IEventBus eventBus,
             ICartService cartService)
@@ -72,7 +71,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
             string result = await _repo.UpsertCartItemAsync(UserId, cart_item);
 
             return new CartUpdateResult(){
-                Result = cart_update.CartItem,
+                Result = cart_item,
                 Code = 200
             };
         }

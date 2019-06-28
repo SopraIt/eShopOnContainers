@@ -23,79 +23,82 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Services
             _repo_config = repo_config;
         }
         public async Task<CartItem> CalculateCartItem(CartItem cart_item){
-            var product = await _repo_catalog.GetProductDetailBySkuAsync(cart_item.Sku);
+            var product = await _repo_catalog.GetProductDetailBySkuAsync(cart_item.sku);
             if (product != null)
             {
-                cart_item.Name = product.name;
-                cart_item.regular_price = product.regular_price;
-                cart_item.final_price = product.final_price;
-                cart_item.special_price = product.special_price;
-                cart_item.Price = product.special_price == null? product.final_price : product.special_price.Value;
+                var result = JsonConvert.DeserializeObject<CartItem>(JsonConvert.SerializeObject(product));
                 
-                cart_item.Stock = new CartItemStock(){
-                    IsInStock = product.stock.is_in_stock
-                };
+                result.item_id = cart_item.item_id;
+                result.qty = cart_item.qty;
+                result.quote_id = cart_item.quote_id;
 
-                cart_item.Totals = new CartItemTotal(){
-                    Price = product.regular_price,
-                    PriceInclTax = product.final_price,
-                    RowTotal = product.regular_price * cart_item.Qty,
-                    RowTotalInclTax = cart_item.Price * cart_item.Qty,
-                    RowTotalWithDiscount = product.final_price * cart_item.Qty,
+                result.price = product.special_price == null ? product.final_price : product.special_price.Value;
+
+                result.totals = new CartItemTotal(){
+                    price = product.regular_price,
+                    price_incl_tax = product.final_price,
+                    row_total = product.regular_price * cart_item.qty,
+                    row_total_incl_tax = cart_item.price * cart_item.qty,
+                    row_total_with_discount = product.final_price * cart_item.qty,
                 };
+                
+                return result;
             }
-            return cart_item;
+            else 
+            {
+                return null;
+            }
         }
         public async Task<Cart> CalculateCartTotal(Cart cart, AddressInformation shipping_info){
             
             var shipping = (await _repo_config.GetShippingMethosAsync())
-                .FirstOrDefault(x => x.CarrierCode == shipping_info.shippingCarrierCode);
+                .FirstOrDefault(x => x.carrier_code == shipping_info.shippingCarrierCode);
 
-            var base_sub_total = cart.Products.Sum (x => x.Totals.RowTotal);
-            var base_sub_total_with_discount = cart.Products.Sum (x => x.Totals.RowTotalWithDiscount);
+            var base_sub_total = cart.products.Sum (x => x.totals.row_total);
+            var base_sub_total_with_discount = cart.products.Sum (x => x.totals.row_total_with_discount);
 
-            var base_shipping_amount = shipping.BaseAmount;
+            var base_shipping_amount = shipping.base_amount;
             var base_shipping_discount_amount = 0;
 
             var grand_total = base_sub_total_with_discount + base_shipping_discount_amount;
 
-            var base_tax_amount = cart.Products.Sum (x => x.Totals.RowTotalInclTax);
+            var base_tax_amount = cart.products.Sum (x => x.totals.row_total_incl_tax);
             var shipping_tax_amount = 0;
 
             var base_grand_total = grand_total + base_tax_amount + shipping_tax_amount;
             var shipping_amount = base_shipping_amount + base_shipping_discount_amount + shipping_tax_amount;
 
             Total total = new Total(){
-                BaseSubtotal = base_sub_total,
-                BaseSubtotalWithDiscount = base_sub_total_with_discount,
-                BaseShippingAmount = base_shipping_amount,
-                BaseShippingDiscountAmount = base_shipping_discount_amount,
-                GrandTotal = grand_total,
-                BaseTaxAmount = base_tax_amount,
-                ShippingAmount = shipping_tax_amount,
-                BaseGrandTotal = base_grand_total
+                base_subtotal = base_sub_total,
+                base_subtotal_with_discount = base_sub_total_with_discount,
+                base_shipping_amount = base_shipping_amount,
+                base_shipping_discount_amount = base_shipping_discount_amount,
+                grand_total = grand_total,
+                base_tax_amount = base_tax_amount,
+                shipping_tax_amount = shipping_tax_amount,
+                base_grand_total = base_grand_total
             };
 
-            total.TotalSegments = new List<TotalSegment>();
-            total.TotalSegments.Add(new TotalSegment(){
-                Code = "subtotal",
-                Title = "Subtotal",
-                Value = base_sub_total_with_discount
+            total.total_segments = new List<TotalSegment>();
+            total.total_segments.Add(new TotalSegment(){
+                code = "subtotal",
+                title = "Subtotal",
+                value = base_sub_total_with_discount
             });
-            total.TotalSegments.Add(new TotalSegment(){
-                Code = "shipping",
-                Title = "Shipping",
-                Value = shipping_amount
+            total.total_segments.Add(new TotalSegment(){
+                code = "shipping",
+                title = "Shipping",
+                value = shipping_amount
             });
-            total.TotalSegments.Add(new TotalSegment(){
-                Code = "tax",
-                Title = "Tax",
-                Value = base_tax_amount
+            total.total_segments.Add(new TotalSegment(){
+                code = "tax",
+                title = "Tax",
+                value = base_tax_amount
             });
-            total.TotalSegments.Add(new TotalSegment(){
-                Code = "grand_total",
-                Title = "Grand Total",
-                Value = base_sub_total_with_discount + shipping_amount + base_tax_amount
+            total.total_segments.Add(new TotalSegment(){
+                code = "grand_total",
+                title = "Grand Total",
+                value = base_sub_total_with_discount + shipping_amount + base_tax_amount
             });
 
             cart.total = total;

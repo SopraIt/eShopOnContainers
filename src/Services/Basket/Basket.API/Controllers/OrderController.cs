@@ -4,7 +4,6 @@ using Basket.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions;
-using Microsoft.eShopOnContainers.Services.Basket.API.Model;
 using Microsoft.eShopOnContainers.Services.Basket.API.Services;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -22,11 +21,11 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IEventBus _eventBus;
-        private readonly ILogger<BasketController> _logger;
+        private readonly ILogger<OrderController> _logger;
         private readonly IBasketDataRepository _repo;
 
         public OrderController(
-            ILogger<BasketController> logger,
+            ILogger<OrderController> logger,
             IEventBus eventBus,
             IBasketDataRepository repository)
         {
@@ -42,10 +41,8 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
             //var UserId = User.FindFirst("sub")?.Value;
             var _cart = await _repo.GetCartAsync(cart.cart_id);
             var id = _repo.InsertOrderAsync(_cart);
-            var delete_count = _repo.DeleteCartAsync(cart.cart_id);
-
+        
             string json = JsonConvert.SerializeObject(_cart);
-
             var cart_event = JsonConvert.DeserializeObject<CartEvent>(json);
 
             // Once basket is checkout, sends an integration event to
@@ -63,6 +60,8 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
 
                 throw;
             }
+
+            var delete_count = _repo.DeleteCartAsync(cart.cart_id);
 
             return new OrderResult(){
                 Result = new OrderInfo(){ 

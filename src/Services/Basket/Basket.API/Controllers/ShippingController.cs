@@ -4,7 +4,6 @@ using Basket.API.Model;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Abstractions;
-using Microsoft.eShopOnContainers.Services.Basket.API.Model;
 using Microsoft.eShopOnContainers.Services.Basket.API.Services;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
@@ -21,13 +20,13 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
     public class ShippingController : ControllerBase
     {
         private readonly IEventBus _eventBus;
-        private readonly ILogger<BasketController> _logger;
+        private readonly ILogger<ShippingController> _logger;
         private readonly IBasketDataRepository _repo;
         private readonly IConfigDataRepository _repo_config;
         private readonly ICartService _cartService;
 
         public ShippingController(
-            ILogger<BasketController> logger,
+            ILogger<ShippingController> logger,
             IBasketDataRepository repository,
             IEventBus eventBus,
             ICartService cartService,
@@ -59,16 +58,18 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
             var UserId = User.FindFirst("sub")?.Value;
             var cart = await _repo.GetCartAsync(UserId);
 
-            var cart_total = await _cartService.CalculateCartTotal(cart, req.AddressInformation);
+            var cart_total = await _cartService.CalculateCartTotal(cart, req.addressInformation);
             string result = await _repo.UpsertCartTotalAsync(UserId, cart_total.total);
+            
+            var payment_methods = await _repo_config.GetPaymentMethosAsync();
 
             ShippingInformation ship = new ShippingInformation(){
-                PaymentMethods = new List<PaymentMethod>(),
-                Totals = new Total()
+                payment_methods = payment_methods,
+                totals = cart_total.total
             };
 
             return new ShippingInformationResult(){
-                Result = null,
+                Result = ship,
                 Code = 200
             };
         }

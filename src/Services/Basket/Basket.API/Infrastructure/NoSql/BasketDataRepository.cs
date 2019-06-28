@@ -52,7 +52,7 @@ namespace Basket.API.Infrastructure.NoSql
 
             if (cart != null)
             {
-                return cart.Products;
+                return cart.products;
             }
             else
             {
@@ -71,8 +71,8 @@ namespace Basket.API.Infrastructure.NoSql
                     BsonDocument cart_bson = new BsonDocument {
                         { "user_id", id },
                         { "cart_id", id },
-                        { "Products", new BsonArray()},
-                        { "AddressInformation", new AddressInformation().ToBsonDocument() },
+                        { "products", new BsonArray()},
+                        { "address_information", new AddressInformation().ToBsonDocument() },
                         { "total", new Total().ToBsonDocument() }
                     };
 
@@ -110,11 +110,11 @@ namespace Basket.API.Infrastructure.NoSql
 
                 if (cart_item != null)
                 {
-                    if (cart.Products.Exists(x => x.ItemId == cart_item.ItemId))
+                    if (cart.products.Exists(x => x.item_id == cart_item.item_id))
                     {
-                        cart.Products.RemoveAll(x => x.ItemId == cart_item.ItemId);
+                        cart.products.RemoveAll(x => x.item_id == cart_item.item_id);
                     }
-                    cart.Products.Add(cart_item);
+                    cart.products.Add(cart_item);
 
                     var filter = Builders<BsonDocument>.Filter.Eq("user_id", id);
 
@@ -142,9 +142,9 @@ namespace Basket.API.Infrastructure.NoSql
 
                 if (cart_item != null)
                 {
-                    if (cart.Products.Exists(x => x.ItemId == cart_item.ItemId))
+                    if (cart.products.Exists(x => x.item_id == cart_item.item_id))
                     {
-                        cart.Products.RemoveAll(x => x.ItemId == cart_item.ItemId);
+                        cart.products.RemoveAll(x => x.item_id == cart_item.item_id);
                     }
 
                     var filter = Builders<BsonDocument>.Filter.Eq("user_id", id);

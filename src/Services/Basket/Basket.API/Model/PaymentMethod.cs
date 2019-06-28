@@ -7,10 +7,7 @@ namespace Basket.API.Model
 
     public partial class PaymentMethod
     {
-        [JsonProperty("code")]
-        public string Code { get; set; }
-
-        [JsonProperty("title")]
-        public string Title { get; set; }
+        public string code { get; set; }
+        public string title { get; set; }
     }
 }

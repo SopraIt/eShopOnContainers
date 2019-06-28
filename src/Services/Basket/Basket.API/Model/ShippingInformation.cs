@@ -6,7 +6,7 @@ namespace Basket.API.Model
 {
     public partial class ShippingInformation
     {
-        public List<PaymentMethod> PaymentMethods { get; set; }
-        public Total Totals { get; set; }
+        public List<PaymentMethod> payment_methods { get; set; }
+        public Total totals { get; set; }
     }
 }

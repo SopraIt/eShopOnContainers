@@ -6,13 +6,11 @@ namespace Basket.API.Model
 {
     public partial class ShippingMethodRequest
     {
-        [JsonProperty("address")]
-        public Address Address { get; set; }
+        public Address address { get; set; }
     }
 
     public partial class ShippingInformationRequest
     {
-        [JsonProperty("addressInformation")]
-        public AddressInformation AddressInformation { get; set; }
+        public AddressInformation addressInformation { get; set; }
     }
 }

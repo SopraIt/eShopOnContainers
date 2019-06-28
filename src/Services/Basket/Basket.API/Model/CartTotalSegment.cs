@@ -6,10 +6,10 @@ namespace Basket.API.Model
 {
     public partial class TotalSegment
     {
-        public string Code { get; set; }
-        public string Title { get; set; }
-        public decimal Value { get; set; }
-        public string Area { get; set; }
+        public string code { get; set; }
+        public string title { get; set; }
+        public decimal value { get; set; }
+        public string area { get; set; }
         //public ExtensionAttributes ExtensionAttributes { get; set; }
     }
 }

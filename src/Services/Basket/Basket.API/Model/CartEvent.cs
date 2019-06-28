@@ -8,19 +8,10 @@ namespace Basket.API.Model
 {
     public partial class CartEvent: IntegrationEvent
     {
-
-        [JsonProperty("user_id")]
         public string user_id { get; set; }
-
-        [JsonProperty("cart_id")]
         public string cart_id { get; set; }
-
-        [JsonProperty("products")]
-        public List<CartItem> Products { get; set; }
-
-        [JsonProperty("addressInformation")]
-        public AddressInformation AddressInformation { get; set; }
-
+        public List<CartItem> products { get; set; }
+        public AddressInformation address_information { get; set; }
         public Total total { get; set; }
     }
 }
