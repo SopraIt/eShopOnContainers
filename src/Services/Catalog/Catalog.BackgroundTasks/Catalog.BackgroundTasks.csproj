@@ -51,6 +51,12 @@
     <None Update="CsvData\catalog.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="CsvData\catalog_it.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="CsvData\catalog_de.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="CsvData\ToscaBluProductsID.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
