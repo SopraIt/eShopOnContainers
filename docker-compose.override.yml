@@ -71,7 +71,27 @@ services:
       - "5101:80"   # Important: In a production environment your should remove the external port (5101) kept here for microservice debugging purposes. 
                     # The API Gateway redirects and access through the internal port (80).
     
-  catalog.backgroundtasks:
+  # catalog.backgroundtasks:
+  #   environment:
+  #     - ASPNETCORE_ENVIRONMENT=Development
+  #     - ASPNETCORE_URLS=http://0.0.0.0:80
+  #     - ConnectionString=${ESHOP_AZURE_CATALOG_DB:-Server=sql.data;Database=Microsoft.eShopOnContainers.Services.CatalogDb;User Id=sa;Password=Pass@word}
+  #     - EventBusConnection=${ESHOP_AZURE_SERVICE_BUS:-rabbitmq}
+  #     - EventBusUserName=${ESHOP_SERVICE_BUS_USERNAME}
+  #     - EventBusPassword=${ESHOP_SERVICE_BUS_PASSWORD}          
+  #     - UseCustomizationData=True
+  #     - AzureServiceBusEnabled=False
+  #     - CheckUpdateTime=30000
+  #     - GracePeriodTime=1
+  #     - ApplicationInsights__InstrumentationKey=${INSTRUMENTATION_KEY}
+  #     - OrchestratorType=${ORCHESTRATOR_TYPE}
+  #     - UseLoadTest=${USE_LOADTEST:-False}
+  #     - MongoConnectionString=${ESHOP_AZURE_COSMOSDB:-mongodb://nosql.data}
+  #     - MongoDatabase=CatalogDb
+  #   ports:
+  #     - "5122:80"
+
+  catalog.fullimport:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://0.0.0.0:80
@@ -88,8 +108,6 @@ services:
       - UseLoadTest=${USE_LOADTEST:-False}
       - MongoConnectionString=${ESHOP_AZURE_COSMOSDB:-mongodb://nosql.data}
       - MongoDatabase=CatalogDb
-    ports:
-      - "5122:80"
 
   ordering.api:
     environment:

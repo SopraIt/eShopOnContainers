@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.eShopOnContainers.BuildingBlocks.EventBus.Events.Checkout;
 
 namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
 {
@@ -43,7 +44,7 @@ namespace Microsoft.eShopOnContainers.Services.Basket.API.Controllers
             var id = _repo.InsertOrderAsync(_cart);
         
             string json = JsonConvert.SerializeObject(_cart);
-            var cart_event = JsonConvert.DeserializeObject<CartEvent>(json);
+            var cart_event = JsonConvert.DeserializeObject<CheckoutIntegrationEvent>(json);
 
             // Once basket is checkout, sends an integration event to
             // ordering.api to convert basket to order and proceeds with

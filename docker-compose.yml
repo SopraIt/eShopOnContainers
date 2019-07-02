@@ -30,11 +30,20 @@ services:
       - sql.data
       - rabbitmq
 
-  catalog.backgroundtasks:
-    image: ${REGISTRY:-eshop}/catalog.backgroundtasks:${PLATFORM:-linux}-${TAG:-latest}
+  # catalog.backgroundtasks:
+  #   image: ${REGISTRY:-eshop}/catalog.backgroundtasks:${PLATFORM:-linux}-${TAG:-latest}
+  #   build:
+  #     context: .
+  #     dockerfile: src/Services/Catalog/Catalog.BackgroundTasks/Dockerfile    
+  #   depends_on:
+  #     - sql.data
+  #     - rabbitmq
+  
+  catalog.fullimport:
+    image: ${REGISTRY:-eshop}/catalog.fullimport:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: src/Services/Catalog/Catalog.BackgroundTasks/Dockerfile    
+      dockerfile: src/ConsoleApps/Catalog.FullImport/Dockerfile    
     depends_on:
       - sql.data
       - rabbitmq
