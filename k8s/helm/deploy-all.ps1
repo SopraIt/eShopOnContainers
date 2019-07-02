@@ -75,6 +75,7 @@ helm dependency update elastic-stack
 $infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data","elasticsearch","kibana","logstash")
 $charts = ("eshop-common", "apigwws", "basket-api","catalog-api", "catalog-fullimport-job","identity-api", "locations-api", "marketing-api","ordering-api","ordering-backgroundtasks","ordering-signalrhub", "payment-api", "webspa", "webstatus", "webhooks-api", "webhooks-web")
 
+
 if ($deployInfrastructure) {
     foreach ($infra in $infras) {
         Write-Host "Installing infrastructure: $infra" -ForegroundColor Green

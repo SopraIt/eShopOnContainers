@@ -1,94 +1,33 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ .Values.app.svc.catalogbackgroundtasks }}
+  name: {{ .Values.app.svc.catalogfullimport }}
   labels:
-    app: {{ template "catalog-backgroundtasks.name" . }}
-    chart: {{ template "catalog-backgroundtasks.chart" . }}
+    app: {{ template "catalog-fullimport.name" . }}
+    chart: {{ template "catalog-fullimport.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   schedule: "*/1 * * * *"
   jobTemplate:
+    metadata:
+      labels:
+        app: {{ template "catalog-fullimport.name" . }}
+        release: {{ .Release.Name }}
     spec:
       template:
-        metadata:
-          labels:
-            app: {{ $release_name }}
-            cron: {{ $job.name }}
         spec:
+          {{ if .Values.inf.registry -}}
+          imagePullSecrets:
+          - name: {{ .Values.inf.registry.secretName }}
+          {{- end }}
           containers:
-          - name: {{ .Chart.Name }} 
-            image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
-            imagePullPolicy: {{ .Values.image.pullPolicy }}
-            env:
-              - name: PATH_BASE
-                value: {{ include "pathBase" . }}
-              - name: k8sname
-                value: {{ .Values.clusterName }}
-            {{- if .Values.env.values -}}
-            {{- range .Values.env.values }}
-              - name: {{ .name }}
-                value: {{ .value | quote }}
-            {{- end -}}
-            {{- end -}}
-            {{- if .Values.env.configmap -}}
-            {{- range .Values.env.configmap }}
-              - name: {{ .name }}
-                valueFrom:
-                  configMapKeyRef:
-                    name: {{ $cfgname }}
-                    key: {{ .key }}
-            {{- end -}}
-            {{- end }}
-
-#           - image: "{{ $job.image.repository }}:{{ $job.image.tag }}"
-#             imagePullPolicy: {{ $job.image.imagePullPolicy }}
-#             name: {{ $job.name }}
-#             {{- with $job.env }}
-#             env:
-# {{ toYaml . | indent 12 }}
-#             {{- end }}
-#             {{- if $job.command }}
-#             command: {{ $job.command }}
-#             {{- end }}
-#             {{- with $job.args }}
-#             args:
-# {{ toYaml . | indent 12 }}
-#             {{- with $job.resources }}
-#             resources:
-# {{ toYaml . | indent 14 }}
-#             {{- end }}
-#             {{- with $job.volumeMounts }}
-#             volumeMounts:
-# {{ toYaml . | indent 12 }}
-#             {{- end }}
-#               {{- end }}
-#           {{- with $job.nodeSelector }}
-#           nodeSelector:
-# {{ toYaml . | indent 12 }}
-#           {{- end }}
-#           {{- with $job.affinity }}
-#           affinity:
-# {{ toYaml . | indent 12 }}
-#           {{- end }}
-#           {{- with $job.tolerations }}
-#           tolerations:
-# {{ toYaml . | indent 12 }}
-#           {{- end }}
-#           restartPolicy: {{ $job.restartPolicy }}
-#           {{- with $job.volumes }}
-#           volumes:
-# {{ toYaml . | indent 12 }}
-#           {{- end }}
-  
-# successfulJobsHistoryLimit: {{ $job.successfulJobsHistoryLimit }}
-#   type: {{ .Values.service.type }}
-#   ports:
-#     - port: {{ .Values.service.port }}
-#       targetPort: http
-#       protocol: TCP
-#       name: http
-#   selector:
-#     app: {{ template "catalog-backgroundtasks.name" . }}
-#     release: {{ .Release.Name }}
+            - name: {{ .Chart.Name }} 
+              image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
+              imagePullPolicy: {{ .Values.image.pullPolicy }}
+              env:
+                - name: PATH_BASE
+                  value: {{ include "pathBase" . }}
+                - name: k8sname
+                  value: {{ .Values.clusterName }}
+          restartPolicy: Never
