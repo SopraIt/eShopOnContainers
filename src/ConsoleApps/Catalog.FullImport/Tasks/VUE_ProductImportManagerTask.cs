@@ -19,52 +19,49 @@ using Catalog.Nosql.Infrastructure.Repositories;
 using Catalog.Nosql.Model;
 using Catalog.FullImport.Models.Magento2;
 using Newtonsoft.Json;
+using System.Reflection;
 
 namespace Catalog.FullImport.Tasks
 {
-    public class VUE_ProductImportManagerTask : BackgroundService
+    public class VUE_ProductImportManagerTask : ITaskAsync
     {
         private readonly ILogger<VUE_ProductImportManagerTask> _logger;
         private readonly FullImportSettings _settings;
         private readonly IEventBus _eventBus;
         private readonly IHttpClientFactory _clientFactory;
-        private readonly IHostingEnvironment _hostingEnvironment;
         private readonly ICatalogDataRepository _repo;
 
         public VUE_ProductImportManagerTask(
             IOptions<FullImportSettings> settings,
-            IEventBus eventBus,
             ILogger<VUE_ProductImportManagerTask> logger,
             IHttpClientFactory clientFactory,
-            IHostingEnvironment hostingEnvironment,
             ICatalogDataRepository dataReopsitory)
         {
             _settings = settings?.Value ?? throw new ArgumentNullException(nameof(settings));
-            _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
-            _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
             _repo = dataReopsitory ?? throw new ArgumentNullException(nameof(dataReopsitory));
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        public async Task ExecuteAsync()
         {
             _logger.LogDebug("GracePeriodManagerService is starting.");
 
-            await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
-            
-            BuildCatalog(stoppingToken, string.Empty);
+            await Task.Delay(_settings.CheckUpdateTime);
 
-            BuildCatalog(stoppingToken, "_it");
+            BuildCatalog(string.Empty);
 
-            BuildCatalog(stoppingToken, "_de");
+            BuildCatalog("_it");
+
+            BuildCatalog("_de");
 
             _logger.LogInformation("GracePeriodManagerService background task is stopping.");
 
             await Task.CompletedTask;
         }
 
-        private async void BuildCatalog(CancellationToken stoppingToken, string local){
+        private async void BuildCatalog(string local)
+        {
             List<Import> rows = GetRowsFromFile(local);
 
             string mapping_json = string.Empty;
@@ -79,78 +76,76 @@ namespace Catalog.FullImport.Tasks
             mapping_json = GetFromFile("category_mapping.txt");
             result_mapping = await PutMappingInSearch("category", mapping_json, local);
 
-            stoppingToken.Register(() => _logger.LogDebug("#1 GracePeriodManagerService background task is stopping."));
 
-            while (!stoppingToken.IsCancellationRequested)
+
+            _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
+
+            foreach (var row in rows.Where(x => !x.Imported))
             {
-                _logger.LogInformation("GracePeriodManagerService background task is doing background work.");
+                _logger.LogInformation(string.Format("Elaboration of {0} Product", row._id));
+                string json_source = JsonConvert.SerializeObject(row._source);
+                string result_search = string.Empty;
+                string result_nosql = string.Empty;
 
-                foreach (var row in rows.Where(x => !x.Imported))
+                switch (row._type)
                 {
-                    _logger.LogInformation(string.Format("Elaboration of {0} Product", row._id));
-                    string json_source = JsonConvert.SerializeObject(row._source);
-                    string result_search = string.Empty;
-                    string result_nosql = string.Empty;
+                    case "category":
+                        result_search = await PutInSearch("category" + local, row._id, json_source);
+                        break;
+                    case "product":
+                        result_search = await PutInSearch("product" + local, row._id, json_source);
+                        result_nosql = await putInNoSql(row._id, json_source);
+                        break;
+                    case "attribute":
+                        result_search = await PutInSearch("attribute" + local, row._id, json_source);
+                        break;
+                    case "review":
+                        result_search = await PutInSearch("review" + local, row._id, json_source);
+                        break;
+                    default:
+                        Console.WriteLine("Default case");
+                        break;
+                }
 
-                    switch (row._type)
-                    {
-                        case "category":
-                            result_search = await PutInSearch("category" + local, row._id, json_source);
-                            break;
-                        case "product":
-                            result_search = await PutInSearch("product" + local, row._id, json_source);
-                            result_nosql = await putInNoSql(row._id, json_source);
-                            break;
-                        case "attribute":
-                            result_search = await PutInSearch("attribute" + local, row._id, json_source);
-                            break;
-                        case "review":
-                            result_search = await PutInSearch("review" + local, row._id, json_source);
-                            break;
-                        default:
-                            Console.WriteLine("Default case");
-                            break;
-                    }
-
-                    if (result_search == string.Empty)
-                    {
-                        _logger.LogInformation(string.Format("Elaboration of {0} Product KO", row._id));
-                    }
-                    else
-                    {
-                        row.Imported = true;
-                    }
-
-
-
-                    // string token = await this.GetAuthToken();
-                    // _logger.LogInformation("Token: " + token);
-
-                    // string productDetail = await GetProductDetail(product.ID, token);
-                    // productDetail = productDetail.Replace("-","_");
-
-                    // if (productDetail != string.Empty)
-                    // {
-                    //     string result_search = await PutInSearch(product.ID, productDetail);
-                    //     if (result_search == string.Empty) {
-                    //         _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
-                    //     }
-
-                    //     string result_nosql = await putInNoSql(product.ID, productDetail);
-                    //     if (result_nosql == string.Empty) {
-                    //         _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
-                    //     }
-
-                    //     if(!string.IsNullOrEmpty(result_search) && !string.IsNullOrEmpty(result_nosql)){
-                    //         product.Imported = true;
-                    //     }
-                    // }
-
+                if (result_search == string.Empty)
+                {
+                    _logger.LogInformation(string.Format("Elaboration of {0} Product KO", row._id));
+                }
+                else
+                {
+                    row.Imported = true;
                 }
 
 
-                await Task.Delay(_settings.CheckUpdateTime, stoppingToken);
+
+                // string token = await this.GetAuthToken();
+                // _logger.LogInformation("Token: " + token);
+
+                // string productDetail = await GetProductDetail(product.ID, token);
+                // productDetail = productDetail.Replace("-","_");
+
+                // if (productDetail != string.Empty)
+                // {
+                //     string result_search = await PutInSearch(product.ID, productDetail);
+                //     if (result_search == string.Empty) {
+                //         _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                //     }
+
+                //     string result_nosql = await putInNoSql(product.ID, productDetail);
+                //     if (result_nosql == string.Empty) {
+                //         _logger.LogInformation(string.Format("Elaboration of {0} Product KO", product.ID));
+                //     }
+
+                //     if(!string.IsNullOrEmpty(result_search) && !string.IsNullOrEmpty(result_nosql)){
+                //         product.Imported = true;
+                //     }
+                // }
+
             }
+
+
+
+
         }
 
         private async Task<string> GetAuthToken()
@@ -226,7 +221,7 @@ namespace Catalog.FullImport.Tasks
 
         private List<Import> GetRowsFromFile(string local)
         {
-            string csvFile = Path.Combine(_hostingEnvironment.ContentRootPath, "CsvData", "catalog" + local + ".txt");
+            string csvFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "CsvData", "catalog" + local + ".txt");
 
             if (!File.Exists(csvFile))
             {
@@ -248,7 +243,7 @@ namespace Catalog.FullImport.Tasks
 
         private string GetFromFile(string file_name)
         {
-            string csvFile = Path.Combine(_hostingEnvironment.ContentRootPath, "CsvData", file_name);
+            string csvFile = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "CsvData", file_name);
 
             if (!File.Exists(csvFile))
             {
@@ -256,12 +251,12 @@ namespace Catalog.FullImport.Tasks
                 //return GetPreconfiguredCatalogBrands();
             }
 
-            string json= File.ReadAllText(csvFile);
+            string json = File.ReadAllText(csvFile);
 
             return json;
         }
 
-        private async Task<string> PutMappingInSearch(string index,  string json, string local)
+        private async Task<string> PutMappingInSearch(string index, string json, string local)
         {
             try
             {

@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Catalog.FullImport.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -25,10 +27,19 @@ namespace Catalog.FullImport
             try
             {
                 Log.Information("Configuring web host ({ApplicationContext})...", AppName);
-                var host = BuildWebHost(configuration, args);
+                //var host = BuildWebHost(configuration, args);
+                //VUE_ProductImportManagerTask task = new VUE_ProductImportManagerTask();
+
+                var serviceCollection = new ServiceCollection();
+                // Startup.cs finally :)
+                Startup startup = new Startup();
+                startup.ConfigureServices(serviceCollection);
+
+                var serviceProvider = serviceCollection.BuildServiceProvider();
+                var service = serviceProvider.GetService<ITaskAsync>();
+                service.ExecuteAsync();
 
                 Log.Information("Starting web host ({ApplicationContext})...", AppName);
-                host.Run();
 
                 return 0;
             }
@@ -43,13 +54,13 @@ namespace Catalog.FullImport
             }
         }
 
-        private static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .CaptureStartupErrors(false)
-                .UseStartup<Startup>()
-                .UseConfiguration(configuration)
-                .UseSerilog()
-                .Build();
+        //private static IWebHost BuildWebHost(IConfiguration configuration, string[] args) =>
+        //    WebHost.CreateDefaultBuilder(args)
+        //        .CaptureStartupErrors(false)
+        //        .UseStartup<Startup>()
+        //        .UseConfiguration(configuration)
+        //        .UseSerilog()
+        //        .Build();
 
         private static Serilog.ILogger CreateSerilogLogger(IConfiguration configuration)
         {
