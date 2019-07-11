@@ -31,7 +31,6 @@ namespace Catalog.FullImport
                 //VUE_ProductImportManagerTask task = new VUE_ProductImportManagerTask();
 
                 var serviceCollection = new ServiceCollection();
-                // Startup.cs finally :)
                 Startup startup = new Startup();
                 startup.ConfigureServices(serviceCollection);
 

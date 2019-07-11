@@ -47,8 +47,8 @@ namespace Catalog.FullImport.Tasks
         {
             _logger.LogDebug("GracePeriodManagerService is starting.");
 
-            await Task.Delay(_settings.CheckUpdateTime);
-
+            //await Task.Delay(_settings.CheckUpdateTime);
+            
             BuildCatalog(string.Empty);
 
             BuildCatalog("_it");
@@ -56,8 +56,6 @@ namespace Catalog.FullImport.Tasks
             BuildCatalog("_de");
 
             _logger.LogInformation("GracePeriodManagerService background task is stopping.");
-
-            await Task.CompletedTask;
         }
 
         private async void BuildCatalog(string local)
